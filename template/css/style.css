@@ -1,0 +1,37 @@
+body {
+    background: url(/template/img/bg.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+.main header {
+    min-height: 200px;
+}
+header img {
+    margin: 0 auto;
+    padding: 10px 0;
+    display: block;
+}
+.main .login {
+    min-height: 500px;
+}
+.select2-dropdown, .select2-selection {
+    width: 250px;
+}
+.main .login-form input {
+    width: 100%;
+}
+.login ul li {
+    display: inline;
+}
+footer img {
+    position: absolute;
+    bottom: 0;
+    max-height: 100px;
+    width: 100%;
+    object-fit: cover;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0px;
+}
