@@ -8,8 +8,5 @@
 
 class Users {
     
-    public function ActiveUsers()
-    {
-        echo '1';
-    }
+
 }

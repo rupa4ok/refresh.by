@@ -21,4 +21,3 @@ require_once(ROOT.'/config/config.php');
 $router = new Router();
 $router->run();
 
-///
