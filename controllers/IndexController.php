@@ -11,9 +11,6 @@ class IndexController
             {
                 header('Location: /admin1',true, 301); //редирект в админку админа
             }
-            else {
-            
-            }
         }
         
         return true;
