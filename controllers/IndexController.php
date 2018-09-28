@@ -29,7 +29,6 @@ class IndexController
                 //Логиним юзера
                 $_SESSION['logged_user'] = $user;
                 $_SESSION['name'] = $user->name;
-            
                 return;
             } else {
                 echo "Пароль не верен";
