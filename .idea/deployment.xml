@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" uploadOnCheckin="13449d55-d967-478e-b53d-76778978e1d6">
+  <component name="PublishConfigData">
     <serverData>
       <paths name="alikam.by">
         <serverdata>
@@ -40,7 +40,7 @@
       <paths name="roboschool.pro">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
@@ -59,6 +59,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="refresh.by" />
   </component>
 </project>
