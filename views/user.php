@@ -28,16 +28,9 @@
             <h1>Сотрудники</h1>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <h3>Меню</h3>
-                <ul>
-                    <li><a href="/admin1">Объекты</a></li>
-                    <li><a href="/admin2">Прорабы</a></li>
-                    <li><a href="/admin3">Работники</a></li>
-                    <li><a href="/admin4">Сводный табель</a></li>
-                    <li><a href="/admin5">Управление объектами</a></li>
-                </ul>
-            </div>
+    
+            <?php include_once "../views/left-menu.php" ?>
+            
             <div class="col-md-9 content-block">
                 
                 <?php
