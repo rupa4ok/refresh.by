@@ -28,9 +28,7 @@
             <h1>Сотрудники</h1>
         </div>
         <div class="row">
-    
-            <?php include_once "../views/left-menu.php" ?>
-            
+            <?php include_once ROOT. '/views/left-menu.php'; ?>
             <div class="col-md-9 content-block">
                 
                 <?php
@@ -56,19 +54,10 @@
                         <button id="reset-btn" class="btn pull-right">Сбросить данные</button>
                     </div>
                 </div>';
-                    
-                    $link = mysqli_connect(
-                        'localhost',
-                        'refresh',
-                        'refreshrefresh',
-                        'refresh');
-                    
-                    if (!$link) {
-                        printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-                        exit;
-                    }
-                    
-                    if ($result = mysqli_query($link, 'SELECT * FROM people ORDER BY id')) {
+
+                $table = 'people';
+
+                if ($result = $admin->GetTable($table)) {
                         
                         echo '
 
@@ -81,8 +70,8 @@
                             '<th>Выполняемые работы</th>' .
                             '</tr>' .
                             '</thead>';
-                        
-                        while( $row = mysqli_fetch_assoc($result) ){
+    
+                    foreach ($result as $row) {
                             echo '<tr>' .
                                 '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
                                 '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
@@ -90,9 +79,7 @@
                                 '</tr>';
                         }
                         echo '</table>';
-                        mysqli_free_result($result);
                     }
-                    mysqli_close($link);
                 ?>
             </div>
         </div>

@@ -25,7 +25,7 @@
             <h1>Объекты</h1>
         </div>
         <div class="row">
-            <?php include_once "../views/left-menu.php" ?>
+            <?php include_once ROOT. '/views/left-menu.php'; ?>
             <div class="col-md-9 content-block">
                 
                 <?php
@@ -58,9 +58,39 @@
                             <button id="reset-btn" class="btn pull-right">Сбросить данные</button>
                         </div>
                     </div>';
-    
-                    $admin->GetObjectList()
                 
+                $table = 'object';
+
+                if ($result = $admin->GetTable($table)) {
+    
+                    echo '
+                    <table class="table results1" style="margin-top: 30px;">' .
+                        '<thead>' .
+                        '<tr>' .
+                        '<th>Название объекта</th>' .
+                        '<th>Месяц</th>' .
+                        '<th>Год</th>' .
+                        '<th>Дата начала</th>' .
+                        '<th>Дата сдачи</th>' .
+                        '<th>Статус</th>' .
+                        '</tr>' .
+                        '</thead>';
+    
+                    foreach ($result as $row) {
+                        echo '<tr>' .
+                            '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
+                            '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
+                            '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
+                            '<td><a href="#" class="people-start-editable" data-name="start" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['start']) . '</a></td>' .
+                            '<td><a href="#" class="people-finish-editable" data-name="finish" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['finish']) . '</a></td>' .
+                            '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                            '<td><form method="post" class="delete"><input type="text" value="' . $row['id'] . '" name="id" hidden><button type="submit" onclick="return proverka();"> Удалить</button></td></form> ' .
+                            '<td><form action="admin5" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
+                            '</tr>';
+                    }
+                    echo '</table>';
+                }
+
                 ?>
             </div>
         </div>
