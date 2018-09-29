@@ -19,10 +19,9 @@ class IndexController
     public function Auth()
     {
         if ($_POST) {
+            
             $data1 = $_POST; //получаем данные из массива
-    
             $errors1 = array();
-    
             $user = R::findOne('users','email = ?',array($data1['email']));//Проверка правильности email
     
             if ( $user ) {

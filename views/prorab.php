@@ -28,16 +28,7 @@
             <h1>Прорабы</h1>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <h3>Меню</h3>
-                <ul>
-                    <li><a href="/admin1">Объекты</a></li>
-                    <li><a href="/admin2">Прорабы</a></li>
-                    <li><a href="/admin3">Работники</a></li>
-                    <li><a href="/admin4">Сводный табель</a></li>
-                    <li><a href="/admin5">Управление объектами</a></li>
-                </ul>
-            </div>
+            <?php include_once ROOT. '/views/left-menu.php'; ?>
             <div class="col-md-9 content-block">
 
                 <div class="results" style="color: red"></div>
@@ -51,42 +42,33 @@
                 </form>
                 
                 <?php
-                    $link = mysqli_connect(
-                        'localhost',
-                        'refresh',
-                        'refreshrefresh',
-                        'refresh');
+
+                $table = 'people';
+
+                if ($result = $admin->GetTable($table)) {
                     
-                    if (!$link) {
-                        printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-                        exit;
-                    }
-                    
-                    if ($result = mysqli_query($link, 'SELECT * FROM people ORDER BY id')) {
-                        
-                        echo '
+                    echo '
 
                     <table class="table" style="margin-top: 30px;">' .
-                            '<thead>' .
-                            '<tr>' .
-                            '<th>Имя прораба</th>' .
-                            '<th>Объекты</th>' .
-                            '<th>Работники</th>' .
-     
-                            '</tr>' .
-                            '</thead>';
-                        
-                        while( $row = mysqli_fetch_assoc($result) ){
-                            echo '<tr>' .
-                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
-                                '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . '4' . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['nrabotnik'] . '</a></td>' .
-                                '</tr>';
-                        }
-                        echo '</table>';
-                        mysqli_free_result($result);
+                        '<thead>' .
+                        '<tr>' .
+                        '<th>Имя прораба</th>' .
+                        '<th>Объекты</th>' .
+                        '<th>Работники</th>' .
+        
+                        '</tr>' .
+                        '</thead>';
+                    
+                    foreach ($result as $res)  {
+                        echo '<tr>' .
+                            '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
+                            '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . '4' . '</a></td>' .
+                            '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . $res['nrabotnik'] . '</a></td>' .
+                            '</tr>';
                     }
-                    mysqli_close($link);
+                    echo '</table>';
+                }
+
                 ?>
             </div>
         </div>
