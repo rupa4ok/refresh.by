@@ -1,23 +1,23 @@
 <?php
-    
-    if ($_SESSION['name'] !== 'admin')
-    {
-        header('Location: /',true, 301); //редирект на главную
-    }
 
-    include_once ROOT. '/models/Admin.php';
+if ( $_SESSION['role'] !== 'admin' )
+{
+    header('Location: /',true, 301); //редирект на главную если не залогинен
+}
+
+include_once ROOT . '/models/Admin.php';
 
 class AdminController
 {
-
+    
     public function actionPanel()
     {
         require_once(ROOT . '/config/config.php');
         require_once(ROOT . '/views/header.php');
-
+        
         $uri = $_SERVER['REQUEST_URI'];
         $admin = new Admin();
-
+        
         switch ($uri) {
             case '/admin1':
                 require_once(ROOT . '/views/project-list.php');
@@ -39,12 +39,11 @@ class AdminController
                 echo 'Страница 404';
                 break;
         }
-
+        
         require_once(ROOT . '/views/footer.php');
-
+        
         return true;
     }
-
-
-
+    
+    
 }

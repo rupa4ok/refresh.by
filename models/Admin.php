@@ -8,11 +8,9 @@
     
     class Admin
     {
-        
         public function GetTable($table)
         {
             $result = R::findAll($table);
             return $result;
         }
-        
     }

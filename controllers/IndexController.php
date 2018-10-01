@@ -6,13 +6,15 @@ class IndexController
     public function action()
     {
         require_once(ROOT . '/views/index.php');
-        if (isset($_SESSION['name'])) {
-            if ($_SESSION['name'] == 'admin')
+        
+        if (isset($_SESSION['role'])) {
+        if ( $_SESSION['role'] == 'admin' )
             {
                 header('Location: /admin1',true, 301); //редирект в админку админа
+            } elseif ( $_SESSION['role'] == 'user' ) {
+                header('Location: /user1',true, 301); //редирект в админку админа
             }
-        }
-        
+    }
         return true;
     }
     
@@ -30,6 +32,7 @@ class IndexController
                     //Логиним юзера
                     $_SESSION['logged_user'] = $user;
                     $_SESSION['name'] = $user->name;
+                    $_SESSION['role'] = $user->role;
                     return;
                 } else {
                     echo "Пароль не верен";

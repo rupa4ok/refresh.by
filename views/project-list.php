@@ -1,4 +1,4 @@
-    <header>
+<header>
     <img src="/template/img/logo.png"/>
 </header>
 
@@ -25,7 +25,7 @@
             <h1>Объекты</h1>
         </div>
         <div class="row">
-            <?php include_once ROOT. '/views/left-menu.php'; ?>
+            <?php include_once ROOT . '/views/left-menu.php'; ?>
             <div class="col-md-9 content-block">
                 
                 <?php
@@ -60,9 +60,9 @@
                     </div>';
                 
                 $table = 'object';
-
+                
                 if ($result = $admin->GetTable($table)) {
-    
+                    
                     echo '
                     <table class="table results1" style="margin-top: 30px;">' .
                         '<thead>' .
@@ -75,7 +75,7 @@
                         '<th>Статус</th>' .
                         '</tr>' .
                         '</thead>';
-    
+                    
                     foreach ($result as $row) {
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
@@ -90,7 +90,7 @@
                     }
                     echo '</table>';
                 }
-
+                
                 ?>
             </div>
         </div>

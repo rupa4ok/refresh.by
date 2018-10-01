@@ -1,26 +1,10 @@
-
 <body>
 
 <header>
-    <img src="/template/img/logo.png" />
+    <img src="/template/img/logo.png"/>
 </header>
 
-<section class="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <ul>
-                    <li><a href="/logout.php">Выйти</a></li>
-                    <li><a href="/view/personal.php">Личный кабинет</a></li>
-                    <li><a href="">Информация о пользователе</a></li>
-                    <li><a href="">Экспорт отчета</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</section>
+<?php include_once ROOT . '/views/top-menu.php'; ?>
 
 <section>
     <div class="container">
@@ -28,12 +12,12 @@
             <h1>Сотрудники</h1>
         </div>
         <div class="row">
-            <?php include_once ROOT. '/views/left-menu.php'; ?>
+            <?php include_once ROOT . '/views/left-menu.php'; ?>
             <div class="col-md-9 content-block">
                 
                 <?php
-    
-                    echo '<div style="width: 50%">
+                
+                echo '<div style="width: 50%">
                     <div id="msg" class="alert hide"></div>
                     <table id="user" class="table table-bordered table-striped">
                         <tbody>
@@ -54,32 +38,32 @@
                         <button id="reset-btn" class="btn pull-right">Сбросить данные</button>
                     </div>
                 </div>';
-
+                
                 $table = 'people';
-
+                
                 if ($result = $admin->GetTable($table)) {
-                        
-                        echo '
+                    
+                    echo '
 
                     <table class="table" style="margin-top: 30px;">' .
-                            '<thead>' .
-                            '<tr>' .
-                            '<th>Имя сотрудника</th>' .
-                            '<th>Коэфиициент сложности</th>' .
-                            '<th>Номер работника</th>' .
-                            '<th>Выполняемые работы</th>' .
-                            '</tr>' .
-                            '</thead>';
-    
+                        '<thead>' .
+                        '<tr>' .
+                        '<th>Имя сотрудника</th>' .
+                        '<th>Коэфиициент сложности</th>' .
+                        '<th>Номер работника</th>' .
+                        '<th>Выполняемые работы</th>' .
+                        '</tr>' .
+                        '</thead>';
+                    
                     foreach ($result as $row) {
-                            echo '<tr>' .
-                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
-                                '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['nrabotnik'] . '</a></td>' .
-                                '</tr>';
-                        }
-                        echo '</table>';
+                        echo '<tr>' .
+                            '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
+                            '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
+                            '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['nrabotnik'] . '</a></td>' .
+                            '</tr>';
                     }
+                    echo '</table>';
+                }
                 ?>
             </div>
         </div>

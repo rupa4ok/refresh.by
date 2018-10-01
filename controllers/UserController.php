@@ -1,5 +1,10 @@
 <?php
 
+if ( $_SESSION['role'] !== 'user' )
+{
+    header('Location: /',true, 301); //редирект на главную если не залогинен
+}
+
 include_once ROOT. '/models/Users.php';
 
 class UserController {
@@ -13,7 +18,7 @@ class UserController {
 
         switch ($uri) {
             case '/user1':
-                require_once(ROOT . '/views/users-list.php');
+                require_once(ROOT . '/views/project-list.php');
                 echo 'Страница 1-1';
                 break;
             case '/user2':

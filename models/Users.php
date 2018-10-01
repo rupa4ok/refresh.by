@@ -8,5 +8,10 @@
 
 class Users {
     
+    public function GetTableById($table, $id)
+    {
+        $result = R::findAll($table);
+        return $result;
+    }
 
 }

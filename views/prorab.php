@@ -1,26 +1,10 @@
-
-    <body>
+<body>
 
 <header>
-    <img src="/template/img/logo.png" />
+    <img src="/template/img/logo.png"/>
 </header>
 
-<section class="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <ul>
-                    <li><a href="/logout.php">Выйти</a></li>
-                    <li><a href="/view/personal.php">Личный кабинет</a></li>
-                    <li><a href="">Информация о пользователе</a></li>
-                    <li><a href="">Экспорт отчета</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</section>
+<?php include_once ROOT . '/views/top-menu.php'; ?>
 
 <section>
     <div class="container">
@@ -28,23 +12,25 @@
             <h1>Прорабы</h1>
         </div>
         <div class="row">
-            <?php include_once ROOT. '/views/left-menu.php'; ?>
+            
+            <?php include_once ROOT . '/views/left-menu.php'; ?>
+            
             <div class="col-md-9 content-block">
-
                 <div class="results" style="color: red"></div>
-
                 <form method="POST" id="form">
-                    <input type="text" name="login" placeholder="Ваше имя" value="<? $data = $_POST; echo @$data['login']; ?>" >
+                    <input type="text" name="login" placeholder="Ваше имя" value="<? $data = $_POST;
+                    echo @$data['login']; ?>">
                     <input type="email" name="email" placeholder="Почта" value="<? echo @$data['email']; ?>">
-                    <input type="password" name="password"  placeholder="Пароль" value="<? echo @$data['password']; ?>">
-                    <input type="password" name="password2"  placeholder="Введите пароль еще раз" value="<? echo @$data['password2']; ?>">
+                    <input type="password" name="password" placeholder="Пароль" value="<? echo @$data['password']; ?>">
+                    <input type="password" name="password2" placeholder="Введите пароль еще раз"
+                           value="<? echo @$data['password2']; ?>">
                     <button type="submit" name="do_signup">Зарегистрироваться</button>
                 </form>
                 
                 <?php
-
+                
                 $table = 'people';
-
+                
                 if ($result = $admin->GetTable($table)) {
                     
                     echo '
@@ -55,11 +41,11 @@
                         '<th>Имя прораба</th>' .
                         '<th>Объекты</th>' .
                         '<th>Работники</th>' .
-        
+                        
                         '</tr>' .
                         '</thead>';
                     
-                    foreach ($result as $res)  {
+                    foreach ($result as $res) {
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
                             '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . '4' . '</a></td>' .
@@ -68,7 +54,7 @@
                     }
                     echo '</table>';
                 }
-
+                
                 ?>
             </div>
         </div>
