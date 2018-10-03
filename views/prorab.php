@@ -29,27 +29,28 @@
                 
                 <?php
                 
-                $table = 'people';
-                
-                if ($result = $admin->GetTable($table)) {
+                $table = 'users';
+                $role = $_SESSION['role'];
+                $id = $_SESSION['id'];
+                if ( $result = $admin->GetTableById($table, $id, $role)) {
                     
                     echo '
-
                     <table class="table" style="margin-top: 30px;">' .
                         '<thead>' .
                         '<tr>' .
                         '<th>Имя прораба</th>' .
+                        '<th>Email</th>' .
                         '<th>Объекты</th>' .
-                        '<th>Работники</th>' .
                         
                         '</tr>' .
                         '</thead>';
                     
                     foreach ($result as $res) {
+   
                         echo '<tr>' .
-                            '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
+                            '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['name'] . '" data-url="ajax1.php" >' . $res['name'] . '</a></td>' .
+                            '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['email'] . '" data-url="ajax1.php" >' . $res['email'] . '</a></td>' .
                             '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . '4' . '</a></td>' .
-                            '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . $res['nrabotnik'] . '</a></td>' .
                             '</tr>';
                     }
                     echo '</table>';

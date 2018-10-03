@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" uploadOnCheckin="13449d55-d967-478e-b53d-76778978e1d6">
+  <component name="PublishConfigData" uploadOnCheckin="7bede0f8-13ad-4e5f-b303-2f68e31c6a42">
     <serverData>
-      <paths name="alikam.by">
+      <paths name="alikam">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -17,6 +17,13 @@
         </serverdata>
       </paths>
       <paths name="goldenlion.by">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="jonka">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -38,13 +45,6 @@
         </serverdata>
       </paths>
       <paths name="roboschool.pro">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="s15333">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

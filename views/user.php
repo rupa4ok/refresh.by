@@ -40,8 +40,9 @@
                 </div>';
                 
                 $table = 'people';
-                
-                if ($result = $admin->GetTable($table)) {
+                $role = $_SESSION['role'];
+                $id = $_SESSION['id'];
+                if ( $result = $admin->GetTableById($table, $id, $role)) {
                     
                     echo '
 
@@ -49,17 +50,14 @@
                         '<thead>' .
                         '<tr>' .
                         '<th>Имя сотрудника</th>' .
-                        '<th>Коэфиициент сложности</th>' .
                         '<th>Номер работника</th>' .
-                        '<th>Выполняемые работы</th>' .
                         '</tr>' .
                         '</thead>';
                     
                     foreach ($result as $row) {
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
-                            '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
-                            '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['nrabotnik'] . '</a></td>' .
+                            '<td>' . $row['nrabotnik'] . '</td>' .
                             '</tr>';
                     }
                     echo '</table>';

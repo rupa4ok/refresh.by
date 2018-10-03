@@ -8,9 +8,13 @@
 
 class Users {
     
-    public function GetTableById($table, $id)
+    public function GetObjectById($table, $id, $role)
     {
-        $result = R::findAll($table);
+        if ( $role == 'admin' ) {
+            $result = R::findAll($table);
+        } else {
+            $result = R::findAll($table, ' users_id = ? ', [ $id ]);
+        }
         return $result;
     }
 

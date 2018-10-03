@@ -1,7 +1,6 @@
 <?php
 
-if ( $_SESSION['role'] !== 'admin' )
-{
+if ( $_SESSION['role'] !== 'admin' ) {
     header('Location: /',true, 301); //редирект на главную если не залогинен
 }
 
@@ -35,13 +34,14 @@ class AdminController
                 require_once(ROOT . '/views/project.php');
                 break;
             case '/admin6':
+                require_once(ROOT . '/views/export.php');
+                break;
             default:
                 echo 'Страница 404';
                 break;
         }
         
         require_once(ROOT . '/views/footer.php');
-        
         return true;
     }
     

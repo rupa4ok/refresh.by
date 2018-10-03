@@ -33,6 +33,7 @@ class IndexController
                     $_SESSION['logged_user'] = $user;
                     $_SESSION['name'] = $user->name;
                     $_SESSION['role'] = $user->role;
+                    $_SESSION['id'] = $user->id;
                     return;
                 } else {
                     echo "Пароль не верен";

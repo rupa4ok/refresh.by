@@ -25,12 +25,27 @@
             <h1>Объекты</h1>
         </div>
         <div class="row">
-            <?php include_once ROOT . '/views/left-menu.php'; ?>
+<?php
+
+$id = $_SESSION['id'];
+$table = 'object';
+$role = $_SESSION['role'];
+$result = $admin->GetTableById($table, $id, $role);
+
+if ( $_SESSION['role'] == 'admin' ) {
+    $uri = 'admin5';
+    include_once ROOT . '/views/left-menu.php';
+} else {
+    $uri = 'user5';
+    include_once ROOT . '/views/left-menu1.php';
+}
+
+?>
             <div class="col-md-9 content-block">
+            
+<?php
                 
-                <?php
-                
-                echo '<div style="width: 50%">
+ echo '<div style="width: 50%">
                         <div id="msg" class="alert hide"></div>
                         <table id="user" class="table table-bordered table-striped">
                             <tbody>
@@ -59,10 +74,7 @@
                         </div>
                     </div>';
                 
-                $table = 'object';
-                
-                if ($result = $admin->GetTable($table)) {
-                    
+                if ($result) {
                     echo '
                     <table class="table results1" style="margin-top: 30px;">' .
                         '<thead>' .
@@ -84,8 +96,12 @@
                             '<td><a href="#" class="people-start-editable" data-name="start" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['start']) . '</a></td>' .
                             '<td><a href="#" class="people-finish-editable" data-name="finish" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['finish']) . '</a></td>' .
                             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
-                            '<td><form method="post" class="delete"><input type="text" value="' . $row['id'] . '" name="id" hidden><button type="submit" onclick="return proverka();"> Удалить</button></td></form> ' .
-                            '<td><form action="admin5" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
+                            '<td><form method="post" class="delete">
+
+<input type="text" value="' . $row['id'] . '" name="id" hidden>
+
+<button type="submit" onclick="return proverka();"> Удалить</button></td></form> ' .
+                            '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
                             '</tr>';
                     }
                     echo '</table>';

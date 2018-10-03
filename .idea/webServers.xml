@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3e8a774e-cb62-4e24-a6a8-b82cc806598f" name="jonka" url="http://s15756@h4.modhost.pro">
+        <fileTransfer host="s15756@h4.modhost.pro" port="22" rootFolder="/home/s15756/www/core/elements" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
