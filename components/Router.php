@@ -41,9 +41,6 @@ class Router
                     include_once($controllerFile);
                 }
                 
-                echo $actionName . '<br>';
-                echo $controllerName;
-                
                 $controllerObject = new $controllerName;
                 $result = $controllerObject->$actionName();
                 if ($result != null) {

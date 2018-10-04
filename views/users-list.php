@@ -12,7 +12,15 @@
             <h1>Личный кабинет</h1>
         </div>
         <div class="row">
-            <?php include_once ROOT . '/views/left-menu.php'; ?>
+            <?php
+            if ( $_SESSION['role'] == 'admin' ) {
+                $uri = 'admin2';
+                include_once ROOT . '/views/left-menu.php';
+            } else {
+                $uri = 'user2';
+                include_once ROOT . '/views/left-menu1.php';
+            }
+            ?>
             <div class="col-md-9 content-block">
                 <h4>Объекты</h4>
 

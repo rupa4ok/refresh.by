@@ -14,8 +14,8 @@ class Users {
             $result = R::findAll($table);
         } else {
             $result = R::findAll($table, ' users_id = ? ', [ $id ]);
+            
         }
         return $result;
     }
-
 }
