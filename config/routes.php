@@ -6,6 +6,5 @@ return array(
     'admin' => 'admin/panel',
     'logout' => 'logout/exit',
     'tabel' => 'tabel/list',
-    '' => 'index'
-
+    'export' => 'export/panel',
 );

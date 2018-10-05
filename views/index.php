@@ -1,5 +1,7 @@
 <?php include "header.php"; ?>
 
+    //@TODO: Дописать комментарии потом хрен что вспомнишь
+
 <body>
     <header>
         <img src="template/img/logo.png" />
