@@ -1,4 +1,7 @@
 <?php
+
+//@TODO: Переделать запрос к бд
+
 $link = mysqli_connect(
     'localhost',  /* Хост, к которому мы подключаемся */
     'refresh',       /* Имя пользователя */
@@ -12,3 +15,12 @@ if (!$link) {
 
 var_dump($_POST);
 
+$column = $_POST['name'];
+if ($_POST['name'] == 'timework') {
+    $newValue = $_POST['timework'];
+}
+
+$id = $_POST['pk'];
+$newValue = $_POST['value'];
+$sql = "UPDATE `time` SET timework = '$newValue' where id = $id";
+mysqli_query($link, $sql);

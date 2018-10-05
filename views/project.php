@@ -71,14 +71,13 @@
                 $peoples = $admin->GetList($object);
                 
                 foreach ($peoples as $people) {
-                    $peopleId = $people->id . '<br>';
-                    $objectId = $object->id . '<br>';
+                    $peopleId = $people->id;
+                    $objectId = $object->id;
                     
                     echo $people->fio;
+    
+                    $number = $admin->GetWorkNumber($objectId, $peopleId);
                     
-                    $admin->GetWorkNumber($objectId, $peopleId);
-                    
-                    $date3 = date('d-m-Y', $object->start);
                     echo '<table id="user" class="table table-bordered table-striped">
                             <tbody><tr>';
                     $aDates = array();
@@ -95,14 +94,21 @@
                     
                     foreach ($aDates as $day) {
                         $time = 0;
-                        $timework = $admin->GetTime();
-                        $timedata = $admin->GetData();
+                        $workstart = $object->mounth;
+                        $options = array(
+                            'day' => $day,
+                            'mounth' => $object->mounth,
+                            'nraboti' => $number,
+                        );
 
-//                    $time = R::dispense('time');
-//                    $time->date = $day;
-//                    R::store($time);
+                        $admin->CreateWork($options);
+    
+                        $timedata =  $admin->GetWorkId($options);
+                        
+                        $worked = $admin->GetTime($timedata);
+                        
                         echo '<td><p>' . $day . '</p>
-                <a href="#" class="myeditable editable editable-click" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="name" data-original-title="Введите количество часов" >' . $timework . '</a></td>
+                <a href="#" class="myeditable editable editable-click" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
                 
                 ';
                     }
@@ -110,10 +116,6 @@
                     echo '</tbody>
                         </table>';
                 }
-                
-                $time = R::dispense('time');
-                $time->date = $date3;
-                R::store($time);
                 
                 ?>
             </div>

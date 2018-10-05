@@ -177,13 +177,53 @@ class Admin {
     
     public function GetList($object)
     {
+        //ищем работников, закрепленных за данным объектом
         $peoples = $object->with('ORDER BY `fio` DESC')->sharedPeopleList;
         return $peoples;
     }
     
-    public function GetData()
+    public function GetData($timedata)
     {
+        
+        $worked = R::findOne( 'time', ' id = ? ', [ $timedata ] );
+        return $worked->timework;
     
+    }
+    
+    public function CreateWork($options)
+    {
+        
+        //проверяем есть ли данная работа в базе данных
+        //@TODO: Проверка наличия работы при каждой загрузке страницы, проверять только при создании работы
+        $datecheck = $options['day'];
+        $mounthcheck = $options['mounth'];
+        $nraboticheck = $options['nraboti'];
+        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ?', [ $datecheck,$mounthcheck,$nraboticheck ] );
+        
+        //если номер работы отсутствует, создаем работу на месяц
+        
+        if (!$workcheck) {
+            $time = R::dispense('time');
+            $time->date = $datecheck;
+            $time->mounth = $mounthcheck;
+            $time->nraboti = $nraboticheck;
+            $time->timework = '0';
+            R::store($time);
+        }
+        
+        return $workcheck;
+        
+    }
+    
+    public function GetWorkId ($options)
+    {
+        
+        $datecheck = $options['day'];
+        $mounthcheck = $options['mounth'];
+        $nraboticheck = $options['nraboti'];
+        $workid  = R::findOne( 'time', ' date = ? AND mounth = ? AND nraboti = ? ', [ $datecheck,$mounthcheck,$nraboticheck ] );
+        return $workid->id;
+        
     }
     
 }
