@@ -4,6 +4,7 @@
     <title></title>
     <link href="/template/css/bootstrap.css" rel="stylesheet">
     <link href="/template/css/address.css" rel="stylesheet">
+    <link href="/template/css/style.css" rel="stylesheet">
     <script type="text/javascript" src="/template/js/jquery.min.js"></script>
     <script type="text/javascript" src="/template/js/jquery-3.3.1.min.js"></script>
     <script src="/template/js/bootstrap.js" type="text/javascript"></script>

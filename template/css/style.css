@@ -35,3 +35,17 @@ footer img {
     max-width: 100%;
     margin-bottom: 0px;
 }
+#user .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 2px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+#user p {
+    margin: 0;
+}
+.paginator {
+    display: flex;
+    padding: 10px 0;
+}

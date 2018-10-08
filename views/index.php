@@ -1,7 +1,5 @@
 <?php include "header.php"; ?>
 
-    //@TODO: Дописать комментарии потом хрен что вспомнишь
-
 <body>
     <header>
         <img src="template/img/logo.png" />
@@ -11,6 +9,7 @@
             <div class="row login-row">
                 <div class="col-md-4 col-md-offset-4 login-form">
                                     <?php
+                                    //@TODO: Дописать комментарии потом хрен что вспомнишь
                                     $index = new IndexController();
                                     $index->Auth(); ?>
                                     <div class="results1" style="color: red"></div>

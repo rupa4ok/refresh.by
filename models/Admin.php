@@ -19,6 +19,12 @@ class Admin {
         }
     }
     
+    public function GetObjectByMounth($id)
+    {
+        $result = R::loadAll('object', array($id));
+        return $result;
+    }
+    
     public function ObjectDelete($table, $id)
     {
         R::trash( $table, $id);
@@ -164,7 +170,7 @@ class Admin {
     {
         $worknumber = R::getRow( 'SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [ $objectId,$peopleId ] );
         $number = $worknumber['id'];
-        echo 'Номер работы: ' . $number;
+        echo $number;
         
         return $number;
     }
@@ -184,10 +190,8 @@ class Admin {
     
     public function GetData($timedata)
     {
-        
         $worked = R::findOne( 'time', ' id = ? ', [ $timedata ] );
         return $worked->timework;
-    
     }
     
     public function CreateWork($options)
@@ -224,6 +228,10 @@ class Admin {
         $workid  = R::findOne( 'time', ' date = ? AND mounth = ? AND nraboti = ? ', [ $datecheck,$mounthcheck,$nraboticheck ] );
         return $workid->id;
         
+    }
+    
+    public function rgp($url) { // remove GET-parameters from URL
+        return preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $url);
     }
     
 }
