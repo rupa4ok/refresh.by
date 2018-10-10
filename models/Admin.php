@@ -27,13 +27,6 @@ class Admin {
     }
     
     public function ObjectDelete($table, $id)
-
-    {
-        $result = R::loadAll('object', array($id));
-        return $result;
-    }
-    
-    public function ObjectDelete($table, $id)
     {
         R::trash( $table, $id);
         return;
