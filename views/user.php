@@ -42,8 +42,10 @@
                 $table = 'people';
                 $role = $_SESSION['role'];
                 $id = $_SESSION['id'];
-                if ( $result = $admin->GetTableById($table, $id, $role)) {
-                    
+                $result = $admin->GetTableById($table, $id, $role);
+                print_r($result);
+                if ( $result ) {
+                    echo '$result';
                     echo '
 
                     <table class="table" style="margin-top: 30px;">' .

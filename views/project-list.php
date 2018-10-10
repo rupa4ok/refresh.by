@@ -20,9 +20,11 @@ $result = $admin->GetTableById($table, $id, $role);
 if ( $_SESSION['role'] == 'admin' ) {
     $uri = 'admin5';
     include_once ROOT . '/views/left-menu.php';
+    $class = 'people-status-editable';
 } else {
     $uri = 'user5';
     include_once ROOT . '/views/left-menu1.php';
+    $class = '';
 }
 
 ?>
@@ -76,7 +78,7 @@ if ( $_SESSION['role'] == 'admin' ) {
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
                             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
                             '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
-                            '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                            '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
                             '<td><form method="post" class="delete">
 
 <input type="text" value="' . $row['id'] . '" name="id" hidden>

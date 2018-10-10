@@ -4,7 +4,6 @@ if ( $_SESSION['role'] !== 'user' ) {
     header('Location: /',true, 301); //редирект на главную если не залогинен
 }
 
-include_once ROOT. '/models/Users.php';
 include_once ROOT . '/models/Admin.php';
 
 class UserController {
@@ -15,7 +14,6 @@ class UserController {
         require_once(ROOT . '/views/header.php');
     
         $uri = $_SERVER['REQUEST_URI'];
-        $users = new Users();
         $admin = new Admin();
 
         switch ($uri) {
@@ -23,7 +21,7 @@ class UserController {
                 require_once(ROOT . '/views/project-list.php');
                 break;
             case '/user2':
-                require_once(ROOT . '/views/users-list.php');
+                require_once(ROOT . '/views/user.php');
                 break;
             case '/user3':
                 require_once(ROOT . '/views/users-list.php');

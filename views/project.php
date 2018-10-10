@@ -48,6 +48,15 @@
                             case '/admin11':
                                 $month = $res->mounth+1;
                                 break;
+                            case '/user5':
+                                $month = $res->mounth;
+                                break;
+                            case '/user9':
+                                $month = $res->mounth-1;
+                                break;
+                            case '/user11':
+                                $month = $res->mounth+1;
+                                break;
                         }
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
@@ -85,6 +94,11 @@
                     
 <div><form method="post" action="/admin'.$mounthnext = ($month +1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Следующий месяц" /> </form></div></div>';
                 }
+                if ($uri == '/user5') {
+                    echo '<div class="paginator"><div><form method="post" action="/user'.$mounthprev = ($month -1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Предыдущий месяц" /> </form></div><div class="curent">Месяц: '.$month.'</div>
+                    
+<div><form method="post" action="/user'.$mounthnext = ($month +1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Следующий месяц" /> </form></div></div>';
+                }
                 
                 $object = $admin->GetShared($id);
                 $peoples = $admin->GetList($object);
@@ -121,7 +135,8 @@
                             'day' => $day,
                             'mounth' => $month,
                             'nraboti' => $number,
-                            'nrabotnik' => $peopleId
+                            'nrabotnik' => $peopleId,
+                            'nprorab' => $_SESSION['id']
                         );
 
                         $admin->CreateWork($options);

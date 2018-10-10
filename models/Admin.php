@@ -11,10 +11,11 @@ class Admin {
     public function GetTableById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
-            $result = R::findAll($table);
+            $result = R::findAll($table, 'ORDER BY fio ASC');
             return $result;
         } else {
-            $result = R::findAll($table, ' users_id = ? ', [ $id ]);
+            echo 'Я не админ!!!';
+            $result = R::getAll('');
             return $result;
         }
     }
@@ -26,12 +27,12 @@ class Admin {
         return $result;
     }
     
-    public function ObjectDelete($table, $id)
-
-    {
-        $result = R::loadAll('object', array($id));
-        return $result;
-    }
+//    public function ObjectDelete($table, $id)
+//
+//    {
+//        $result = R::loadAll('object', array($id));
+//        return $result;
+//    }
     
     public function ObjectDelete($table, $id)
     {
@@ -125,7 +126,8 @@ class Admin {
         $mounthcheck = $options['mounth'];
         $nraboticheck = $options['nraboti'];
         $nrabotnik = $options['nrabotnik'];
-        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ?', [ $datecheck,$mounthcheck,$nraboticheck]);
+        $nprorab = $options['nprorab'];
+        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ? AND nprorab = ?', [ $datecheck,$mounthcheck,$nraboticheck,$nprorab]);
         
         //если номер работы отсутствует, создаем работу на месяц
         
@@ -135,6 +137,7 @@ class Admin {
             $time->mounth = $mounthcheck;
             $time->nraboti = $nraboticheck;
             $time->nrabotnik = $nrabotnik;
+            $time->nprorab = $nprorab;
             $time->timework = '0';
             R::store($time);
         }
