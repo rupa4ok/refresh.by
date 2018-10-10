@@ -81,7 +81,8 @@
 
                 $uri = $_SERVER['REQUEST_URI'];
                 if ($uri == '/admin5') {
-                    echo '<div class="paginator"><div><form method="post" action="/admin'.$mounthprev = ($month -1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Предыдущий месяц" /> </form></div><div>Месяц: '.$month.'</div>
+                    echo '<div class="paginator"><div><form method="post" action="/admin'.$mounthprev = ($month -1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Предыдущий месяц" /> </form></div><div class="curent">Месяц: '.$month.'</div>
+                    
 <div><form method="post" action="/admin'.$mounthnext = ($month +1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Следующий месяц" /> </form></div></div>';
                 }
                 
@@ -120,6 +121,7 @@
                             'day' => $day,
                             'mounth' => $month,
                             'nraboti' => $number,
+                            'nrabotnik' => $peopleId
                         );
 
                         $admin->CreateWork($options);

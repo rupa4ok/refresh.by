@@ -18,18 +18,18 @@ $(document).ready(function () {
     $('.people-mounth-editable').editable({
         value: 'Месяц',
         source: [
-            {value: 'Январь', text: 'Январь'},
-            {value: 'Февраль', text: 'Февраль'},
-            {value: 'Март', text: 'Март'},
-            {value: 'Апрель', text: 'Апрель'},
-            {value: 'Май', text: 'Май'},
-            {value: 'Июнь', text: 'Июнь'},
-            {value: 'Июль', text: 'Июль'},
-            {value: 'Август', text: 'Август'},
-            {value: 'Сентябрь', text: 'Сентябрь'},
-            {value: 'Октябрь', text: 'Октябрь'},
-            {value: 'Ноябрь', text: 'Ноябрь'},
-            {value: 'Декабрь', text: 'Декабрь'}
+            {value: '1', text: '1'},
+            {value: '2', text: '2'},
+            {value: '3', text: '3'},
+            {value: '4', text: '4'},
+            {value: '5', text: '5'},
+            {value: '6', text: '6'},
+            {value: '7', text: '7'},
+            {value: '8', text: '8'},
+            {value: '9', text: '9'},
+            {value: '10', text: '10'},
+            {value: '11', text: '11'},
+            {value: '12', text: '12'}
         ]
     });
     $('.people-year-editable').editable({
@@ -62,7 +62,8 @@ $(document).ready(function () {
             {value: '2017', text: '2017'},
             {value: '2018', text: '2018'},
             {value: '2019', text: '2019'},
-            {value: '2020', text: '2020'}
+            {value: '2020', text: '2020'},
+            {value: '2021', text: '2021'}
         ]
     });
 

@@ -20,6 +20,14 @@ class Admin {
     }
     
     public function GetObjectByMounth($id)
+
+    {
+        $result = R::loadAll('object', array($id));
+        return $result;
+    }
+    
+    public function ObjectDelete($table, $id)
+
     {
         $result = R::loadAll('object', array($id));
         return $result;
@@ -29,92 +37,6 @@ class Admin {
     {
         R::trash( $table, $id);
         return;
-    }
-    
-    public function ExportCsv($table,$options)
-    {
-        
-        $data = R::findAll($table);
-
-//        foreach ($data as $a) {
-//
-//            foreach ($anton as $s) {
-//
-//                foreach ($a as $t => $key) {
-//                    if($t == $s){
-//                        $array1 = array();
-//                        $list = array(
-//                            array(array_push($array1, $key))
-//                        );
-//                    }
-//                }
-//
-//                print_r($list);
-//            }
-//
-//        }
-    
-        $list = array();
-        
-        foreach ($data as $item) {
-           $list[] = array_push($list, [$item->fio,$item->fioshort,$item->nrabotnik]);
-        }
-        
-        $fp = fopen('file.csv', 'w');
-    
-        foreach ($list as $fields) {
-            fputcsv($fp, $fields);
-        }
-    
-        fclose($fp);
-        
-        return;
-    }
-    
-    public function ImportCsv($filename) {
-
-        ini_set('auto_detect_line_endings', true);
-        if(!file_exists($filename) || !is_readable($filename)) {
-            return false;
-        }
-        $header = null;
-        $data = array();
-
-        if(($handle = fopen($filename, 'r')) !== false) {
-            while(($row = fgetcsv($handle, 100, ';')) !== false) {
-                
-                if(!$header) {
-                    if($row[0] != 'sep=') {
-                        $header = $row;
-                    }
-                } else {
-                    if (count($header) > count($row)) {
-                        $difference = count($header) - count($row);
-                        for ($i = 1; $i <= $difference; $i++) {
-                            $row[count($row) + 1] = '';
-                        }
-                    }
-                }
-                if($row[0] != 'sep=') {
-                    $data[] = $row;
-                }
-            }
-            fclose($handle);
-        }
-        
-        foreach ($data as $item) {
-    
-            $user = R::dispense('people');
-            
-            $user->fio = $item['2'];
-            $user->fioshort = $item['1'];
-            $user->nrabotnik = $item['0'];
-    
-            R::store($user);
-        }
-        
-        return $data;
-    
     }
     
     public function CreateObject($data)
@@ -202,7 +124,8 @@ class Admin {
         $datecheck = $options['day'];
         $mounthcheck = $options['mounth'];
         $nraboticheck = $options['nraboti'];
-        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ?', [ $datecheck,$mounthcheck,$nraboticheck ] );
+        $nrabotnik = $options['nrabotnik'];
+        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ?', [ $datecheck,$mounthcheck,$nraboticheck]);
         
         //если номер работы отсутствует, создаем работу на месяц
         
@@ -211,6 +134,7 @@ class Admin {
             $time->date = $datecheck;
             $time->mounth = $mounthcheck;
             $time->nraboti = $nraboticheck;
+            $time->nrabotnik = $nrabotnik;
             $time->timework = '0';
             R::store($time);
         }
@@ -230,8 +154,17 @@ class Admin {
         
     }
     
-    public function rgp($url) { // remove GET-parameters from URL
-        return preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $url);
+    public function GetUserList()
+    {
+        $result = R::findAll('people', ' ORDER BY id ');
+        return $result;
+    }
+    
+    public function GetWorkTime($id)
+    {
+        $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id',[':id' => $id]);
+        
+        return $result;
     }
     
 }

@@ -29,13 +29,13 @@
                 
                 <?php
 
+                ini_set('display_errors', 0);
+                error_reporting(E_ALL);
                 
-
                 $filename = 'file.csv';
-
                 $table = 'people';
-                $options = array('fio','fioshort','nrabotnik');
-                $admin->ImportCsv($filename);
+                
+                $csv->DownloadCsv($filename);
                 
                 ?>
             </div>
