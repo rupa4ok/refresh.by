@@ -18,8 +18,10 @@
                 <?php
                 
                 $id = $_POST['id'];
+
+                $result = $admin->GetObjectByMounth($id);
                 
-                if ($result = R::loadAll('object', array($id))) {
+                if ($result) {
                     
                     foreach ($result as $res) {
                         echo '<h1>' . $res->name . '</h1>';
@@ -36,18 +38,27 @@
                         '</thead>';
                     
                     foreach ($result as $res) {
+                        switch ($uri) {
+                            case '/admin5':
+                                $month = $res->mounth;
+                                break;
+                            case '/admin9':
+                                $month = $res->mounth-1;
+                                break;
+                            case '/admin11':
+                                $month = $res->mounth+1;
+                                break;
+                        }
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
                             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
                             '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->year . '</a></td>' .
                             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->status . '</a></td>' .
                             '<td><a href="#" class="people-delete-editable" data-name="delete" id="delete' . $res->id . '" data-type="select" data-pk="' . $res->id . '" >Удалить</a></td>' .
-                            '<td><form action="admin3.php" method="POST"><input type="text" name="' . $res->id . '" value="' . $res->id . '" hidden> <button>Редактировать</button></form></td>' .
-                            '<td><form action="admin3.php" method="POST"><input type="text" name="' . $res->id . '" value="' . $res->id . '" hidden> <button>Копировать</button></form></td>' .
                             '</tr>';
                     }
                     
-                    echo '</table>';
+                    echo '</table><br>';
                 }
                 
                 $list = R::findAll('people', 'id > ?', [0]);
@@ -67,6 +78,13 @@
         </form>
 
         ';
+
+                $uri = $_SERVER['REQUEST_URI'];
+                if ($uri == '/admin5') {
+                    echo '<div class="paginator"><div><form method="post" action="/admin'.$mounthprev = ($month -1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Предыдущий месяц" /> </form></div><div class="curent">Месяц: '.$month.'</div>
+<div><form method="post" action="/admin'.$mounthnext = ($month +1).'"><input name="id" value="'.$id.'" hidden/><input type="submit" value="Следующий месяц" /> </form></div></div>';
+                }
+                
                 $object = $admin->GetShared($id);
                 $peoples = $admin->GetList($object);
                 
@@ -74,9 +92,9 @@
                     $peopleId = $people->id;
                     $objectId = $object->id;
                     
-                    echo $people->fio;
-    
+                    echo '<div class="fio">' . $people->fio . ' Номер работы: ';
                     $number = $admin->GetWorkNumber($objectId, $peopleId);
+                    echo '</div>';
                     
                     echo '<table id="user" class="table table-bordered table-striped">
                             <tbody><tr>';
@@ -95,17 +113,18 @@
                     foreach ($aDates as $day) {
                         $time = 0;
                         $workstart = $object->mounth;
+                        
+                        $uri = $_SERVER['REQUEST_URI'];
+                        
                         $options = array(
                             'day' => $day,
-                            'mounth' => $object->mounth,
+                            'mounth' => $month,
                             'nraboti' => $number,
+                            'nrabotnik' => $peopleId
                         );
 
                         $admin->CreateWork($options);
-    
-                        $timedata =  $admin->GetWorkId($options);
-                        
-                        $worked = $admin->GetTime($timedata);
+                        $timedata = $admin->GetWorkId($options);
                         
                         echo '<td><p>' . $day . '</p>
                 <a href="#" class="myeditable editable editable-click" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>

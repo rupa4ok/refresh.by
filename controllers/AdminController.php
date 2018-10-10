@@ -34,7 +34,13 @@ class AdminController
                 require_once(ROOT . '/views/project.php');
                 break;
             case '/admin6':
+                require_once(ROOT . '/views/import.php');
+                break;
+            case '/admin7':
                 require_once(ROOT . '/views/export.php');
+                break;
+            case '/admin11':
+                require_once(ROOT . '/views/project.php');
                 break;
             default:
                 echo 'Страница 404';
@@ -44,6 +50,5 @@ class AdminController
         require_once(ROOT . '/views/footer.php');
         return true;
     }
-    
     
 }

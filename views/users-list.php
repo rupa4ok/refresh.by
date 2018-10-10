@@ -22,23 +22,15 @@
             }
             ?>
             <div class="col-md-9 content-block">
-                <h4>Объекты</h4>
 
                 <div class="col-md-9 content-block">
                     
                     <?php
-                    $link = mysqli_connect(
-                        'localhost',
-                        'refresh',
-                        'refreshrefresh',
-                        'refresh');
+
+                    $result = $admin->GetUserList();
                     
-                    if (!$link) {
-                        printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-                        exit;
-                    }
                     
-                    if ($result = mysqli_query($link, 'SELECT * FROM people ORDER BY id')) {
+                    if ($result) {
                         
                         echo '
 
@@ -46,24 +38,26 @@
                             '<thead>' .
                             '<tr>' .
                             '<th>Имя сотрудника</th>' .
-                            '<th>Коэфиициент сложности</th>' .
                             '<th>Суммарное время</th>' .
                             '<th>Подробный табель</th>' .
                             '</tr>' .
                             '</thead>';
-                        
-                        while ($row = mysqli_fetch_assoc($result)) {
+
+                        foreach ($result as $res) {
+                            $id = $res['id'];
+                            $worktime = $admin->GetWorkTime($id);
+                            $worktime = $worktime['0']['SUM(timework)'];
+                            $worktime = ((!$worktime) ?: $worktime = 0);
                             echo '<tr>' .
-                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >168 часов</a></td>' .
+                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
+                                '<td><a href="#" class="people-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . $worktime . ' часов</a></td>' .
                                 '<td><button>Подробнее</button></td>' .
                                 '</tr>';
                         }
                         echo '</table>';
-                        mysqli_free_result($result);
+                        
                     }
-                    mysqli_close($link);
+
                     ?>
                 </div>
 

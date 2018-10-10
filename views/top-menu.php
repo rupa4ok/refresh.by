@@ -5,9 +5,8 @@
                 
                 <ul>
                     <li><a href="/logout.php">Выйти</a></li>
-                    <li><a href="/view/personal.php">Личный кабинет</a></li>
-                    <li><a href="">Информация о пользователе</a></li>
-                    <li><a href="">Экспорт отчета</a></li>
+                    <li><a href="/admin6">Импорт работников</a></li>
+                    <li><a href="/admin7">Экспорт отчетов</a></li>
                 </ul>
             
             </div>
