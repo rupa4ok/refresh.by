@@ -39,6 +39,9 @@ class AdminController
             case '/admin7':
                 require_once(ROOT . '/views/export.php');
                 break;
+            case '/admin9':
+                require_once(ROOT . '/views/project.php');
+                break;
             case '/admin11':
                 require_once(ROOT . '/views/project.php');
                 break;
