@@ -74,6 +74,7 @@ if ( $_SESSION['role'] == 'admin' ) {
                         '</thead>';
                     
                     foreach ($result as $row) {
+                        
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
                             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .

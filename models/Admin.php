@@ -11,11 +11,10 @@ class Admin {
     public function GetTableById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
-            $result = R::findAll($table, 'ORDER BY fio ASC');
+            $result = R::findAll($table);
             return $result;
         } else {
-            echo 'Я не админ!!!';
-            $result = R::getAll('');
+            $result = R::findAll($table, ' users_id = ? ', [ $id ]);
             return $result;
         }
     }
