@@ -19,6 +19,17 @@ class Admin {
         }
     }
     
+    public function GetUserById($table, $id, $role)
+    {
+        if ( $role == 'admin' ) {
+            $result = R::findAll($table);
+            return $result;
+        } else {
+            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.nrabotnik where nprorab = :id and people.nrabotnik is not null', [':id' => $id]);
+            return $result;
+        }
+    }
+    
     public function GetObjectByMounth($id)
 
     {

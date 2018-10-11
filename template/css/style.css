@@ -52,4 +52,17 @@ footer img {
 .curent {
     padding: 10px 0;
 }
-
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+}
+.inline-input .input-sm {
+    height: 20px;
+    width: 20px !important;
+    padding: 0px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 3px;
+}

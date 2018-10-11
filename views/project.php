@@ -143,7 +143,7 @@
                         $timedata = $admin->GetWorkId($options);
                         
                         echo '<td><p>' . $day . '</p>
-                <a href="#" class="myeditable editable editable-click" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
+                <a href="#" class="myeditable1 editable inline-input" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
                 
                 ';
                     }

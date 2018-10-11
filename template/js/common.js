@@ -1,5 +1,5 @@
-$.fn.editable.defaults.mode = 'popup';
-$(document).ready(function () {
+$(function(){
+    $.fn.editable.defaults.mode = 'inline';
     $('.people-editable').editable();
     $('.people-phone-editable').editable({
         type: 'text',
@@ -10,6 +10,7 @@ $(document).ready(function () {
     });
     $('.people-status-editable').editable({
         value: 'Активный',
+        mode: 'popup',
         source: [
             {value: 'Активный', text: 'Активный'},
             {value: 'Сдан', text: 'Сдан'}
@@ -17,6 +18,7 @@ $(document).ready(function () {
     });
     $('.people-mounth-editable').editable({
         value: 'Месяц',
+        mode: 'popup',
         source: [
             {value: '1', text: '1'},
             {value: '2', text: '2'},
@@ -34,6 +36,7 @@ $(document).ready(function () {
     });
     $('.people-year-editable').editable({
         value: 'Год',
+        mode: 'popup',
         source: [
 
             {value: '2017', text: '2017'},
@@ -98,8 +101,36 @@ $(document).ready(function () {
         value: {}
     });
     //init editables
+    $('.myeditable1').editable({
+        url: '/post',
+        showbuttons: false,
+        clear: false,
+        escape: false
+    });
+    //autofocus on worktime
     $('.myeditable').editable({
-        url: '/post' //this url will not be used for creating new user, it is only for update
+        showbuttons: false,
+        mode: 'inline'
+    }).on('shown', function(ev, editable) {
+        setTimeout(function() {
+            editable.input.$input.select();
+        },0);
+    });
+
+    $('.myeditable1').editable({
+        showbuttons: false,
+        mode: 'inline'
+    }).on('shown', function(ev, editable) {
+        setTimeout(function() {
+            editable.input.$input.select();
+        },0);
+    });
+
+    $('.myeditable').on('save.newuser', function(){
+        var that = this;
+        setTimeout(function() {
+            $(that).closest('td').next().find('.myeditable').editable('show');
+        }, 200);
     });
 
 //make username required
@@ -150,7 +181,7 @@ $(document).ready(function () {
         });
     });
 
-});
+
 
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -240,9 +271,7 @@ $.mockjax({
     }
 });
 
-$(document).ready(function() {
     $('.js-example-basic-single').select2();
-});
 
 $(function(){
     $("#event-list").select2({
@@ -262,3 +291,7 @@ function proverka() {
         return false;
     }
 }
+
+});
+
+
