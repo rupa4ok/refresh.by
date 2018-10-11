@@ -47,7 +47,7 @@
                             $id = $res['id'];
                             $worktime = $admin->GetWorkTime($id);
                             $worktime = $worktime['0']['SUM(timework)'];
-                            $worktime = ((!$worktime) ?: $worktime = 0);
+                            $worktime = (($worktime) ?: $worktime = 0);
                             echo '<tr>' .
                                 '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
                                 '<td><a href="#" class="people-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . $worktime . ' часов</a></td>' .
