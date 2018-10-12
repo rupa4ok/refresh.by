@@ -110,6 +110,7 @@ $(function(){
     //autofocus on worktime
     $('.myeditable').editable({
         showbuttons: false,
+        clear: false,
         mode: 'inline'
     }).on('shown', function(ev, editable) {
         setTimeout(function() {
