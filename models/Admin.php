@@ -173,9 +173,9 @@ class Admin {
         return $result;
     }
     
-    public function GetUserListById()
+    public function GetUserListById($id)
     {
-        $result = R::getAll('select fio from time full join people where nprorab = 97  ORDER BY fio');
+        $result = R::getAll('select * from object left join object_people on object.id = object_people.object_id right join people on object_people.people_id = people.id where object.id is not null ORDER BY fio');
         return $result;
     }
     
