@@ -58,6 +58,7 @@
                                 $month = $res->mounth+1;
                                 break;
                         }
+                        
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
                             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
@@ -106,16 +107,16 @@
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
                     $objectId = $object->id;
+                    $year = $object->year;
                     
                     echo '<div class="fio">' . $people->fio . ' Номер работы: ';
                     $number = $admin->GetWorkNumber($objectId, $peopleId);
                     echo '</div>';
                     
-                    echo '<table id="user" class="table table-bordered table-striped">
+                    echo '<table id="user" class="table table-bordered  table-striped ">
                             <tbody><tr>';
                     $aDates = array();
-                    $newDate = '01-' . $object->mounth . '-' . $object->year;
-                    
+                    $newDate = '01-' . $month . '-' . $year;
                     $oStart = new DateTime($newDate);
                     $oEnd = clone $oStart;
                     $oEnd->add(new DateInterval("P1M"));
@@ -142,8 +143,11 @@
                         $admin->CreateWork($options);
                         $timedata = $admin->GetWorkId($options);
                         
-                        echo '<td><p>' . $day . '</p>
-                <a href="#" class="myeditable1 editable inline-input" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
+                        $dayWeek = $day . '-' . $month . '-2018';
+                        $dayWeek = strftime("%a", strtotime($dayWeek));
+                        
+                        echo '<td class = "' .$dayWeek. '"><p>' . $day . '</p>
+                <a href="#" class="myeditable editable inline-input" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
                 
                 ';
                     }

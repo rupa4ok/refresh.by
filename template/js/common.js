@@ -1,5 +1,6 @@
 $(function(){
     $.fn.editable.defaults.mode = 'inline';
+
     $('.people-editable').editable();
     $('.people-phone-editable').editable({
         type: 'text',
@@ -16,6 +17,7 @@ $(function(){
             {value: 'Сдан', text: 'Сдан'}
         ]
     });
+
     $('.people-mounth-editable').editable({
         value: 'Месяц',
         mode: 'popup',
@@ -106,24 +108,6 @@ $(function(){
         showbuttons: false,
         clear: false,
         escape: false
-    });
-    //autofocus on worktime
-    $('.myeditable').editable({
-        showbuttons: false,
-        mode: 'inline'
-    }).on('shown', function(ev, editable) {
-        setTimeout(function() {
-            editable.input.$input.select();
-        },0);
-    });
-
-    $('.myeditable1').editable({
-        showbuttons: false,
-        mode: 'inline'
-    }).on('shown', function(ev, editable) {
-        setTimeout(function() {
-            editable.input.$input.select();
-        },0);
     });
 
     $('.myeditable').on('save.newuser', function(){
@@ -291,6 +275,17 @@ function proverka() {
         return false;
     }
 }
+
+//autofocus on worktime
+    $('.myeditable').editable({
+        showbuttons: false,
+        clear: false,
+        mode: 'inline'
+    }).on('shown', function(ev, editable) {
+        setTimeout(function() {
+            editable.input.$input.select();
+        },0);
+    });
 
 });
 
