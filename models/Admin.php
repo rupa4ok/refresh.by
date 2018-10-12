@@ -169,7 +169,13 @@ class Admin {
     
     public function GetUserList()
     {
-        $result = R::findAll('people', ' ORDER BY id ');
+        $result = R::findAll('people', ' ORDER BY fio ');
+        return $result;
+    }
+    
+    public function GetUserListById()
+    {
+        $result = R::getAll('select fio from time full join people where nprorab = 97  ORDER BY fio');
         return $result;
     }
     
@@ -178,6 +184,12 @@ class Admin {
         $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id',[':id' => $id]);
         
         return $result;
+    }
+    
+    public function FindPeople()
+    {
+        $list = R::findAll('people', 'id > ? ORDER BY fio', [0]);
+        return $list;
     }
     
 }

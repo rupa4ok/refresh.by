@@ -26,9 +26,13 @@
                 <div class="col-md-9 content-block">
                     
                     <?php
-
-                    $result = $admin->GetUserList();
-                    
+                    $id = $_SESSION['id'];
+                    if ( $_SESSION['role'] == 'admin' ) {
+                        $result = $admin->GetUserList();
+                    } else {
+                        $result = $admin->GetUserListById($id);
+                        echo $id;
+                    }
                     
                     if ($result) {
                         

@@ -70,8 +70,8 @@
                     
                     echo '</table><br>';
                 }
-                
-                $list = R::findAll('people', 'id > ?', [0]);
+
+                $list = $admin->FindPeople();
                 
                 echo '
         <form method="POST" id="form3" class="dataspan">
