@@ -37,13 +37,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="refresh.by (1)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="robolab.by">
         <serverdata>
           <mappings>

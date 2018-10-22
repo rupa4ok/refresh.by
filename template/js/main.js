@@ -53,6 +53,21 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#form4').submit(function () {
+
+        var form = $(this);
+        var data = form.serialize();
+        $.ajax({
+            type: 'POST',
+            url: 'components/filter.php',
+            data: data,
+            success: function (data1) {
+                $('.results1').html(data1);
+            },
+        });
+        return false;
+    });
+
     $('.delete').submit(function () {
         if (!$("input").is(".error")) {
             var form = $(this);

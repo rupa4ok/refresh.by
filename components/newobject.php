@@ -8,9 +8,7 @@
     include_once"../models/Admin.php";
     
     $data = $_POST; //получаем данные из массива
-    
     $admin = new Admin();
-    
     $admin->CreateObject($data);
     
     

@@ -25,7 +25,7 @@ class Admin {
             $result = R::findAll($table);
             return $result;
         } else {
-            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.nrabotnik where nprorab = :id and people.nrabotnik is not null', [':id' => $id]);
+            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.nrabotnik is not null', [':id' => $id]);
             return $result;
         }
     }
@@ -60,7 +60,7 @@ class Admin {
             }
     
             if (!isset($data['mounth'])) {
-                $mounth = date("Y");
+                $mounth = date("m");
             }
             
             if ($data['year']) {
@@ -129,7 +129,6 @@ class Admin {
     
     public function CreateWork($options)
     {
-        
         //проверяем есть ли данная работа в базе данных
         //@TODO: Проверка наличия работы при каждой загрузке страницы, проверять только при создании работы
         $datecheck = $options['day'];
@@ -140,7 +139,6 @@ class Admin {
         $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ? AND mounth = ? AND nraboti = ? AND nprorab = ?', [ $datecheck,$mounthcheck,$nraboticheck,$nprorab]);
         
         //если номер работы отсутствует, создаем работу на месяц
-        
         if (!$workcheck) {
             $time = R::dispense('time');
             $time->date = $datecheck;
@@ -153,7 +151,6 @@ class Admin {
         }
         
         return $workcheck;
-        
     }
     
     public function GetWorkId ($options)
@@ -173,9 +170,9 @@ class Admin {
         return $result;
     }
     
-    public function GetUserListById($id)
+    public function GetUserListById()
     {
-        $result = R::getAll('select * from object left join object_people on object.id = object_people.object_id right join people on object_people.people_id = people.id where object.users_id = :id ORDER BY fio',[':id' => $id]);
+        $result = R::getAll('select fio from time full join people where nprorab = 97  ORDER BY fio');
         return $result;
     }
     

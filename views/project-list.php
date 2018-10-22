@@ -2,7 +2,19 @@
     <img src="/template/img/logo.png"/>
 </header>
 
-<?php include_once ROOT . '/views/top-menu.php'; ?>
+<?php
+
+if ( $_SESSION['role'] == 'admin' ) {
+    $uri = 'admin5';
+    include_once ROOT . '/views/top-menu.php';
+    $class = 'people-status-editable';
+} else {
+    $uri = 'user5';
+    include_once ROOT . '/views/top-menu1.php';
+    $class = '';
+}
+
+?>
 
 <section>
     <div class="container">
@@ -29,35 +41,49 @@ if ( $_SESSION['role'] == 'admin' ) {
 
 ?>
             <div class="col-md-9 content-block">
-            
+                
 <?php
                 
- echo '<div style="width: 50%">
+ echo '<div class="addObject" style="width: 50%">
                         <div id="msg" class="alert hide"></div>
                         <table id="user" class="table table-bordered table-striped">
                             <tbody>
                             <tr>
-                                <td width="40%">Название объекта</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty" id="new_username" data-type="text" data-name="name" data-original-title="Введите название объекта">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Отчетный год</td>
-
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-year-editable" data-type="select" data-name="year" data-original-title="Выберите отчетный год">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Отчетный месяц</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-mounth-editable" data-type="select" data-name="mounth" data-original-title="Выберите отчетный месяц">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Статус</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-status-editable" data-type="select" data-name="status" data-original-title="Выберите статус объекта">Пусто</a></td>
+                                <td width="30%">Название объекта</td>
+                                <td width="50%"><a href="#" class="myeditable editable editable-click editable-empty" id="new_username" data-type="text" data-name="name" data-original-title="Введите название объекта">Пусто</a></td>
+                                <td width="20%"><button id="save-btn" class="btn btn-primary">Добавить</button></td>
                             </tr>
                             </tbody>
                         </table>
+                        
+                        <form method="post" id="form4">
+                    <select id="year" name="year">
+                        <option selected disabled>Выберете год</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2019">2020</option>
+                        <option value="2019">2021</option>
+                        <option value="2019">2022</option>
+                    </select>
+                    <select id="mounth" name="mounth">
+                        <option selected disabled>Выберете месяц</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <button type="submit">Показать</button>
+                </form>
+                        
                         <div>
-                            <button id="save-btn" class="btn btn-primary">Добавить новый объект</button>
-                            <button id="reset-btn" class="btn pull-right">Сбросить данные</button>
                         </div>
                     </div>';
                 

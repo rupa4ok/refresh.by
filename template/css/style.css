@@ -69,3 +69,6 @@ footer img {
 .Sat, .Sun {
     background-color: greenyellow;
 }
+.addObject .btn {
+    padding: 0;
+}
