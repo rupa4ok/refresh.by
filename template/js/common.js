@@ -116,7 +116,7 @@ $(function(){
             $(that).closest('tr').next().find('.myeditable').editable('show');
         }, 200);
     });
-    $('#save-btn').click(function () {
+    $('#save-btn1').click(function () {
         $('.myeditable').editable('submit', {
             url: 'components/newobject.php',
             ajaxOptions: {

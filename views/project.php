@@ -79,7 +79,11 @@ if ( $_SESSION['role'] == 'admin' ) {
                             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
                             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
                             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->status . '</a></td>' .
-                            '<td><a href="#" class="people-delete-editable" data-name="delete" id="delete' . $res->id . '" data-type="select" data-pk="' . $res->id . '" >Удалить</a></td>' .
+                            '<td><form method="post" action="/index.php" class="delete">
+
+<input type="text" value="' . $res->id . '" name="id" hidden>
+
+<button type="submit" onclick="return proverka();"> Удалить</button></td></form> ' .
                             '</tr>';
                     }
                     

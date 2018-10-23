@@ -32,8 +32,6 @@ if ($result) {
         '<th>Название объекта</th>' .
         '<th>Месяц</th>' .
         '<th>Год</th>' .
-        '<th>Дата начала</th>' .
-        '<th>Дата сдачи</th>' .
         '<th>Статус</th>' .
         '</tr>' .
         '</thead>';
@@ -43,8 +41,6 @@ if ($result) {
             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
             '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
-            '<td><a href="#" class="people-start-editable" data-name="start" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['start']) . '</a></td>' .
-            '<td><a href="#" class="people-finish-editable" data-name="finish" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['finish']) . '</a></td>' .
             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
             '<td><form method="post" class="delete">
 

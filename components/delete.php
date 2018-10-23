@@ -1,3 +1,20 @@
+    <link href="/template/css/bootstrap.css" rel="stylesheet">
+    <link href="/template/css/address.css" rel="stylesheet">
+    <link href="/template/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/template/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/template/js/jquery-3.3.1.min.js"></script>
+    <script src="/template/js/bootstrap.js" type="text/javascript"></script>
+    
+    <link href="/template/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="/template/js/bootstrap-editable.min.js"></script>
+    <script src="/template/js/address.js" type="text/javascript"></script>
+    <script src="/template/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="/template/js/jquery.mockjax.js" type="text/javascript"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.js"></script>
+    <script type="text/javascript" src='../template/js/main.js'></script>
+
 <?php
     /**
      * Created by PhpStorm.
@@ -27,14 +44,12 @@ $result = $admin->GetTableByID($table, $id, $role);
 
 if ($result) {
     echo '
-                    <table class="table results1" style="margin-top: 30px;">' .
+                    <table class="table results1" style="margin-top: 10px;">' .
         '<thead>' .
         '<tr>' .
         '<th>Название объекта</th>' .
         '<th>Месяц</th>' .
         '<th>Год</th>' .
-        '<th>Дата начала</th>' .
-        '<th>Дата сдачи</th>' .
         '<th>Статус</th>' .
         '</tr>' .
         '</thead>';
@@ -44,8 +59,6 @@ if ($result) {
             '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
             '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
             '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
-            '<td><a href="#" class="people-start-editable" data-name="start" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['start']) . '</a></td>' .
-            '<td><a href="#" class="people-finish-editable" data-name="finish" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['finish']) . '</a></td>' .
             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
             '<td><form method="post" class="delete">
 
@@ -57,3 +70,4 @@ if ($result) {
     }
     echo '</table>';
 }
+

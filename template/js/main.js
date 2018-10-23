@@ -87,6 +87,25 @@ $(document).ready(function() {
         }
     });
 
+    $('#form5').submit(function () {
+        if (!$("input").is(".error")) {
+            var form = $(this);
+            var data1 = form.serialize();
+            $.ajax({
+                type: 'POST',
+                url: 'components/newobject.php',
+                data: data1,
+                success: function (data1) {
+                    $('.results1').html(data1);
+                },
+            });
+            return false;
+        } else {
+            alert('error');
+            return false;
+        }
+    });
+
 });
 
 

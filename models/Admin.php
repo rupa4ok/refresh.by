@@ -22,10 +22,10 @@ class Admin {
     public function GetUserById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
-            $result = R::findAll($table);
+            $result = R::getAll('select DISTINCT people.fio,people.nrabotnik, SUM(time.timework) as sum from time left join people on time.nrabotnik = people.id where people.nrabotnik is not null GROUP BY people.fio ORDER BY fio ASC');
             return $result;
         } else {
-            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.nrabotnik is not null', [':id' => $id]);
+            $result = R::getAll('select DISTINCT people.fio,people.nrabotnik, SUM(time.timework) as sum from time left join people on time.nrabotnik = people.id where nprorab = :id and people.nrabotnik is not null GROUP BY people.fio', [':id' => $id]);
             return $result;
         }
     }
@@ -50,8 +50,10 @@ class Admin {
         return;
     }
     
-    public function CreateObject($data)
+    public function CreateObject($data,$name)
     {
+        $data['mounth'] = date("m");
+        $data['year'] = date("Y");
         
         if ($data['name'] !== 'Пусто') {
     
@@ -80,7 +82,7 @@ class Admin {
             }
 
             $object = R::dispense('object');
-            $object->name = $data['name'];
+            $object->name = $name;
             $object->year = $year;
             $object->mounth = $mounth;
             $object->status = 'Активный';

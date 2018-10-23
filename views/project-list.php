@@ -49,15 +49,22 @@ if ( $_SESSION['role'] == 'admin' ) {
                         <table id="user" class="table table-bordered table-striped">
                             <tbody>
                             <tr>
-                                <td width="30%">Название объекта</td>
-                                <td width="50%"><a href="#" class="myeditable editable editable-click editable-empty" id="new_username" data-type="text" data-name="name" data-original-title="Введите название объекта">Пусто</a></td>
-                                <td width="20%"><button id="save-btn" class="btn btn-primary">Добавить</button></td>
+
+<form id="form5" method="post" >
+<td width="30%">Название объекта</td>
+<td width="50%"><input type="text" name="name"></td>
+<td width="20%"><button id="save-btn" class="btn btn-primary">Добавить</button></td>
+</form>
                             </tr>
                             </tbody>
                         </table>
                         
-                        <form method="post" id="form4">
-                    <select id="year" name="year">
+                        <div>
+                        </div>
+                    </div>
+                    
+                    <form method="post" id="form4" style="margin-top: 10px;">
+                    <select id="year" name="year" style="padding: 3px;">
                         <option selected disabled>Выберете год</option>
                         <option value="2018">2018</option>
                         <option value="2019">2019</option>
@@ -65,7 +72,7 @@ if ( $_SESSION['role'] == 'admin' ) {
                         <option value="2019">2021</option>
                         <option value="2019">2022</option>
                     </select>
-                    <select id="mounth" name="mounth">
+                    <select id="mounth" name="mounth" style="padding: 3px;">
                         <option selected disabled>Выберете месяц</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -82,14 +89,12 @@ if ( $_SESSION['role'] == 'admin' ) {
                     </select>
                     <button type="submit">Показать</button>
                 </form>
-                        
-                        <div>
-                        </div>
-                    </div>';
+                    
+                    ';
                 
                 if ($result) {
                     echo '
-                    <table class="table results1" style="margin-top: 30px;">' .
+                    <table class="table results1" style="margin-top: 10px;">' .
                         '<thead>' .
                         '<tr>' .
                         '<th>Название объекта</th>' .
