@@ -12,9 +12,6 @@ class TabelController {
     
     public function actionList()
     {
-        ini_set('display_errors', 0);
-        error_reporting(E_ALL);
-    
         $uri = $_SERVER['REQUEST_URI'];
         $csv = new Csv();
     
@@ -33,8 +30,6 @@ class TabelController {
                 echo 'Страница 404';
                 break;
         }
-    
-        
         
     }
     

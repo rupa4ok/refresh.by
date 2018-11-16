@@ -47,6 +47,12 @@ class Csv {
         return;
     }
     
+    /**Выгрузка файла
+     *
+     * @param $url
+     * @param $filename
+     */
+    
     public function DownloadCsv($url, $filename)
     {
         
@@ -64,7 +70,6 @@ class Csv {
         }
         $header = null;
         $data = array();
-        
         if(($handle = fopen($filename, 'r')) !== false) {
             while(($row = fgetcsv($handle, 100, ';')) !== false) {
                 
@@ -86,20 +91,14 @@ class Csv {
             }
             fclose($handle);
         }
-    
-        print_r($data);
         
         foreach ($data as $item) {
-            
             $user = R::dispense('people');
-            
             $user->fio = $item['2'];
             $user->fioshort = $item['1'];
             $user->nrabotnik = $item['0'];
-            
             R::store($user);
         }
-        
         return $data;
         
     }

@@ -17,27 +17,20 @@
             
             <div class="col-md-9 content-block">
                 <div class="results" style="color: red"></div>
-                <form method="POST" id="form">
-                    <input type="text" name="login" placeholder="Ваше имя" value="<? $data = $_POST;
-                    echo @$data['login']; ?>">
-                    <input type="email" name="email" placeholder="Почта" value="<? echo @$data['email']; ?>">
-                    <input type="password" name="password" placeholder="Пароль" value="<? echo @$data['password']; ?>">
-                    <input type="password" name="password2" placeholder="Введите пароль еще раз"
-                           value="<? echo @$data['password2']; ?>">
-                    <button type="submit" name="do_signup">Зарегистрироваться</button>
-                </form>
+
+                <a href="file.csv">Скачать файл</a>
                 
                 <?php
 
                 ini_set('display_errors', 0);
                 error_reporting(E_ALL);
                 
-                $filename = 'file.csv';
                 $table = 'people';
-                
-                $csv->DownloadCsv($filename);
+                $filename = 'file.csv';
+                $csv->ExportCsv($table,$filename);
                 
                 ?>
+                
             </div>
         </div>
     </div>

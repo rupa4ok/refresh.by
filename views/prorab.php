@@ -30,9 +30,8 @@
                 <?php
                 
                 $table = 'users';
-                $role = $_SESSION['role'];
-                $id = $_SESSION['id'];
-                if ( $result = $admin->GetTableById($table, $id, $role)) {
+                $role = 'user';
+                if ( $result = $admin->GetProrab($table, $role)) {
                     
                     echo '
                     <table class="table" style="margin-top: 30px;">' .
@@ -40,7 +39,6 @@
                         '<tr>' .
                         '<th>Имя прораба</th>' .
                         '<th>Email</th>' .
-                        '<th>Объекты</th>' .
                         
                         '</tr>' .
                         '</thead>';
@@ -50,7 +48,6 @@
                         echo '<tr>' .
                             '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['name'] . '" data-url="ajax1.php" >' . $res['name'] . '</a></td>' .
                             '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['email'] . '" data-url="ajax1.php" >' . $res['email'] . '</a></td>' .
-                            '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . '4' . '</a></td>' .
                             '</tr>';
                     }
                     echo '</table>';

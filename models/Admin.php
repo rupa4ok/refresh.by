@@ -11,14 +11,26 @@ class Admin {
     public function GetTableById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
-            $result = R::findAll($table);
+            $result = R::getAll( "SELECT * FROM {$table} WHERE mounth = :mounth AND year = :year",
+                [':mounth' => $_SESSION['month'], ':year' => $_SESSION['year']]
+            );
             return $result;
         } else {
-            $result = R::findAll($table, ' users_id = ? ', [ $id ]);
+            $result = R::getAll( "SELECT * FROM {$table} WHERE users_id = :users_id AND mounth = :mounth AND year = :year",
+                [':users_id' => $id, ':mounth' => $_SESSION['month'], ':year' => $_SESSION['year']]
+            );
             return $result;
         }
     }
     
+    /**
+     * Получение списка юзеров
+     *
+     * @param $table
+     * @param $id
+     * @param $role
+     * @return array
+     */
     public function GetUserById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
@@ -44,6 +56,10 @@ class Admin {
 //        return $result;
 //    }
     
+    /**
+     * @param $table
+     * @param $id
+     */
     public function ObjectDelete($table, $id)
     {
         R::trash( $table, $id);
@@ -60,7 +76,7 @@ class Admin {
             }
     
             if (!isset($data['mounth'])) {
-                $mounth = date("Y");
+                $mounth = date("m");
             }
             
             if ($data['year']) {
@@ -182,7 +198,6 @@ class Admin {
     public function GetWorkTime($id)
     {
         $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id',[':id' => $id]);
-        
         return $result;
     }
     
@@ -190,6 +205,18 @@ class Admin {
     {
         $list = R::findAll('people', 'id > ? ORDER BY fio', [0]);
         return $list;
+    }
+    
+    public function getDate()
+    {
+//        $_SESSION['month'] = 11;
+//        $_SESSION['year'] = 2018;
+    }
+    
+    public function GetProrab($table, $role)
+    {
+        $result = R::findAll($table, ' role = ?', [ $role ]);
+        return $result;
     }
     
 }

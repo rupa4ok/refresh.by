@@ -15,7 +15,24 @@ class UserController {
     
         $uri = $_SERVER['REQUEST_URI'];
         $admin = new Admin();
-
+    
+        if (!isset($_SESSION['month'])) {
+            $_SESSION['month'] = date('m');
+        } else {
+            $_SESSION['month'] = $_POST['month'];
+        }
+        if (!isset($_SESSION['year'])) {
+            $_SESSION['year'] = date('Y');
+        } else {
+            $_SESSION['year'] = $_POST['year'];
+        }
+        if (!isset($_POST['month'])) {
+            $_POST['month'] = date('m');
+        }
+        if (!isset($_POST['year'])) {
+            $_POST['year'] = date('Y');
+        }
+        
         switch ($uri) {
             case '/user1':
                 require_once(ROOT . '/views/project-list.php');
@@ -30,6 +47,12 @@ class UserController {
                 require_once(ROOT . '/views/users-list.php');
                 break;
             case '/user5':
+                require_once(ROOT . '/views/project.php');
+                break;
+            case '/user9':
+                require_once(ROOT . '/views/project.php');
+                break;
+            case '/user11':
                 require_once(ROOT . '/views/project.php');
                 break;
             default:

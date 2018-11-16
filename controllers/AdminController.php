@@ -5,6 +5,7 @@ if ( $_SESSION['role'] !== 'admin' ) {
 }
 
 include_once ROOT . '/models/Admin.php';
+include_once ROOT . '/models/Csv.php';
 
 class AdminController
 {
@@ -15,7 +16,26 @@ class AdminController
         require_once(ROOT . '/views/header.php');
         
         $uri = $_SERVER['REQUEST_URI'];
+
         $admin = new Admin();
+        $csv = new Csv;
+    
+        if (!isset($_SESSION['month'])) {
+            $_SESSION['month'] = date('m');
+        } else {
+            $_SESSION['month'] = $_POST['month'];
+        }
+        if (!isset($_SESSION['year'])) {
+            $_SESSION['year'] = date('Y');
+        } else {
+            $_SESSION['year'] = $_POST['year'];
+        }
+        if (!isset($_POST['month'])) {
+            $_POST['month'] = date('m');
+        }
+        if (!isset($_POST['year'])) {
+            $_POST['year'] = date('Y');
+        }
         
         switch ($uri) {
             case '/admin1':

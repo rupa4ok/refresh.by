@@ -29,35 +29,22 @@ if ( $_SESSION['role'] == 'admin' ) {
 
 ?>
             <div class="col-md-9 content-block">
-            
+                
 <?php
                 
- echo '<div style="width: 50%">
+ echo '<div class="addObject" style="width: 50%">
                         <div id="msg" class="alert hide"></div>
                         <table id="user" class="table table-bordered table-striped">
                             <tbody>
                             <tr>
-                                <td width="40%">Название объекта</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty" id="new_username" data-type="text" data-name="name" data-original-title="Введите название объекта">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Отчетный год</td>
-
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-year-editable" data-type="select" data-name="year" data-original-title="Выберите отчетный год">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Отчетный месяц</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-mounth-editable" data-type="select" data-name="mounth" data-original-title="Выберите отчетный месяц">Пусто</a></td>
-                            </tr>
-                            <tr>
-                                <td>Статус</td>
-                                <td><a href="#" class="myeditable editable editable-click editable-empty people-status-editable" data-type="select" data-name="status" data-original-title="Выберите статус объекта">Пусто</a></td>
+                                <td width="30%">Название объекта</td>
+                                <td width="50%"><a href="#" class="myeditable editable editable-click editable-empty" id="new_username" data-type="text" data-name="name" data-original-title="Введите название объекта">Пусто</a></td>
+                                <td width="20%"><button id="save-btn" class="btn btn-primary">Добавить</button></td>
                             </tr>
                             </tbody>
                         </table>
+                        
                         <div>
-                            <button id="save-btn" class="btn btn-primary">Добавить новый объект</button>
-                            <button id="reset-btn" class="btn pull-right">Сбросить данные</button>
                         </div>
                     </div>';
                 

@@ -69,3 +69,9 @@ footer img {
 .Sat, .Sun {
     background-color: greenyellow;
 }
+.addObject .btn {
+    padding: 0;
+}
+.refresh, #form10, .inline {
+    display: inline;
+}
