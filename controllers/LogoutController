@@ -1,0 +1,16 @@
+<?php
+
+
+
+class LogoutController {
+
+    public function actionIndex()
+    {
+        echo 'logout';
+
+        return true;
+    }
+
+
+}
+

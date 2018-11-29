@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
     /**
      * Created by PhpStorm.
@@ -59,3 +60,78 @@ if ($result) {
     }
     echo '</table>';
 }
+=======
+    <link href="/template/css/bootstrap.css" rel="stylesheet">
+    <link href="/template/css/address.css" rel="stylesheet">
+    <link href="/template/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/template/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/template/js/jquery-3.3.1.min.js"></script>
+    <script src="/template/js/bootstrap.js" type="text/javascript"></script>
+    
+    <link href="/template/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="/template/js/bootstrap-editable.min.js"></script>
+    <script src="/template/js/address.js" type="text/javascript"></script>
+    <script src="/template/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="/template/js/jquery.mockjax.js" type="text/javascript"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.js"></script>
+    <script type="text/javascript" src='../template/js/main.js'></script>
+
+<?php
+    /**
+     * Created by PhpStorm.
+     * User: rupak
+     * Date: 23.09.2018
+     * Time: 21:14
+     */
+    
+require_once"../config/config.php";
+require_once"../models/Admin.php";
+require_once"../models/Users.php";
+
+$table = 'object';
+$id = $_POST['id'];
+$role = $_SESSION['role'];
+$admin = new Admin();
+$admin->ObjectDelete($table, $id);
+
+if ( $_SESSION['role'] == 'admin' ) {
+    $uri = 'admin5';
+} else {
+    $uri = 'user5';
+}
+
+$id = $_SESSION['id'];
+$result = $admin->GetTableByID($table, $id, $role);
+
+if ($result) {
+    echo '
+                    <table class="table results1" style="margin-top: 10px;">' .
+        '<thead>' .
+        '<tr>' .
+        '<th>Название объекта</th>' .
+        '<th>Месяц</th>' .
+        '<th>Год</th>' .
+        '<th>Статус</th>' .
+        '</tr>' .
+        '</thead>';
+    
+    foreach ($result as $row) {
+        echo '<tr>' .
+            '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
+            '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
+            '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
+            '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+            '<td><form method="post" class="delete">
+
+<input type="text" value="' . $row['id'] . '" name="id" hidden>
+
+<button type="submit" onclick="return proverka();"> Удалить</button></td></form> ' .
+            '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
+            '</tr>';
+    }
+    echo '</table>';
+}
+
+>>>>>>> 2cac73942f428d4415f6c51643a92deff2df3699
