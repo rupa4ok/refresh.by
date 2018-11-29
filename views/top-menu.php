@@ -5,20 +5,20 @@
                 
                 <ul>
                     <li><a href="/logout.php">Выйти</a></li>
-                    <li><a href="/admin7">Экспорт отчетов</a></li>
+<?php if ($_SESSION['role'] == 'admin') {
+    echo '<li><a href="/admin7">Экспорт отчетов</a></li>';
+} ?>
                     
                     <li>
                         <?php
                         
-                        if ($_SESSION['month'] AND $_POST['month']) {
+                        if ($_SESSION['month'] and $_POST['month']) {
                             $_SESSION['month'] = $_POST['month'];
                             $_SESSION['year'] = $_POST['year'];
-                            echo '<span class="results3">' . 'Отчетный месяц: ' . $_SESSION['month'] .' - ' . $_SESSION['year']
-                            . '<form method="post" class="refresh">
+                            echo '<span class="results3">' . 'Отчетный месяц: ' . $_SESSION['month'] . ' - ' . $_SESSION['year']
+                                . '<form method="post" class="refresh">
                         <input type="text" value="257" name="id" hidden="">
-                        <button type="submit" onclick="return refresh();">Сбросить</button></form></span>'
-                            ;
-
+                        <button type="submit" onclick="return refresh();">Сбросить</button></form></span>';
                         } else {
                             echo '<li>
 
@@ -51,7 +51,6 @@
 </form>
 </span>
 </li>';
-                        
                         }
                         ?>
                     </li>

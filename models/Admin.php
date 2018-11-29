@@ -68,7 +68,8 @@ class Admin {
     
     public function CreateObject($data)
     {
-        
+        $error_obj = '';
+
         if ($data['name'] !== 'Пусто') {
     
             if (!isset($data['year'])) {
@@ -87,24 +88,36 @@ class Admin {
                 }
             }
             
-            if ($data['mounth']) {
+            if (isset($data['mounth'])) {
                 if ($data['mounth'] == 'Месяц') {
                     $mounth = date("m");
                 } else {
                     $mounth = $data['mounth'];
                 }
             }
-
-            $object = R::dispense('object');
-            $object->name = $data['name'];
-            $object->year = $year;
-            $object->mounth = $mounth;
-            $object->status = 'Активный';
-            $object->users_id = $_SESSION['id'];
-        
-            R::store($object);
+    
+            $obj = R::findOne('object', 'name = ?', [$data['name']]);
+            if (isset($obj)) {
+                $objName = $obj->name;
+            } else {
+                $objName = 0;
+            }
+            
+            if ($objName !== $data['name']) {
+                $object = R::dispense('object');
+                $object->name = $data['name'];
+                $object->year = $year;
+                $object->mounth = $mounth;
+                $object->status = 'Активный';
+                $object->users_id = $_SESSION['id'];
+    
+                R::store($object);
+            } else {
+                $error_obj = 'Объект существует';
+            }
+            
         }
-        return;
+        return $error_obj;
     }
     
     public function GetShared($id)

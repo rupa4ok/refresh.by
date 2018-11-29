@@ -1,6 +1,6 @@
 <?php
 
-if ( $_SESSION['role'] !== 'admin' ) {
+if ($_SESSION['role'] !== 'admin') {
     header('Location: /',true, 301); //редирект на главную если не залогинен
 }
 
@@ -39,6 +39,15 @@ class AdminController
         
         switch ($uri) {
             case '/admin1':
+                if (isset($_POST['addobject'])) {
+                    $data = $_POST; //получаем данные из массива
+                    $admin->CreateObject($data);
+                }
+                if (isset($_POST['delete'])) {
+                    $table = 'object';
+                    $id = $_POST['id'];
+                    $admin->ObjectDelete($table, $id);
+                }
                 require_once(ROOT . '/views/project-list.php');
                 break;
             case '/admin2':
@@ -62,11 +71,11 @@ class AdminController
             case '/admin9':
                 require_once(ROOT . '/views/project.php');
                 break;
-            case '/admin11':
+            case '/admin12':
                 require_once(ROOT . '/views/project.php');
                 break;
             default:
-                echo 'Страница 404';
+                require_once(ROOT . '/views/project.php');
                 break;
         }
         

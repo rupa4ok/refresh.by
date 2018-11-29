@@ -1,7 +1,7 @@
 <?php
 
-if ( $_SESSION['role'] !== 'user' ) {
-    header('Location: /',true, 301); //редирект на главную если не залогинен
+if ($_SESSION['role'] !== 'user') {
+    header('Location:/',true, 301); //редирект на главную если не залогинен
 }
 
 include_once ROOT . '/models/Admin.php';
@@ -56,7 +56,7 @@ class UserController {
                 require_once(ROOT . '/views/project.php');
                 break;
             default:
-                echo 'Страница 404';
+                require_once(ROOT . '/views/project.php');
                 break;
         }
 

@@ -1,5 +1,5 @@
 <?php
-if(session_id() == '') {
+if (session_id() == '') {
     session_start();
 }
 
@@ -14,7 +14,4 @@ error_reporting(E_ALL);
 require_once('/var/www/site19.websfera.by/data/www/site19.websfera.by/libs/rb.php');
 
 //Подключение к бд
-    R::setup( 'mysql:host=localhost;dbname=refresh', 'refresh', 'refreshrefresh' );
-
-
-
+R::setup('mysql:host=localhost;dbname=refresh', 'refresh', 'refreshrefresh');

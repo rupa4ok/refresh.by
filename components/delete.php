@@ -5,6 +5,8 @@
      * Date: 23.09.2018
      * Time: 21:14
      */
+
+session_start();
     
 require_once"../config/config.php";
 require_once"../models/Admin.php";
@@ -47,7 +49,7 @@ if ($result) {
             '<td><a href="#" class="people-start-editable" data-name="start" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['start']) . '</a></td>' .
             '<td><a href="#" class="people-finish-editable" data-name="finish" data-type="date" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . date('d.m.Y', $row['finish']) . '</a></td>' .
             '<td><a href="#" class="people-status-editable" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
-            '<td><form method="post" class="delete">
+            '<td><form method="post">
 
 <input type="text" value="' . $row['id'] . '" name="id" hidden>
 

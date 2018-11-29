@@ -1,36 +1,43 @@
 <?php include "header.php"; ?>
-
-<body>
-    <header>
-        <img src="template/img/logo.png" />
-    </header>
-    <section class="main login">
-        <div class="container">
-            <div class="row login-row">
-                <div class="col-md-4 col-md-offset-4 login-form">
-                                    <?php
-                                    //@TODO: Дописать комментарии потом хрен что вспомнишь
-                                    $index = new IndexController();
-                                    $index->Auth(); ?>
-                                    <div class="results1" style="color: red"></div>
-                                    <form method="POST" id="form2">
-                                        <input type="email" name="email" placeholder="Почта" value="<? echo @$data['email']; ?>">
-                                        <input type="password" name="password"  placeholder="Пароль" value="<? echo @$data['password']; ?>">
-                                        <button type="submit" name="do_login">Вход</button>
-                                    </form>
-
-                </div>
-            </div>
-        </div>
-    </section>
     
-    <section>
-        <div class="container">
-            <div class="row">
-            
+    <body>
+<header>
+    <img src="template/img/logo.png"/>
+</header>
+<section class="main login">
+    <div class="container">
+        <div class="row login-row">
+            <div class="col-md-4 col-md-offset-4 login-form">
+                <?php
+                $index = new IndexController();
+                $index->Auth(); ?>
+                <div class="results1" style="color: red"></div>
+                <form method="POST" id="form2">
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Почта"
+                               class="form-control" value="<?php echo @$data['email']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Пароль"
+                               class="form-control" value="<?php echo @$data['password']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary col-md-12" type="submit"
+                                name="do_login">Вход
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
         
+        </div>
+    </div>
+</section>
 
 <?php include "footer.php" ?>

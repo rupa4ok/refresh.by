@@ -12,7 +12,7 @@ if ( $_SESSION['role'] == 'admin' ) {
     $class = 'people-status-editable';
 } else {
     $uri = 'user5';
-    include_once ROOT . '/views/top-menu1.php';
+    include_once ROOT . '/views/top-menu.php';
     $class = '';
 }
 

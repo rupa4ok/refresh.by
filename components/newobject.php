@@ -10,4 +10,3 @@
     $data = $_POST; //получаем данные из массива
     $admin = new Admin();
     $admin->CreateObject($data);
-    header('Location: http://site19.websfera.by/user1',true, 301);

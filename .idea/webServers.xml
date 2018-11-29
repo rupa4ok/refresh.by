@@ -5,7 +5,7 @@
       <webServer id="401c886a-8604-4a14-be06-bbfece15e1d0" name="refresh" url="http://178.159.46.85">
         <fileTransfer host="178.159.46.85" port="21" rootFolder="/www/site19.websfera.by">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>
