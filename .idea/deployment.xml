@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" uploadOnCheckin="3c9608ad-8ab9-4108-a8d0-0da59c3ce92a">
+  <component name="PublishConfigData" uploadOnCheckin="7bede0f8-13ad-4e5f-b303-2f68e31c6a42">
     <serverData>
       <paths name="alikam">
         <serverdata>
@@ -37,13 +37,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="refresh.by (1)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="robolab.by">
         <serverdata>
           <mappings>
@@ -59,6 +52,6 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="refresh.by (1)" />
+    <option name="myUploadOnCheckinName" value="refresh.by" />
   </component>
 </project>

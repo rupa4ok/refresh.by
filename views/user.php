@@ -41,11 +41,11 @@ if ( $_SESSION['role'] == 'admin' ) {
                 
                 <?php
 
-                if ( $_SESSION['role'] == 'admin' ) {
-                    $uri = 'admin5';
-                    include_once ROOT . '/views/adduser.php';
-                    $class = 'people-status-editable';
-                }
+//                if ( $_SESSION['role'] == 'admin' ) {
+//                    $uri = 'admin5';
+//                    include_once ROOT . '/views/adduser.php';
+//                    $class = 'people-status-editable';
+//                }
                 
                 $table = 'people';
                 $role = $_SESSION['role'];
@@ -61,6 +61,7 @@ if ( $_SESSION['role'] == 'admin' ) {
                         '<tr>' .
                         '<th>Имя сотрудника</th>' .
                         '<th>Номер работника</th>' .
+                        '<th>Время работы</th>' .
                         '</tr>' .
                         '</thead>';
                     
@@ -69,11 +70,14 @@ if ( $_SESSION['role'] == 'admin' ) {
                             echo '<tr>' .
                                 '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
                                 '<td>' . $row['nrabotnik'] . '</td>' .
+                                '<td>' . $row['sum'] . '</td>' .
                                 '</tr>';
                         } else {
+
                             echo '<tr>' .
                             '<td>' . $row['fio'] . '</td>' .
                             '<td>' . $row['nrabotnik'] . '</td>' .
+                            '<td>' . $row['sum'] . '</td>' .
                             '</tr>';
                     }
                         }

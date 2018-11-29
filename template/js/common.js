@@ -59,19 +59,6 @@ $(function(){
 
     });
 
-    $('#country').editable({
-        format: 'dd.mm.yyyy',
-        defaultDate: '01/26/2018',
-        viewformat: 'dd.mm.yyyy',
-        source: [
-            {value: '2017', text: '2017'},
-            {value: '2018', text: '2018'},
-            {value: '2019', text: '2019'},
-            {value: '2020', text: '2020'},
-            {value: '2021', text: '2021'}
-        ]
-    });
-
     $('.people-finish-editable').editable({
         format: 'dd.mm.yyyy',
         defaultDate: '01/26/2018',
@@ -129,27 +116,14 @@ $(function(){
             $(that).closest('tr').next().find('.myeditable').editable('show');
         }, 200);
     });
-    $('#save-btn').click(function () {
+    $('#save-btn1').click(function () {
         $('.myeditable').editable('submit', {
             url: 'components/newobject.php',
             ajaxOptions: {
                 dataType: 'json' //assuming json response
             },
-            success: function (data, config) {
-                if (data && data.id) {  //record created, response like {"id": 2}
-                    //set pk
-                    $(this).editable('option', 'pk', data.id);
-                    //remove unsaved class
-                    $(this).removeClass('editable-unsaved');
-                    //Сообщение об успешной регистрации
-                    var msg = 'Объект успешно создан';
-                    $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
-                    $('#save-btn').hide();
-                    $(this).off('save.newuser');
-                } else if (data && data.errors) {
-                    //server-side validation error, response like {"errors": {"username": "username already exist"} }
-                    config.error.call(this, data.errors);
-                }
+            success: function (data1) {
+                $('.results1').html(data1);
             },
             error: function (errors) {
                 var msg = '';
@@ -164,8 +138,6 @@ $(function(){
             }
         });
     });
-
-
 
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -259,7 +231,7 @@ $.mockjax({
 
 $(function(){
     $("#event-list").select2({
-        placeholder: 'Выберите событие'
+        placeholder: 'Выберите работника'
     })
     //Добавление и удаление в value=""
         .on('select2:select select2:unselect', function (evt) {
@@ -267,14 +239,6 @@ $(function(){
         })
 
 });
-
-function proverka() {
-    if (confirm("Подтвердите удаление объекта")) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 //autofocus on worktime
     $('.myeditable').editable({
@@ -288,5 +252,31 @@ function proverka() {
     });
 
 });
+
+function proverka() {
+    if (confirm("Подтвердите удаление объекта")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+$('#country').change(function(){
+    var val = $(this).val();
+    $('#region').show();
+    $('#region').html('');
+    $.ajax({
+        type: 'POST',
+        url: '/components/filter.php',
+        data: {'country': val},
+        success: function(data) {
+            var obj = JSON.parse(data);
+            $.each(obj, function( index, value ) {
+                $('#region').append($("<option></option>").attr("value",value).text(index));
+            });
+        }
+    });
+});
+
 
 

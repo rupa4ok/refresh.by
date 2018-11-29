@@ -32,6 +32,12 @@ class UserController {
             case '/user5':
                 require_once(ROOT . '/views/project.php');
                 break;
+            case '/user9':
+                require_once(ROOT . '/views/project.php');
+                break;
+            case '/user11':
+                require_once(ROOT . '/views/project.php');
+                break;
             default:
                 echo 'Страница 404';
                 break;

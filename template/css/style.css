@@ -34,6 +34,7 @@ footer img {
     width: 100%;
     max-width: 100%;
     margin-bottom: 0px;
+    background-color: transparent !important;
 }
 #user .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     padding: 2px;
@@ -68,4 +69,7 @@ footer img {
 }
 .Sat, .Sun {
     background-color: greenyellow;
+}
+.addObject .btn {
+    padding: 0;
 }

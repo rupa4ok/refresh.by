@@ -1,37 +1,19 @@
-    <link href="/template/css/bootstrap.css" rel="stylesheet">
-    <link href="/template/css/address.css" rel="stylesheet">
-    <link href="/template/css/style.css" rel="stylesheet">
-    <script type="text/javascript" src="/template/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/template/js/jquery-3.3.1.min.js"></script>
-    <script src="/template/js/bootstrap.js" type="text/javascript"></script>
-    
-    <link href="/template/css/bootstrap-editable.css" rel="stylesheet"/>
-    <script src="/template/js/bootstrap-editable.min.js"></script>
-    <script src="/template/js/address.js" type="text/javascript"></script>
-    <script src="/template/js/jquery.maskedinput.min.js" type="text/javascript"></script>
-    <script src="/template/js/jquery.mockjax.js" type="text/javascript"></script>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.js"></script>
-    <script type="text/javascript" src='../template/js/main.js'></script>
-
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: rupak
-     * Date: 23.09.2018
-     * Time: 21:14
-     */
-    
+/**
+ * Created by PhpStorm.
+ * User: rupak
+ * Date: 23.09.2018
+ * Time: 21:14
+ */
+
 require_once"../config/config.php";
 require_once"../models/Admin.php";
 require_once"../models/Users.php";
 
 $table = 'object';
-$id = $_POST['id'];
+$id = $_SESSION['id'];
 $role = $_SESSION['role'];
 $admin = new Admin();
-$admin->ObjectDelete($table, $id);
 
 if ( $_SESSION['role'] == 'admin' ) {
     $uri = 'admin5';
@@ -44,7 +26,7 @@ $result = $admin->GetTableByID($table, $id, $role);
 
 if ($result) {
     echo '
-                    <table class="table results1" style="margin-top: 10px;">' .
+                    <table class="table results1" style="margin-top: 30px;">' .
         '<thead>' .
         '<tr>' .
         '<th>Название объекта</th>' .
@@ -70,4 +52,3 @@ if ($result) {
     }
     echo '</table>';
 }
-
