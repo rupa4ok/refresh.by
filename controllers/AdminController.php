@@ -1,7 +1,7 @@
 <?php
 
 if ($_SESSION['role'] !== 'admin') {
-    header('Location: /',true, 301); //редирект на главную если не залогинен
+    header('Location: /', true, 301); //редирект на главную если не залогинен
 }
 
 include_once ROOT . '/models/Admin.php';
@@ -19,22 +19,20 @@ class AdminController
 
         $admin = new Admin();
         $csv = new Csv;
-    
-        if (!isset($_SESSION['month'])) {
+
+        if (!isset($_POST['month']) and !isset($_SESSION['month'])) {
             $_SESSION['month'] = date('m');
-        } else {
+        }
+        if (!isset($_POST['year']) and !isset($_SESSION['year'])) {
+            $_SESSION['year'] = date('Y');
+        }
+
+        if (isset($_SESSION['month']) and isset($_POST['month'])) {
             $_SESSION['month'] = $_POST['month'];
         }
-        if (!isset($_SESSION['year'])) {
-            $_SESSION['year'] = date('Y');
-        } else {
+
+        if (isset($_SESSION['year']) and isset($_POST['year'])) {
             $_SESSION['year'] = $_POST['year'];
-        }
-        if (!isset($_POST['month'])) {
-            $_POST['month'] = date('m');
-        }
-        if (!isset($_POST['year'])) {
-            $_POST['year'] = date('Y');
         }
         
         switch ($uri) {
@@ -60,6 +58,7 @@ class AdminController
                 require_once(ROOT . '/views/users-list.php');
                 break;
             case '/admin5':
+                $objectStatus = '$class="myeditable editable inline-input"';
                 require_once(ROOT . '/views/project.php');
                 break;
             case '/admin6':

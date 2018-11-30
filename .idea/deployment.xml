@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
-  <component name="PublishConfigData" serverName="refresh" uploadOnCheckin="3c9608ad-8ab9-4108-a8d0-0da59c3ce92a">
-=======
-  <component name="PublishConfigData" uploadOnCheckin="7bede0f8-13ad-4e5f-b303-2f68e31c6a42">
->>>>>>> 2cac73942f428d4415f6c51643a92deff2df3699
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="refresh" autoUploadExternalChanges="true">
     <serverData>
       <paths name="refresh">
         <serverdata>
@@ -13,24 +9,7 @@
           </mappings>
         </serverdata>
       </paths>
-<<<<<<< HEAD
-=======
-      <paths name="robolab.by">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="roboschool.pro">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
->>>>>>> 2cac73942f428d4415f6c51643a92deff2df3699
     </serverData>
-    <option name="myUploadOnCheckinName" value="refresh.by" />
+    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
   </component>
 </project>

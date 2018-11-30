@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <?php
-            if ( $_SESSION['role'] == 'admin' ) {
+            if ($_SESSION['role'] == 'admin') {
                 $uri = 'admin2';
                 include_once ROOT . '/views/left-menu.php';
             } else {
@@ -22,48 +22,81 @@
             }
             ?>
             <div class="col-md-9 content-block">
-
+                
                 <div class="col-md-9 content-block">
-                    
+
                     <?php
                     $id = $_SESSION['id'];
-                    if ( $_SESSION['role'] == 'admin' ) {
+                    if ($_SESSION['role'] == 'admin') {
                         $result = $admin->GetUserList();
                     } else {
                         $result = $admin->GetUserListById($id);
                         echo $id;
                     }
-                    
-                    if ($result) {
-                        
-                        echo '
 
-                    <table class="table" style="margin-top: 30px;">' .
-                            '<thead>' .
-                            '<tr>' .
-                            '<th>Имя сотрудника</th>' .
-                            '<th>Суммарное время</th>' .
-                            '<th>Подробный табель</th>' .
-                            '</tr>' .
-                            '</thead>';
 
-                        foreach ($result as $res) {
-                            $id = $res['id'];
-                            $worktime = $admin->GetWorkTime($id);
-                            $worktime = $worktime['0']['SUM(timework)'];
-                            $worktime = (($worktime) ?: $worktime = 0);
-                            echo '<tr>' .
-                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $res['fio'] . '" data-url="ajax1.php" >' . $res['fio'] . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="koef" data-type="text" data-pk="' . $res['id'] . '" data-url="ajax1.php" >' . $worktime . ' часов</a></td>' .
-                                '<td><button>Подробнее</button></td>' .
-                                '</tr>';
-                        }
-                        echo '</table>';
-                        
+                    echo '<table id="user" class="table table-bordered  table-striped results">
+                            <tbody>';
+
+                    foreach ($peoples as $people) {
+
+                        echo '<tr>
+                            <td class = "">
+                                    Имя
+                            </td>
+                            
+                            <td class = "">
+                                    01
+                            </td>
+                            <td class = "">
+                                    07
+                            </td> 
+                            <td class = "">
+                                    14
+                            </td>
+                            </tr>
+                            
+                            <tr>
+                            
+                            <td class = "">
+                                    Имя
+                            </td>
+                            
+                            <td class = "">
+                                    11
+                            </td>
+                            <td class = "">
+                                    11
+                            </td> 
+                            <td class = "">
+                                    11
+                            </td>
+                            </tr>
+                            
+                            <tr>
+                            
+                            <td class = "">
+                                    Имя
+                            </td>
+                            
+                            <td class = "">
+                                    11
+                            </td>
+                            <td class = "">
+                                    11
+                            </td> 
+                            <td class = "">
+                                    11
+                            </td>
+                            
+                            ';
+
                     }
+
+                    echo '</tr>';
+                    echo '</tbody>
+                        </table>';
 
                     ?>
                 </div>
-
-
             </div>

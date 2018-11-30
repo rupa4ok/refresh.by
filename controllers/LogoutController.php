@@ -8,7 +8,7 @@ class LogoutController {
     {
         $_SESSION = array();
 
-        header('Location: /',true, 301); //редирект в админку админа
+        header('Location: /',true, 301); //редирект на главную
 
         return true;
     }
