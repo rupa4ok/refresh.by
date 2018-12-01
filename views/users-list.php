@@ -28,19 +28,27 @@
                     <?php
                     $id = $_SESSION['id'];
                     if ($_SESSION['role'] == 'admin') {
-                        $result = $admin->GetUserList();
+                        $result = $admin->getTabelList($id);
                     } else {
                         $result = $admin->GetUserListById($id);
                         echo $id;
                     }
+                    $dataCell = array();
 
+                    foreach ($result as $res) {
+                        $dataCell[$res['mounth']][$res['date']] = [
+                            'time' => $res['timework']
+                        ];
+                    }
 
+                    echo '<pre>';
+                    print_r($dataCell);
+                    echo '</pre>';
+                    
                     echo '<table id="user" class="table table-bordered  table-striped results">
                             <tbody>';
 
-                    foreach ($peoples as $people) {
-
-                        echo '<tr>
+                    echo '<tr>
                             <td class = "">
                                     Имя
                             </td>
@@ -91,10 +99,8 @@
                             
                             ';
 
-                    }
-
                     echo '</tr>';
-                    echo '</tbody>
+                    echo '</tbody>  
                         </table>';
 
                     ?>

@@ -235,11 +235,14 @@ class Admin {
     }
 
     /**
+     * @param $id
      * @return array
      */
-    public function getTabelList()
+    public function getTabelList($id)
     {
-        return R::getAll( "SELECT * FROM time");
+        return R::getAll( "SELECT * FROM time as t LEFT JOIN people as p 
+        ON t.nrabotnik = p.id WHERE t.nprorab = {$id} AND t.timework != 0
+        ");
     }
     
 }
