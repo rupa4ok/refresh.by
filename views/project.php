@@ -24,9 +24,14 @@
                 <h4>Объекты</h4>
                 
                 <?php
-                
-                $id = $_POST['id'];
 
+                if (isset($_POST['id'])) {
+                    $id = $_POST['id'];
+                } else {
+                    $id = $_SESSION['id'];
+                }
+                $month = $_SESSION['month'];
+                
                 $result = $admin->GetObjectByMounth($id);
 
                 $objectStatus = '$class="inline-input"';
@@ -40,18 +45,41 @@
                             $objectStatus = 'class="myeditable editable inline-input"';
                         }
                     }
+    
+                    if($_SESSION['role'] == 'admin') {
+                        echo '<table class="table">' .
+                            '<thead>' .
+                            '<tr>' .
+                            '<th>Название объекта</th>' .
+                            '<th>Месяц</th>' .
+                            '<th>Год</th>' .
+                            '<th>Прораб</th>' .
+                            '<th>Статус</th>' .
+                            '</tr>' .
+                            '</thead>';
+                    } else {
+                        echo '<table class="table">' .
+                            '<thead>' .
+                            '<tr>' .
+                            '<th>Название объекта</th>' .
+                            '<th>Месяц</th>' .
+                            '<th>Год</th>' .
+                            '<th>Статус</th>' .
+                            '</tr>' .
+                            '</thead>';
+                    }
                     
-                    echo '<table class="table">' .
-                        '<thead>' .
-                        '<tr>' .
-                        '<th>Название объекта</th>' .
-                        '<th>Месяц</th>' .
-                        '<th>Год</th>' .
-                        '<th>Статус</th>' .
-                        '</tr>' .
-                        '</thead>';
+                    
                     
                     foreach ($result as $res) {
+                        $realId = $res['users_id'];
+                        $table = 'users';
+                        $realName = $admin->getProrabName($table, $realId);
+                        
+                        foreach ($realName as $value) {
+                            $real = $value['name'];
+                        }
+                        
                         switch ($uri) {
                             case '/admin5':
                                 $month = $res->mounth;
@@ -66,7 +94,11 @@
                                 $month = $res->mounth+1;
                                 break;
                             case '/user5':
-                                $month = $res->mounth;
+                                if (isset($res->mounth)) {
+                                    $month = $res->mounth;
+                                } else {
+                                    $month = $_SESSION['month'];
+                                }
                                 break;
                             case '/user10':
                                 $month = $res->mounth-1;
@@ -81,14 +113,22 @@
                                 break;
                         }
                         
-                        
-                        
-                        echo '<tr>' .
-                            '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
-                            '<td><a href="#" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
-                            '<td><a href="#" data-name="year" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->year . '</a></td>' .
-                            '<td><a href="#" data-name="status" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->status . '</a></td>' .
-                            '</tr>';
+                        if($_SESSION['role'] == 'admin') {
+                            echo '<tr>' .
+                                '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
+                                '<td><a href="#" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
+                                '<td><a href="#" data-name="year" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->year . '</a></td>' .
+                                '<td>'. $real .'</td>' .
+                                '<td><a href="#" data-name="status" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->status . '</a></td>' .
+                                '</tr>';
+                        } else {
+                            echo '<tr>' .
+                                '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
+                                '<td><a href="#" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
+                                '<td><a href="#" data-name="year" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->year . '</a></td>' .
+                                '<td><a href="#" data-name="status" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->status . '</a></td>' .
+                                '</tr>';
+                        }
                     }
                     
                     echo '</table><br>';
@@ -158,7 +198,19 @@
                     
                     echo '<div class="fio">' . $people->fio . ' Номер работы: ';
                     $number = $admin->GetWorkNumber($objectId, $peopleId);
-                    echo '<i class="fa fa-files-o" aria-hidden="true">Копировать</i></div>';
+                    echo '
+<form method="post" >
+<input type="text" value="' . $id . '" name="id" hidden>
+<input type="text" name="copy" value="copy" hidden>
+  <button name="copyPeople" value="copy"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+ </form>
+<form method="post" >
+<input type="text" value="' . $id . '" name="id" hidden>
+<input type="text" value="' . $number . '" name="number" hidden>
+<input type="text" name="delete" value="delete" hidden>
+  <button name="copyPeople" value="delete" onclick="return proverka2();"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+ </form>
+ </div>';
                     
                     echo '<table id="user" class="table table-bordered  table-striped results tableObject">
                             <tbody><tr>';
@@ -189,7 +241,6 @@
 
                         $admin->CreateWork($options);
                         $timedata = $admin->GetWorkId($options);
-                        
                         $dayWeek = $day . '-' . $month . '-2018';
                         $dayWeek = strftime("%a", strtotime($dayWeek));
                         echo '<td class = "' .$dayWeek. '"><p>' . $day . '</p>

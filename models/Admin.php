@@ -265,4 +265,10 @@ class Admin {
         ");
     }
     
+    public function getProrabName($table, $realId)
+    {
+        $result = R::findAll($table, ' id = ?', [ $realId ]);
+        return $result;
+    }
+    
 }

@@ -78,3 +78,6 @@ footer img {
 .tableObject .form-inline .form-control {
     width: 100% !important;
 }
+.fio form {
+    display: inline;
+}

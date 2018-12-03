@@ -10,18 +10,20 @@ $(function(){
         $("input.people-phone-editable").mask("(999) 999-9999");
     });
     $('.people-status-editable').editable({
-        value: 'Активный',
+        value: 'def',
         mode: 'popup',
         source: [
+            {value: 'def', text: 'Выберите статус объекта'},
             {value: 'Активный', text: 'Активный'},
             {value: 'Сдан', text: 'Сдан'}
         ]
     });
 
     $('.people-mounth-editable').editable({
-        value: 'Месяц',
+        value: 'def',
         mode: 'popup',
         source: [
+            {value: 'def', text: '12'},
             {value: '1', text: '1'},
             {value: '2', text: '2'},
             {value: '3', text: '3'},
@@ -37,10 +39,10 @@ $(function(){
         ]
     });
     $('.people-year-editable').editable({
-        value: 'Год',
+        value: 'def',
         mode: 'popup',
         source: [
-
+            {value: 'def', text: '2018'},
             {value: '2017', text: '2017'},
             {value: '2018', text: '2018'},
             {value: '2019', text: '2019'},
@@ -263,6 +265,14 @@ function proverka() {
 
 function proverka1() {
     if (confirm("Скопировать объект?")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function proverka2() {
+    if (confirm("Удалить работника?")) {
         return true;
     } else {
         return false;

@@ -68,6 +68,11 @@ class UserController {
                 require_once(ROOT . '/views/users-list.php');
                 break;
             case '/user5':
+                if (isset($_POST['delete'])) {
+                    $table = 'object_people';
+                    $id = $_POST['number'];
+                    $admin->ObjectDelete($table, $id);
+                }
                 require_once(ROOT . '/views/project.php');
                 break;
             case '/user9':
