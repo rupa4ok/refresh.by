@@ -261,6 +261,14 @@ function proverka() {
     }
 }
 
+function proverka1() {
+    if (confirm("Скопировать объект?")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 $('#country').change(function(){
     var val = $(this).val();
     $('#region').show();

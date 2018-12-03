@@ -46,6 +46,17 @@ class AdminController
                     $id = $_POST['id'];
                     $admin->ObjectDelete($table, $id);
                 }
+                if (isset($_POST['copy'])) {
+                    $table = 'object';
+                    $id = $_POST['id'];
+                    $result = $admin->copyObject($table, $id);
+                    foreach ($result as $res) {
+                        $newName = $res->name;
+                    }
+                    $_POST['newName'] = $newName;
+                    $data = $_POST; //получаем данные из массива
+                    $add = $admin->CreateObject($data);
+                }
                 require_once(ROOT . '/views/project-list.php');
                 break;
             case '/admin2':

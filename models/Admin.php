@@ -37,7 +37,7 @@ class Admin {
             $result = R::findAll($table);
             return $result;
         } else {
-            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.nrabotnik where nprorab = :id and people.nrabotnik is not null', [':id' => $id]);
+            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.id is not null', [':id' => $id]);
             return $result;
         }
     }
@@ -65,12 +65,18 @@ class Admin {
         R::trash( $table, $id);
         return;
     }
+
+    public function copyObject($table, $id)
+    {
+        $result = R::loadAll('object', array($id));
+        return $result;
+    }
     
     public function CreateObject($data)
     {
         $error_obj = '';
 
-        if ($data['name'] !== 'Пусто') {
+        if (isset($data['name']) !== 'Пусто') {
     
             if (!isset($data['year'])) {
                 $year = date("Y");
@@ -80,7 +86,7 @@ class Admin {
                 $mounth = date("m");
             }
             
-            if ($data['year']) {
+            if (isset($data['year'])) {
                 if ($data['year'] == 'Год') {
                     $year = date("Y");
                 } else {
@@ -95,17 +101,20 @@ class Admin {
                     $mounth = $data['mounth'];
                 }
             }
-    
-            $obj = R::findOne('object', 'name = ?', [$data['name']]);
-            if (isset($obj)) {
-                $objName = $obj->name;
-            } else {
-                $objName = 0;
+            
+            if (isset($data['name'])) {
+                $obj = R::findOne('object', 'name = ?', [$data['name']]);
+                if (isset($obj)) {
+                    $objName = $obj->name;
+                } else {
+                    $objName = 0;
+                    $error_obj = 'Объект существует';
+                }
             }
             
-            if ($objName !== $data['name']) {
+            if (isset($_POST['copy'])) {
                 $object = R::dispense('object');
-                $object->name = $data['name'];
+                $object->name = 'Копия ' . $data['newName'];
                 $object->year = $year;
                 $object->mounth = $mounth;
                 $object->status = 'Активный';
@@ -113,9 +122,20 @@ class Admin {
     
                 R::store($object);
             } else {
-                $error_obj = 'Объект существует';
+                if ($objName !== $data['name']) {
+                    $object = R::dispense('object');
+                    $object->name = $data['name'];
+                    $object->year = $year;
+                    $object->mounth = $mounth;
+                    $object->status = 'Активный';
+                    $object->users_id = $_SESSION['id'];
+        
+                    R::store($object);
+                } else {
+                    $error_obj = 'Объект существует';
+                }
             }
-            
+   
         }
         return $error_obj;
     }

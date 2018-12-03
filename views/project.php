@@ -158,7 +158,7 @@
                     
                     echo '<div class="fio">' . $people->fio . ' Номер работы: ';
                     $number = $admin->GetWorkNumber($objectId, $peopleId);
-                    echo '</div>';
+                    echo '<i class="fa fa-files-o" aria-hidden="true">Копировать</i></div>';
                     
                     echo '<table id="user" class="table table-bordered  table-striped results tableObject">
                             <tbody><tr>';

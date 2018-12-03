@@ -8,6 +8,9 @@ include_once ROOT . '/models/Admin.php';
 
 class UserController {
     
+    /**
+     * @return bool
+     */
     public function actionPage()
     {
         require_once(ROOT . '/config/config.php');
@@ -33,6 +36,26 @@ class UserController {
         
         switch ($uri) {
             case '/user1':
+                if (isset($_POST['addobject'])) {
+                    $data = $_POST; //получаем данные из массива
+                    $error_obj = $admin->CreateObject($data);
+                }
+                if (isset($_POST['delete'])) {
+                    $table = 'object';
+                    $id = $_POST['id'];
+                    $admin->ObjectDelete($table, $id);
+                }
+                if (isset($_POST['copy'])) {
+                    $table = 'object';
+                    $id = $_POST['id'];
+                    $result = $admin->copyObject($table, $id);
+                    foreach ($result as $res) {
+                        $newName = $res->name;
+                    }
+                    $_POST['newName'] = $newName;
+                    $data = $_POST; //получаем данные из массива
+                    $add = $admin->CreateObject($data);
+                }
                 require_once(ROOT . '/views/project-list.php');
                 break;
             case '/user2':
