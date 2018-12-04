@@ -11,10 +11,8 @@
                     
                     <li>
                         <?php
-                        
-                        if ($_SESSION['month'] and $_POST['month']) {
-                            $_SESSION['month'] = $_POST['month'];
-                            $_SESSION['year'] = $_POST['year'];
+
+                        if (isset($_SESSION['month'])) {
                             echo '<span class="results3">' . 'Отчетный месяц: ' . $_SESSION['month'] . ' - ' . $_SESSION['year']
                                 . '<form method="post" class="refresh">
                         <input type="text" value="257" name="id" hidden="">
