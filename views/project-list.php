@@ -56,19 +56,32 @@
                         '<tr>' .
                         '<th>Название объекта</th>' .
                         '<th>Месяц</th>' .
-                        '<th>Год</th>' .
-                        '<th>Статус</th>' .
+                        '<th>Год</th>';
+                    if ($_SESSION['role'] == 'admin') {
+                        echo '<th>Прораб</th>';
+                    }
+                    echo '<th>Статус</th>' .
                         '</tr>' .
                         '</thead>';
                     
                     foreach ($result as $row) {
+                        $realId = $row['users_id'];
+                        $table = 'users';
+                        $realName = $admin->getProrabName($table, $realId);
+                        
+                        foreach ($realName as $value) {
+                            $real = $value['name'];
+                        }
                         
                         if ($row['status'] !== 'Сдан') {
                             echo '<tr>' .
                                 '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
                                 '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
-                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
-                                '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>';
+                            if ($_SESSION['role'] == 'admin') {
+                                echo '<td>' . $real . '</td>';
+                            }
+                            echo '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
                                 '<td><form method="post" >
 
 <input type="text" value="' . $row['id'] . '" name="id" hidden>
@@ -85,15 +98,16 @@
                             echo '<tr>' .
                                 '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
                                 '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
-                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>' .
-                                '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
-                                '<td></td>'.
-                                '<td></td>'.
+                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>';
+                            if ($_SESSION['role'] == 'admin') {
+                                echo '<td>' . $real . '</td>';
+                            }
+                            echo '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                                '<td></td>' .
+                                '<td></td>' .
                                 '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><i class="fas fa-long-arrow-alt-right"></i></button></form></td>' .
                                 '</tr>';
                         }
-
-                        
                     }
                     echo '</table>';
                 }

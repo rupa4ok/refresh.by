@@ -38,7 +38,7 @@ class UserController {
             case '/user1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $error_obj = $admin->CreateObject($data);
+                    $admin->CreateObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
