@@ -233,7 +233,7 @@ $.mockjax({
 
 $(function(){
     $("#event-list").select2({
-        placeholder: 'Выберите событие'
+        placeholder: 'Выберите работника'
     })
     //Добавление и удаление в value=""
         .on('select2:select select2:unselect', function (evt) {
@@ -241,6 +241,17 @@ $(function(){
         })
 
 });
+
+    $(function(){
+        $("#event-list").select2({
+            placeholder: 'Выберите работника'
+        })
+        //Добавление и удаление в value=""
+            .on('select2:select select2:unselect', function (evt) {
+                $('#event').val($(this).val());
+            })
+
+    });
 
 //autofocus on worktime
     $('.myeditable').editable({

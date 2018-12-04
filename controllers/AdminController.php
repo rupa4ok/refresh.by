@@ -69,6 +69,11 @@ class AdminController
                 require_once(ROOT . '/views/users-list.php');
                 break;
             case '/admin5':
+                if (isset($_POST['id'])) {
+                    $id = $_POST['id'];
+                } else {
+                    $id = $_SESSION['id'];
+                }
                 $objectStatus = '$class="myeditable editable inline-input"';
                 require_once(ROOT . '/views/project.php');
                 break;

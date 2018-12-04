@@ -73,13 +73,13 @@
 
 <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="delete" value="delete" hidden>
-<button type="submit" onclick="return proverka();"> Удалить</button></form> </td>' .
+<button type="submit" onclick="return proverka();"><i class="fas fa-trash-alt"></i></button></form> </td>' .
                                 '<td><form method="post" >
 
 <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
-<button type="submit" onclick="return proverka1();"> Копировать</button></form> </td>' .
-                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
+<button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
+                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><i class="fas fa-long-arrow-alt-right"></i></button></form></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .
@@ -89,7 +89,7 @@
                                 '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
                                 '<td></td>'.
                                 '<td></td>'.
-                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button>Перейти</button></form></td>' .
+                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><i class="fas fa-long-arrow-alt-right"></i></button></form></td>' .
                                 '</tr>';
                         }
 
