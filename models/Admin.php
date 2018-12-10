@@ -152,8 +152,6 @@ class Admin {
     {
         $worknumber = R::getRow( 'SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [ $objectId,$peopleId ] );
         $number = $worknumber['id'];
-        echo $number;
-        
         return $number;
     }
     
@@ -166,7 +164,7 @@ class Admin {
     public function GetList($object)
     {
         //ищем работников, закрепленных за данным объектом
-        $peoples = $object->with('ORDER BY `fio` DESC')->sharedPeopleList;
+        $peoples = $object->with('ORDER BY `fio` ASC')->sharedPeopleList;
         return $peoples;
     }
     
