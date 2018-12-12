@@ -72,6 +72,12 @@ class Admin {
         return $result;
     }
     
+    /**
+     * Создание копии объекта
+     *
+     * @param $data
+     * @return string
+     */
     public function CreateObject($data)
     {
         $error_obj = '';
@@ -143,6 +149,12 @@ class Admin {
         return $error_obj;
     }
     
+    /**
+     * Список пользователей текущего объекта
+     *
+     * @param $id
+     * @return \RedBeanPHP\OODBBean
+     */
     public function GetShared($id)
     {
         $object = R::load('object', $id);

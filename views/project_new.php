@@ -87,7 +87,6 @@
                 $list = $admin->FindPeople();
 
                 if ($status !== 'Сдан') {
-    
                     echo '
         <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
@@ -95,14 +94,11 @@
                         echo '<option>' . $lis->fio . '</option>';
                     }
                     echo '</select>
-
         <input name="tagger-1" id="event" value="" hidden>
         <input name="tagger-2" id="event1" value="' . $id . '" hidden>
         <input type="text" name="add" value="add" hidden>
-        
         <button type="submit">Добавить работника</button>
         </form>
-
         ';
                 }
                 
@@ -141,6 +137,17 @@
                     
 <div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
                 }
+
+                if ($curentMonth == 11) {
+                    echo '<div class="paginator"><div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
+                    
+<div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
+                }
+                if ($uri == '/user12') {
+                    echo '<div class="paginator"><div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
+                    
+<div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
+                }
                 
                 $object = $admin->GetShared($id);
                 $peoples = $admin->GetList($object);
@@ -153,8 +160,7 @@
                     if (isset($people->fio)) {
                         echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="ktu" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax1.php" >' . $people['id'] . '</a>';
                     } else {
-                        echo '
-                <div class="fio">
+                        echo '<div class="fio">
                     <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
                         foreach ($list as $lis) {
