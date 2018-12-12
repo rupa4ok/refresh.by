@@ -22,12 +22,18 @@
             ?>
             
             <div class="col-md-9 content-block">
-                <h4>Объекты</h4>
+                <h4>Объекты1</h4>
                 
                 <?php
                 
                 $month = $_SESSION['month'];
+                $curentUrl = $day[1];
+                $curentMonth = $day[2];
                 
+                echo $curentUrl . '-';
+                echo $curentMonth;
+                
+                $id = 303;
                 $result = $admin->GetObjectByMounth($id);
                 
                 $objectStatus = '$class="inline-input"';
@@ -56,39 +62,6 @@
                         $realId = $res['users_id'];
                         $table = 'users';
                         $realName = $admin->getProrabName($table, $realId);
-                        
-                        switch ($uri) {
-                            case '/admin5':
-                                $month = $res->mounth;
-                                break;
-                            case '/admin10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/admin11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/admin12':
-                                $month = $res->mounth + 1;
-                                break;
-                            case '/user5':
-                                if (isset($res->mounth)) {
-                                    $month = $res->mounth;
-                                } else {
-                                    $month = $_SESSION['month'];
-                                }
-                                break;
-                            case '/user10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/user11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/user12':
-                                $month = $res->mounth + 1;
-                                break;
-                            default:
-                                break;
-                        }
                         
                         if ($_SESSION['role'] == 'admin') {
                             echo '<tr>' .

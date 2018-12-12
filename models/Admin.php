@@ -121,6 +121,9 @@ class Admin {
                 $object->users_id = $_SESSION['id'];
     
                 R::store($object);
+                
+                
+                
             } else {
                 if ($objName !== $data['name']) {
                     $object = R::dispense('object');
@@ -258,7 +261,7 @@ class Admin {
      */
     public function getTabelList($id,$month)
     {
-        return R::getAll( "SELECT *, SUMM(t.time) FROM time as t LEFT JOIN people as p
+        return R::getAll( "SELECT * FROM time as t LEFT JOIN people as p
         ON t.nrabotnik = p.id WHERE t.nprorab = {$id} AND t.mounth = {$month} AND t.timework != 0
         ORDER BY t.date");
     }

@@ -108,6 +108,47 @@ class AdminController
                 $objectStatus = '$class="myeditable editable inline-input"';
                 require_once(ROOT . '/views/project.php');
                 break;
+            case '/admin5/11':
+                if (isset($_POST['id'])) {
+                    $id = $_POST['id'];
+                } else {
+                    $id = $_SESSION['id'];
+                }
+                if (isset($_POST['delete'])) {
+                    $table = 'object_people';
+                    $id = $_POST['number'];
+                    $admin->ObjectDelete($table, $id);
+                    $id = $_POST['id'];
+                }
+                if (isset($_POST['add']) or isset($_POST['copy'])) {
+                    if (isset($_POST['tagger-1'])) {
+                        $fio = $_POST['tagger-1'];
+                    }
+                    if (isset($_POST['tagger-2'])) {
+                        $id = $_POST['tagger-2'];
+                    }
+        
+                    $peopleid = R::getRow('SELECT id FROM people WHERE fio LIKE ? LIMIT 1', [ $fio ]);
+        
+                    if (isset($peopleid['id'])) {
+                        $id1 = $peopleid['id'];
+                    } else {
+                        $id1 = 94;
+                    }
+        
+                    echo 'id пользователя' . $id1;
+        
+                    $object = R::load('object', $id);
+                    $peoples = R::load('people', $id1);
+        
+                    $object->sharedPeopleList[] = $peoples;
+        
+                    R::store($object);
+                }
+                $objectStatus = '$class="myeditable editable inline-input"';
+                $day = explode("/", $_SERVER['REQUEST_URI']);
+                require_once(ROOT . '/views/project_new.php');
+                break;
             case '/admin6':
                 require_once(ROOT . '/views/import.php');
                 break;
