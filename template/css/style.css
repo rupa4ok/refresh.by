@@ -91,3 +91,7 @@ footer img {
     border: 0;
     background: 0;
 }
+.fio input {
+    width: 50px;
+    margin-left: 10px;
+}

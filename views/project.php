@@ -42,15 +42,15 @@
                         }
                     }
                     
-echo '<table class="table">' .
-                            '<thead>' .
-                            '<tr>' .
-                            '<th>Название объекта</th>' .
-                            '<th>Месяц</th>' .
-                            '<th>Год</th>' .
-                            '<th>Статус</th>' .
-                            '</tr>' .
-                            '</thead>';
+                    echo '<table class="table">' .
+                        '<thead>' .
+                        '<tr>' .
+                        '<th>Название объекта</th>' .
+                        '<th>Месяц</th>' .
+                        '<th>Год</th>' .
+                        '<th>Статус</th>' .
+                        '</tr>' .
+                        '</thead>';
                     
                     foreach ($result as $res) {
                         $realId = $res['users_id'];
@@ -112,14 +112,16 @@ echo '<table class="table">' .
                 }
                 
                 $list = $admin->FindPeople();
-                
-                echo '
+
+                if ($status !== 'Сдан') {
+    
+                    echo '
         <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
-                foreach ($list as $lis) {
-                    echo '<option>' . $lis->fio . '</option>';
-                }
-                echo '</select>
+                    foreach ($list as $lis) {
+                        echo '<option>' . $lis->fio . '</option>';
+                    }
+                    echo '</select>
 
         <input name="tagger-1" id="event" value="" hidden>
         <input name="tagger-2" id="event1" value="' . $id . '" hidden>
@@ -129,6 +131,7 @@ echo '<table class="table">' .
         </form>
 
         ';
+                }
                 
                 $uri = $_SERVER['REQUEST_URI'];
                 if ($uri == '/admin5') {
@@ -175,7 +178,7 @@ echo '<table class="table">' .
                     $year = $object->year;
                     
                     if (isset($people->fio)) {
-                        echo '<div class="fio">' . $people->fio;
+                        echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">Коэффициент: </span><input>';
                     } else {
                         echo '
                 <div class="fio">
@@ -214,7 +217,7 @@ echo '<table class="table">' .
  </form>
  ';
                     }
-
+                    
                     echo '</div><table id="user" class="table table-bordered  table-striped results tableObject">
                             <tbody><tr>';
                     $aDates = array();

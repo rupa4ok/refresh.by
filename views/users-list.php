@@ -24,85 +24,62 @@
             <div class="col-md-9 content-block">
                 
                 <div class="col-md-9 content-block">
-
+                    
                     <?php
                     $id = $_SESSION['id'];
-                    if ($_SESSION['role'] == 'admin') {
-                        $result = $admin->getTabelList($id);
-                    } else {
-                        $result = $admin->GetUserListById($id);
-                        echo $id;
-                    }
+                    $result = $admin->getTabelList($id, $_SESSION['month']);
+                    $dataFio = array();
                     $dataCell = array();
-
+                    
                     foreach ($result as $res) {
-                        $dataCell[$res['mounth']][$res['date']] = [
+                        $time[] = $res['date'];
+                        $dataFio[$res['fio']][$res['date']] = [
                             'time' => $res['timework']
                         ];
                     }
-
-                    echo '<pre>';
-                    print_r($dataCell);
-                    echo '</pre>';
+                    
+                    $time = array_unique($time, SORT_REGULAR);
                     
                     echo '<table id="user" class="table table-bordered  table-striped results">
-                            <tbody>';
-
-                    echo '<tr>
-                            <td class = "">
-                                    Имя
+                            <tbody><tr><td class = "">
+                                    ФИО
+                            </td>';
+                    
+                    foreach ($time as $t) {
+                        echo '<td class = "">
+                                    ' . $t . '
                             </td>
-                            
-                            <td class = "">
-                                    01
-                            </td>
-                            <td class = "">
-                                    07
-                            </td> 
-                            <td class = "">
-                                    14
-                            </td>
-                            </tr>
-                            
-                            <tr>
-                            
-                            <td class = "">
-                                    Имя
-                            </td>
-                            
-                            <td class = "">
-                                    11
-                            </td>
-                            <td class = "">
-                                    11
-                            </td> 
-                            <td class = "">
-                                    11
-                            </td>
-                            </tr>
-                            
-                            <tr>
-                            
-                            <td class = "">
-                                    Имя
-                            </td>
-                            
-                            <td class = "">
-                                    11
-                            </td>
-                            <td class = "">
-                                    11
-                            </td> 
-                            <td class = "">
-                                    11
-                            </td>
-                            
                             ';
-
+                    }
+                    
+                    foreach ($dataFio as $k => $tab) {
+                        echo '<tr>
+                            <td class = "">
+                                    ' . $k . '
+                            </td>
+                            ';
+                        
+                        foreach ($time as $t) {
+                            $i = 0;
+                            $h = 0;
+                            $s = 0;
+                            foreach ($tab as $f => $val) {
+                                $i++;
+                                if ($t == $f) {
+                                    $s += $val['time'];
+                                    $work[$i] = $val['time'];
+                                }
+                            }
+                            echo '<td class = "">
+                                ' . $s . '
+                            </td>
+                            ';
+                        }
+                    }
                     echo '</tr>';
                     echo '</tbody>  
                         </table>';
-
+                    
                     ?>
                 </div>
             </div>
