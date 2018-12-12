@@ -3,8 +3,15 @@
 class IndexController
 {
     
+    public function __construct()
+    {
+        $this->action();
+        $this->Auth();
+    }
+    
     public function action()
     {
+
         require_once(ROOT . '/views/index.php');
         
         if (isset($_SESSION['role'])) {
