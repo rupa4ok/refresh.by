@@ -8,9 +8,6 @@
     <div class="container">
         <div class="row login-row">
             <div class="col-md-4 col-md-offset-4 login-form">
-                <?php
-                $index = new IndexController();
-                $index->Auth(); ?>
                 <div class="results1" style="color: red"></div>
                 <form method="POST" id="form2">
                     <div class="form-group">
