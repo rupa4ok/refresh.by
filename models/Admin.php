@@ -6,17 +6,18 @@
  * Time: 11:34
  */
 
-class Admin {
+class Admin
+{
     
     public function GetTableById($table, $id, $role)
     {
-        if ( $role == 'admin' ) {
-            $result = R::getAll( "SELECT * FROM {$table} WHERE mounth = :mounth AND year = :year",
+        if ($role == 'admin') {
+            $result = R::getAll("SELECT * FROM {$table} WHERE mounth = :mounth AND year = :year               ORDER BY name",
                 [':mounth' => $_SESSION['month'], ':year' => $_SESSION['year']]
             );
             return $result;
         } else {
-            $result = R::getAll( "SELECT * FROM {$table} WHERE users_id = :users_id AND mounth = :mounth AND year = :year",
+            $result = R::getAll("SELECT * FROM {$table} WHERE users_id = :users_id AND mounth = :mounth AND year = :year",
                 [':users_id' => $id, ':mounth' => $_SESSION['month'], ':year' => $_SESSION['year']]
             );
             return $result;
@@ -33,8 +34,8 @@ class Admin {
      */
     public function GetUserById($table, $id, $role)
     {
-        if ( $role == 'admin' ) {
-            $result = R::findAll( $table , ' ORDER BY fio ' );
+        if ($role == 'admin') {
+            $result = R::findAll($table, ' ORDER BY fio ');
             return $result;
         } else {
             $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.id is not null ORDER BY people.fio', [':id' => $id]);
@@ -43,12 +44,12 @@ class Admin {
     }
     
     public function GetObjectByMounth($id)
-
+    
     {
         $result = R::loadAll('object', array($id));
         return $result;
     }
-    
+
 //    public function ObjectDelete($table, $id)
 //
 //    {
@@ -62,10 +63,10 @@ class Admin {
      */
     public function ObjectDelete($table, $id)
     {
-        R::trash( $table, $id);
+        R::trash($table, $id);
         return;
     }
-
+    
     public function copyObject($table, $id)
     {
         $result = R::loadAll('object', array($id));
@@ -81,13 +82,13 @@ class Admin {
     public function CreateObject($data)
     {
         $error_obj = '';
-
+        
         if (isset($data['name']) !== 'Пусто') {
-    
+            
             if (!isset($data['year'])) {
                 $year = date("Y");
             }
-    
+            
             if (!isset($data['mounth'])) {
                 $mounth = date("m");
             }
@@ -125,9 +126,8 @@ class Admin {
                 $object->mounth = $mounth;
                 $object->status = 'Активный';
                 $object->users_id = $_SESSION['id'];
-    
-                R::store($object);
                 
+                R::store($object);
                 
                 
             } else {
@@ -138,13 +138,13 @@ class Admin {
                     $object->mounth = $mounth;
                     $object->status = 'Активный';
                     $object->users_id = $_SESSION['id'];
-        
+                    
                     R::store($object);
                 } else {
                     $error_obj = 'Объект существует';
                 }
             }
-   
+            
         }
         return $error_obj;
     }
@@ -164,7 +164,7 @@ class Admin {
     
     public function GetWorkNumber($objectId, $peopleId)
     {
-        $worknumber = R::getRow( 'SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [ $objectId,$peopleId ] );
+        $worknumber = R::getRow('SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [$objectId, $peopleId]);
         $number = $worknumber['id'];
         return $number;
     }
@@ -184,7 +184,7 @@ class Admin {
     
     public function GetData($timedata)
     {
-        $worked = R::findOne( 'time', ' id = ? ', [ $timedata ] );
+        $worked = R::findOne('time', ' id = ? ', [$timedata]);
         return $worked->timework;
     }
     
@@ -198,9 +198,9 @@ class Admin {
         $nraboticheck = $options['nraboti'];
         $nrabotnik = $options['nrabotnik'];
         $nprorab = $options['nprorab'];
-        $workcheck = R::getRow( 'SELECT * FROM time WHERE date = ?
+        $workcheck = R::getRow('SELECT * FROM time WHERE date = ?
         AND mounth = ? AND nraboti = ? AND nprorab = ?',
-        [ $datecheck,$mounthcheck,$nraboticheck,$nprorab]);
+            [$datecheck, $mounthcheck, $nraboticheck, $nprorab]);
         
         //если номер работы отсутствует, создаем работу на месяц
         
@@ -242,9 +242,9 @@ class Admin {
             echo $id;
             $object = R::load('object', $id);
             $peoples = R::load('people', $id1);
-    
+            
             $object->sharedPeopleList[] = $peoples;
-    
+            
             R::store($object);
         }
     }
@@ -258,7 +258,7 @@ class Admin {
     public function getSharedData($data)
     {
         $name = 'Копия ' . $data['newName'];
-        return $result = R::findAll('object', ' name = ?', [ $name ]);
+        return $result = R::findAll('object', ' name = ?', [$name]);
     }
     
     /**
@@ -270,16 +270,16 @@ class Admin {
     public function getObjectData($data)
     {
         $name = 'Копия ' . $data['newName'];
-        return $result = R::findAll('object', ' name = ?', [ $name ]);
+        return $result = R::findAll('object', ' name = ?', [$name]);
     }
     
-    public function GetWorkId ($options)
+    public function GetWorkId($options)
     {
         
         $datecheck = $options['day'];
         $mounthcheck = $options['mounth'];
         $nraboticheck = $options['nraboti'];
-        $workid  = R::findOne( 'time', ' date = ? AND mounth = ? AND nraboti = ? ', [ $datecheck,$mounthcheck,$nraboticheck ] );
+        $workid = R::findOne('time', ' date = ? AND mounth = ? AND nraboti = ? ', [$datecheck, $mounthcheck, $nraboticheck]);
         return $workid->id;
         
     }
@@ -298,7 +298,7 @@ class Admin {
     
     public function GetWorkTime($id)
     {
-        $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id',[':id' => $id]);
+        $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id', [':id' => $id]);
         return $result;
     }
     
@@ -308,38 +308,37 @@ class Admin {
         return $list;
     }
     
-    public function getDate()
-    {
-//        $_SESSION['month'] = 11;
-//        $_SESSION['year'] = 2018;
-    }
-    
     public function GetProrab($table, $role)
     {
-        $result = R::findAll($table, ' role = ?', [ $role ]);
+        $result = R::findAll($table, ' role = ?', [$role]);
         return $result;
     }
-
+    
     /**
      * @param $id
      * @return array
      */
-    public function getTabelList($id,$month)
+    public function getTabelList($id, $month)
     {
-        return R::getAll( "SELECT * FROM time as t LEFT JOIN people as p
-        ON t.nrabotnik = p.id WHERE t.nprorab = {$id} AND t.mounth = {$month} AND t.timework != 0
-        ORDER BY t.date");
+        if ($_SESSION['role'] == 'admin') {
+            return R::getAll("SELECT *, SUM(t.timework) as time FROM time as t LEFT JOIN people as p          ON t.nrabotnik = p.id WHERE t.mounth = {$month} AND t.timework != 0 group by
+        fio,nraboti,date ORDER BY date");
+        } else {
+            return R::getAll("SELECT *, SUM(t.timework) as time FROM time as t LEFT JOIN people as            p ON t.nrabotnik = p.id WHERE t.nprorab = {$id} AND t.mounth = {$month} AND t.timework !=             0 group by fio,nraboti,date ORDER BY date");
+        }
+        
     }
     
     public function getProrabName($table, $realId)
     {
-        $result = R::findAll($table, ' id = ?', [ $realId ]);
+        $result = R::findAll($table, ' id = ?', [$realId]);
         return $result;
     }
     
-    public function isWeekend($t) {
+    public function isWeekend($t)
+    {
         setlocale(LC_TIME, 'ru_RU.utf8');
-        $date = $t. '.' .$_SESSION['month']. '.' .$_SESSION['year'];
+        $date = $t . '.' . $_SESSION['month'] . '.' . $_SESSION['year'];
         return strftime('%A', strtotime($date)); // Суббота
     }
     
@@ -351,9 +350,34 @@ class Admin {
      */
     public function getTimeByWork($options)
     {
-        return R::getRow( "SELECT * FROM time WHERE nraboti = :nraboti AND mounth = :mounth AND date = :date LIMIT 1",
+        return R::getRow("SELECT * FROM time WHERE nraboti = :nraboti AND mounth = :mounth AND date = :date LIMIT 1",
             [':nraboti' => $options['nraboti'], ':mounth' => $options['mounth'], ':date' => $options['date']]
         );
+    }
+    
+    /**
+     *  получение id работника по номеру работы
+     *
+     * @param $nwork
+     * @return mixed
+     */
+    public function getIdByWork($nwork)
+    {
+        $id = R::getRow("SELECT * FROM object_people WHERE id = :nwork",
+            [':nwork' => $nwork]);
+        return $id['people_id'];
+    }
+    
+    /**
+     * получение работника по номеру работы
+     *
+     * @param $nwork
+     * @return array
+     */
+    public function getNameById($nwork)
+    {
+        return R::getRow("SELECT * FROM people WHERE id = :id",
+            [':id' => $this->getIdByWork($nwork)]);
     }
     
 }
