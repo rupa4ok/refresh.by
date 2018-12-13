@@ -72,6 +72,12 @@ class Admin {
         return $result;
     }
     
+    /**
+     * Создание копии объекта
+     *
+     * @param $data
+     * @return string
+     */
     public function CreateObject($data)
     {
         $error_obj = '';
@@ -121,6 +127,9 @@ class Admin {
                 $object->users_id = $_SESSION['id'];
     
                 R::store($object);
+                
+                
+                
             } else {
                 if ($objName !== $data['name']) {
                     $object = R::dispense('object');
@@ -140,11 +149,16 @@ class Admin {
         return $error_obj;
     }
     
+    /**
+     * Список пользователей текущего объекта
+     *
+     * @param $id
+     * @return \RedBeanPHP\OODBBean
+     */
     public function GetShared($id)
     {
         $object = R::load('object', $id);
         $object->sharedPeopleList;
-        
         return $object;
     }
     
@@ -205,6 +219,60 @@ class Admin {
         
     }
     
+    /**
+     * Создание копии работ для объекта
+     *
+     * @param $data
+     */
+    public function createAdd($data)
+    {
+        //получаем данные о новом объекте
+        $options = $this->getObjectData($data);
+        foreach ($options as $value) {
+            $id = $value['id'];
+        }
+        
+        //получаем привязки старого объекта
+        $object = $this->GetShared($data['id']);
+        $peoples = $this->GetList($object);
+        
+        //создаем новую работу для объекта
+        foreach ($peoples as $k => $people) {
+            $id1 = $people->id;
+            echo $id;
+            $object = R::load('object', $id);
+            $peoples = R::load('people', $id1);
+    
+            $object->sharedPeopleList[] = $peoples;
+    
+            R::store($object);
+        }
+    }
+    
+    /**
+     * Получаем данные о привязанных работах и рабочих
+     *
+     * @param $data
+     * @return array
+     */
+    public function getSharedData($data)
+    {
+        $name = 'Копия ' . $data['newName'];
+        return $result = R::findAll('object', ' name = ?', [ $name ]);
+    }
+    
+    /**
+     * Получаем данные об объекьте-родителе
+     *
+     * @param $data
+     * @return array
+     */
+    public function getObjectData($data)
+    {
+        $name = 'Копия ' . $data['newName'];
+        return $result = R::findAll('object', ' name = ?', [ $name ]);
+    }
+    
     public function GetWorkId ($options)
     {
         
@@ -258,7 +326,7 @@ class Admin {
      */
     public function getTabelList($id,$month)
     {
-        return R::getAll( "SELECT *, SUMM(t.time) FROM time as t LEFT JOIN people as p
+        return R::getAll( "SELECT * FROM time as t LEFT JOIN people as p
         ON t.nrabotnik = p.id WHERE t.nprorab = {$id} AND t.mounth = {$month} AND t.timework != 0
         ORDER BY t.date");
     }

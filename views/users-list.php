@@ -28,6 +28,9 @@
                     <?php
                     $id = $_SESSION['id'];
                     $result = $admin->getTabelList($id, $_SESSION['month']);
+                    echo '<pre>';
+                    print_r($result);
+                    echo '</pre>';
                     $dataFio = array();
                     $dataCell = array();
                     

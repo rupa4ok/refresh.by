@@ -22,12 +22,18 @@
             ?>
             
             <div class="col-md-9 content-block">
-                <h4>Объекты</h4>
+                <h4>Объекты1</h4>
                 
                 <?php
                 
                 $month = $_SESSION['month'];
+                $curentUrl = $day[1];
+                $curentMonth = $day[2];
                 
+                echo $curentUrl . '-';
+                echo $curentMonth;
+                
+                $id = 303;
                 $result = $admin->GetObjectByMounth($id);
                 
                 $objectStatus = '$class="inline-input"';
@@ -57,39 +63,6 @@
                         $table = 'users';
                         $realName = $admin->getProrabName($table, $realId);
                         
-                        switch ($uri) {
-                            case '/admin5':
-                                $month = $res->mounth;
-                                break;
-                            case '/admin10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/admin11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/admin12':
-                                $month = $res->mounth + 1;
-                                break;
-                            case '/user5':
-                                if (isset($res->mounth)) {
-                                    $month = $res->mounth;
-                                } else {
-                                    $month = $_SESSION['month'];
-                                }
-                                break;
-                            case '/user10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/user11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/user12':
-                                $month = $res->mounth + 1;
-                                break;
-                            default:
-                                break;
-                        }
-                        
                         if ($_SESSION['role'] == 'admin') {
                             echo '<tr>' .
                                 '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
@@ -114,7 +87,6 @@
                 $list = $admin->FindPeople();
 
                 if ($status !== 'Сдан') {
-    
                     echo '
         <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
@@ -122,14 +94,11 @@
                         echo '<option>' . $lis->fio . '</option>';
                     }
                     echo '</select>
-
         <input name="tagger-1" id="event" value="" hidden>
         <input name="tagger-2" id="event1" value="' . $id . '" hidden>
         <input type="text" name="add" value="add" hidden>
-        
         <button type="submit">Добавить работника</button>
         </form>
-
         ';
                 }
                 
@@ -168,6 +137,17 @@
                     
 <div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
                 }
+
+                if ($curentMonth == 11) {
+                    echo '<div class="paginator"><div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
+                    
+<div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
+                }
+                if ($uri == '/user12') {
+                    echo '<div class="paginator"><div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
+                    
+<div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
+                }
                 
                 $object = $admin->GetShared($id);
                 $peoples = $admin->GetList($object);
@@ -180,8 +160,7 @@
                     if (isset($people->fio)) {
                         echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="ktu" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax1.php" >' . $people['id'] . '</a>';
                     } else {
-                        echo '
-                <div class="fio">
+                        echo '<div class="fio">
                     <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
                         foreach ($list as $lis) {
