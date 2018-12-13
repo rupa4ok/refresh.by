@@ -56,6 +56,7 @@ class AdminController
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
                     $add = $admin->CreateObject($data);
+                    $admin->createAdd($data);
                 }
                 require_once(ROOT . '/views/project-list.php');
                 break;

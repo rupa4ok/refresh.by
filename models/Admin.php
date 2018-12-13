@@ -159,7 +159,6 @@ class Admin {
     {
         $object = R::load('object', $id);
         $object->sharedPeopleList;
-        
         return $object;
     }
     
@@ -218,6 +217,60 @@ class Admin {
         
         return $workcheck;
         
+    }
+    
+    /**
+     * Создание копии работ для объекта
+     *
+     * @param $data
+     */
+    public function createAdd($data)
+    {
+        //получаем данные о новом объекте
+        $options = $this->getObjectData($data);
+        foreach ($options as $value) {
+            $id = $value['id'];
+        }
+        
+        //получаем привязки старого объекта
+        $object = $this->GetShared($data['id']);
+        $peoples = $this->GetList($object);
+        
+        //создаем новую работу для объекта
+        foreach ($peoples as $k => $people) {
+            $id1 = $people->id;
+            echo $id;
+            $object = R::load('object', $id);
+            $peoples = R::load('people', $id1);
+    
+            $object->sharedPeopleList[] = $peoples;
+    
+            R::store($object);
+        }
+    }
+    
+    /**
+     * Получаем данные о привязанных работах и рабочих
+     *
+     * @param $data
+     * @return array
+     */
+    public function getSharedData($data)
+    {
+        $name = 'Копия ' . $data['newName'];
+        return $result = R::findAll('object', ' name = ?', [ $name ]);
+    }
+    
+    /**
+     * Получаем данные об объекьте-родителе
+     *
+     * @param $data
+     * @return array
+     */
+    public function getObjectData($data)
+    {
+        $name = 'Копия ' . $data['newName'];
+        return $result = R::findAll('object', ' name = ?', [ $name ]);
     }
     
     public function GetWorkId ($options)
