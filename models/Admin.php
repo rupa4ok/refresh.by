@@ -34,10 +34,10 @@ class Admin {
     public function GetUserById($table, $id, $role)
     {
         if ( $role == 'admin' ) {
-            $result = R::findAll($table);
+            $result = R::findAll( $table , ' ORDER BY fio ' );
             return $result;
         } else {
-            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.id is not null', [':id' => $id]);
+            $result = R::getAll('select DISTINCT people.fio,time.nrabotnik from time left join people on time.nrabotnik = people.id where nprorab = :id and people.id is not null ORDER BY people.fio', [':id' => $id]);
             return $result;
         }
     }
@@ -335,6 +335,25 @@ class Admin {
     {
         $result = R::findAll($table, ' id = ?', [ $realId ]);
         return $result;
+    }
+    
+    public function isWeekend($t) {
+        setlocale(LC_TIME, 'ru_RU.utf8');
+        $date = $t. '.' .$_SESSION['month']. '.' .$_SESSION['year'];
+        return strftime('%A', strtotime($date)); // Суббота
+    }
+    
+    /**
+     * получение отработанных часов в конкретный день
+     *
+     * @param $options
+     * @return array
+     */
+    public function getTimeByWork($options)
+    {
+        return R::getRow( "SELECT * FROM time WHERE nraboti = :nraboti AND mounth = :mounth AND date = :date LIMIT 1",
+            [':nraboti' => $options['nraboti'], ':mounth' => $options['mounth'], ':date' => $options['date']]
+        );
     }
     
 }

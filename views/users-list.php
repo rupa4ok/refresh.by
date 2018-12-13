@@ -49,7 +49,11 @@
                             </td>';
                     
                     foreach ($time as $t) {
-                        echo '<td class = "">
+                        $week = $admin->isWeekend($t);
+                        if ($week == 'Суббота' || $week == 'Воскресенье') {
+                            $week = 'Sun';
+                        }
+                        echo '<td class = "'.$week.'">
                                     ' . $t . '
                             </td>
                             ';

@@ -50,7 +50,6 @@ if ( $_SESSION['role'] == 'admin' ) {
                 $table = 'people';
                 $role = $_SESSION['role'];
                 $id = $_SESSION['id'];
-                echo $role . '-' . $_SESSION['id'];
                 $result = $admin->GetUserById($table, $id, $role);
 
                 if ( $result ) {
