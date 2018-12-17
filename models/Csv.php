@@ -41,6 +41,18 @@ class Csv
                         $item->email
                     ]);
                 }
+            case 'time':
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [
+                        $item->id,
+                        $item->date,
+                        $item->mounth,
+                        $item->nraboti,
+                        $item->timework,
+                        $item->nrabotnik,
+                        $item->nprorab
+                    ]);
+                }
                 break;
             default:
                 return;

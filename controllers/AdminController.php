@@ -197,7 +197,7 @@ class AdminController
                 $filename = 'file2.csv';
                 $csv->exportCsv($table,$filename);
     
-                $table = 'people';
+                $table = 'time';
                 $filename = 'file3.csv';
                 $csv->exportCsv($table,$filename);
                 
