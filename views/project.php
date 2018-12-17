@@ -28,7 +28,7 @@
                 
                 $month = $_SESSION['month'];
                 
-                $result = $admin->GetObjectByMounth($id);
+                $result = $admin->getObjectByMounth($id);
                 
                 $objectStatus = '$class="inline-input"';
                 
@@ -111,7 +111,7 @@
                     echo '</table><br>';
                 }
                 
-                $list = $admin->FindPeople();
+                $list = $admin->findPeople();
 
                 if ($status !== 'Сдан') {
     
@@ -168,9 +168,11 @@
                     
 <div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
                 }
+
+                $prevId = '';
                 
-                $object = $admin->GetShared($id);
-                $peoples = $admin->GetList($object);
+                $object = $admin->getShared($id);
+                $peoples = $admin->getList($object);
                 
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
@@ -178,7 +180,11 @@
                     $year = $object->year;
                     
                     if (isset($people->fio)) {
-                        echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="ktu" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax1.php" >' . $people['id'] . '</a>';
+                        if ($status !== 'Сдан') {
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="ktu" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax1.php" >1</a>';
+                        } else {
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>1';
+                        }
                     } else {
                         echo '
                 <div class="fio">
@@ -196,19 +202,24 @@
         </form>';
                     }
                     
-                    $number = $admin->GetWorkNumber($objectId, $peopleId);
+                    $number = $admin->getWorkNumber($objectId, $peopleId);
                     
                     if ($_SESSION['role'] == 'admin') {
                         echo ' Номер работы: ' . $number;
                     }
+                    
                     if ($status !== 'Сдан' and $_SESSION) {
-                        echo '
+                        if ($prevId !== '') {
+                            echo '
 <form method="post" >
-<input name="tagger-1" id="event" value="" hidden>
+<input name="tagger-1" id="event" value="'. $number .'" hidden>
 <input name="tagger-2" id="event1" value="' . $id . '" hidden>
+<input type="text" value="' . $prevId . '" name="prevId" hidden>
 <input type="text" name="copy" value="copy" hidden>
-<button name="copyPeople" value="copy"><i class="fas fa-copy"></i></button>
-</form>
+<button name="copyPeople" value="copy" onclick="return proverka5();"><i class="fas fa-copy"></i></button>
+</form>';
+                        }
+                        echo '
 <form method="post" >
 <input type="text" value="' . $id . '" name="id" hidden>
 <input type="text" value="' . $number . '" name="number" hidden>
@@ -216,7 +227,10 @@
   <button name="copyPeople" value="delete" onclick="return proverka2();"><i class="fas fa-trash-alt"></i></button>
  </form>
  ';
+                    
                     }
+    
+                    $prevId = $number;
                     
                     echo '</div><table id="user" class="table table-bordered  table-striped results tableObject">
                             <tbody><tr>';
@@ -245,14 +259,15 @@
                             'nprorab' => $_SESSION['id']
                         );
                         
-                        $admin->CreateWork($options);
-                        $timedata = $admin->GetWorkId($options);
+                        $admin->createWork($options);
+                        $timedata = $admin->getWorkId($options);
                         $dayWeek = $day . '-' . $month . '-2018';
                         $dayWeek = strftime("%a", strtotime($dayWeek));
                         echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
+                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->getData($timedata) . '</a></td>
                 
                 ';
+                        
                     }
                     echo '</tr>';
                     echo '</tbody>

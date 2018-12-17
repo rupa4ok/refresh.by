@@ -39,12 +39,12 @@ class AdminController
             case '/admin1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $admin->CreateObject($data);
+                    $admin->createObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
@@ -55,7 +55,7 @@ class AdminController
                     }
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
-                    $add = $admin->CreateObject($data);
+                    $add = $admin->createObject($data);
                     $admin->createAdd($data);
                 }
                 require_once(ROOT . '/views/project-list.php');
@@ -78,10 +78,10 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
-                if (isset($_POST['add']) or isset($_POST['copy'])) {
+                if (isset($_POST['add'])) {
                     if (isset($_POST['tagger-1'])) {
                         $fio = $_POST['tagger-1'];
                     }
@@ -106,6 +106,39 @@ class AdminController
         
                     R::store($object);
                 }
+                if (isset($_POST['copy'])) {
+                    if (isset($_POST['tagger-1'])) {
+                        $currentId = $_POST['tagger-1'];
+                    }
+                    if (isset($_POST['tagger-2'])) {
+                        $id = $_POST['tagger-2'];
+                    }
+                    if (isset($_POST['prevId'])) {
+                        $prevId = $_POST['prevId'];
+                    }
+                    
+                    $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
+                    
+                    foreach ($workCurrent as $work) {
+                        $options = [
+                            'date' => $work['date'],
+                            'mounth' => $work['mounth'],
+                            'nraboti' => $prevId
+                        ];
+                        
+                        $res = ($admin->getTimeByWork($options)) ;
+                        $time = R::dispense('time');
+                        $time->id = $work['id'];
+                        $time->date = $work['date'];
+                        $time->mounth = $work['mounth'];
+                        $time->nraboti = $work['nraboti'];
+                        $time->nrabotnik = $work['nrabotnik'];
+                        $time->nprorab = $work['nprorab'];
+                        $time->timework = $res['timework'];
+    
+                        R::store($time);
+                    }
+                }
                 $objectStatus = '$class="myeditable editable inline-input"';
                 require_once(ROOT . '/views/project.php');
                 break;
@@ -118,7 +151,7 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add']) or isset($_POST['copy'])) {
@@ -136,9 +169,7 @@ class AdminController
                     } else {
                         $id1 = 94;
                     }
-        
-                    echo 'id пользователя' . $id1;
-        
+                    
                     $object = R::load('object', $id);
                     $peoples = R::load('people', $id1);
         
@@ -154,6 +185,22 @@ class AdminController
                 require_once(ROOT . '/views/import.php');
                 break;
             case '/admin7':
+                $table = 'object';
+                $filename = 'file.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'people';
+                $filename = 'file1.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'users';
+                $filename = 'file2.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'time';
+                $filename = 'file3.csv';
+                $csv->exportCsv($table,$filename);
+                
                 require_once(ROOT . '/views/export.php');
                 break;
             case '/admin9':

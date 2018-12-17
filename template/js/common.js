@@ -290,6 +290,14 @@ function proverka2() {
     }
 }
 
+function proverka5() {
+    if (confirm("Скопировать время работы предыдущего работника?")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 $('#country').change(function(){
     var val = $(this).val();
     $('#region').show();

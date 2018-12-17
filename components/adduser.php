@@ -42,13 +42,13 @@ foreach ($aDates as $day) {
         'nprorab' => $_SESSION['id']
     );
     
-    $timedata = $admin->GetWorkId($options);
+    $timedata = $admin->getWorkId($options);
     
     $dayWeek = $day . '-' . $month . '-2018';
     $dayWeek = strftime("%a", strtotime($dayWeek));
     
     echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a href="#" class="myeditable editable inline-input" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
+                <a href="#" class="myeditable editable inline-input" id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->getData($timedata) . '</a></td>
                 
                 ';
 }

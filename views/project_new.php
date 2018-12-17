@@ -34,8 +34,7 @@
                 echo $curentMonth;
                 
                 $id = 303;
-                $result = $admin->GetObjectByMounth($id);
-                
+                $result = $admin->getObjectByMounth($id);
                 $objectStatus = '$class="inline-input"';
                 
                 if ($result) {
@@ -84,7 +83,7 @@
                     echo '</table><br>';
                 }
                 
-                $list = $admin->FindPeople();
+                $list = $admin->findPeople();
 
                 if ($status !== 'Сдан') {
                     echo '
@@ -149,8 +148,8 @@
 <div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
                 }
                 
-                $object = $admin->GetShared($id);
-                $peoples = $admin->GetList($object);
+                $object = $admin->getShared($id);
+                $peoples = $admin->getList($object);
                 
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
@@ -175,7 +174,7 @@
         </form>';
                     }
                     
-                    $number = $admin->GetWorkNumber($objectId, $peopleId);
+                    $number = $admin->getWorkNumber($objectId, $peopleId);
                     
                     if ($_SESSION['role'] == 'admin') {
                         echo ' Номер работы: ' . $number;
@@ -224,12 +223,12 @@
                             'nprorab' => $_SESSION['id']
                         );
                         
-                        $admin->CreateWork($options);
-                        $timedata = $admin->GetWorkId($options);
+                        $admin->createWork($options);
+                        $timedata = $admin->getWorkId($options);
                         $dayWeek = $day . '-' . $month . '-2018';
                         $dayWeek = strftime("%a", strtotime($dayWeek));
                         echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->GetData($timedata) . '</a></td>
+                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->getData($timedata) . '</a></td>
                 
                 ';
                     }

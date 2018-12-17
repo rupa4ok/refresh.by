@@ -28,49 +28,50 @@
                     <?php
                     $id = $_SESSION['id'];
                     $result = $admin->getTabelList($id, $_SESSION['month']);
-                    echo '<pre>';
-                    print_r($result);
-                    echo '</pre>';
                     $dataFio = array();
                     $dataCell = array();
+
+                    $fioPeople = array();
                     
-                    foreach ($result as $res) {
-                        $time[] = $res['date'];
-                        $dataFio[$res['fio']][$res['date']] = [
-                            'time' => $res['timework']
-                        ];
+                    foreach ($result as $k => $res) {
+                        $sheluder[] = $res['date'];
+                        if ([$res['fio']]) {
+                            @$fioPeople[$res['fio']][$res['date']] += $res['timework'];
+                        }
                     }
                     
-                    $time = array_unique($time, SORT_REGULAR);
+                    $sheluder = array_unique($sheluder, SORT_REGULAR);
                     
                     echo '<table id="user" class="table table-bordered  table-striped results">
                             <tbody><tr><td class = "">
                                     ФИО
                             </td>';
                     
-                    foreach ($time as $t) {
-                        echo '<td class = "">
+                    foreach ($sheluder as $t) {
+                        $week = $admin->isWeekend($t);
+                        if ($week == 'Суббота' || $week == 'Воскресенье') {
+                            $week = 'Sun';
+                        }
+                        echo '<td class = "'.$week.'">
                                     ' . $t . '
                             </td>
                             ';
                     }
-                    
-                    foreach ($dataFio as $k => $tab) {
-                        echo '<tr>
-                            <td class = "">
+
+                    foreach ($fioPeople as $k => $tab) {
+                        echo '<tr><td class = "">
                                     ' . $k . '
                             </td>
                             ';
-                        
-                        foreach ($time as $t) {
+    
+                        foreach ($sheluder as $t) {
                             $i = 0;
                             $h = 0;
                             $s = 0;
                             foreach ($tab as $f => $val) {
                                 $i++;
                                 if ($t == $f) {
-                                    $s += $val['time'];
-                                    $work[$i] = $val['time'];
+                                    $s = $val;
                                 }
                             }
                             echo '<td class = "">
@@ -78,7 +79,10 @@
                             </td>
                             ';
                         }
+                        
+
                     }
+                    
                     echo '</tr>';
                     echo '</tbody>  
                         </table>';
