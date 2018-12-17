@@ -32,7 +32,7 @@ class Admin
      * @param $role
      * @return array
      */
-    public function GetUserById($table, $id, $role)
+    public function getUserById($table, $id, $role)
     {
         if ($role == 'admin') {
             $result = R::findAll($table, ' ORDER BY fio ');
@@ -43,28 +43,20 @@ class Admin
         }
     }
     
-    public function GetObjectByMounth($id)
+    public function getObjectByMounth($id)
     
     {
         $result = R::loadAll('object', array($id));
         return $result;
     }
-
-//    public function ObjectDelete($table, $id)
-//
-//    {
-//        $result = R::loadAll('object', array($id));
-//        return $result;
-//    }
     
     /**
      * @param $table
      * @param $id
      */
-    public function ObjectDelete($table, $id)
+    public function objectDelete($table, $id)
     {
-        R::trash($table, $id);
-        return;
+        return R::trash($table, $id);
     }
     
     public function copyObject($table, $id)
@@ -79,7 +71,7 @@ class Admin
      * @param $data
      * @return string
      */
-    public function CreateObject($data)
+    public function createObject($data)
     {
         $error_obj = '';
         
@@ -155,40 +147,50 @@ class Admin
      * @param $id
      * @return \RedBeanPHP\OODBBean
      */
-    public function GetShared($id)
+    public function getShared($id)
     {
         $object = R::load('object', $id);
         $object->sharedPeopleList;
         return $object;
     }
     
-    public function GetWorkNumber($objectId, $peopleId)
+    /**
+     * @param $objectId
+     * @param $peopleId
+     * @return mixed
+     */
+    public function getWorkNumber($objectId, $peopleId)
     {
         $worknumber = R::getRow('SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [$objectId, $peopleId]);
         $number = $worknumber['id'];
         return $number;
     }
     
-    public function GetTime()
-    {
-        $time = 0;
-        return $time;
-    }
-    
-    public function GetList($object)
+    /**
+     * @param $object
+     * @return mixed
+     */
+    public function getList($object)
     {
         //ищем работников, закрепленных за данным объектом
-        $peoples = $object->with('ORDER BY `fio` ASC')->sharedPeopleList;
-        return $peoples;
+        return $peoples = $object->with('ORDER BY `fio` ASC')->sharedPeopleList;
     }
     
-    public function GetData($timedata)
+    /**
+     * @param $timedata
+     * @return mixed
+     */
+    public function getData($timedata)
     {
         $worked = R::findOne('time', ' id = ? ', [$timedata]);
         return $worked->timework;
     }
     
-    public function CreateWork($options)
+    /**
+     * @param $options
+     * @return array
+     */
+    public function createWork($options)
     {
         
         //проверяем есть ли данная работа в базе данных
@@ -214,7 +216,6 @@ class Admin
             $time->timework = '0';
             R::store($time);
         }
-        
         return $workcheck;
         
     }
@@ -233,8 +234,8 @@ class Admin
         }
         
         //получаем привязки старого объекта
-        $object = $this->GetShared($data['id']);
-        $peoples = $this->GetList($object);
+        $object = $this->getShared($data['id']);
+        $peoples = $this->getList($object);
         
         //создаем новую работу для объекта
         foreach ($peoples as $k => $people) {
@@ -273,42 +274,62 @@ class Admin
         return $result = R::findAll('object', ' name = ?', [$name]);
     }
     
-    public function GetWorkId($options)
+    /**
+     * @param $options
+     * @return mixed
+     */
+    public function getWorkId($options)
     {
-        
         $datecheck = $options['day'];
         $mounthcheck = $options['mounth'];
         $nraboticheck = $options['nraboti'];
         $workid = R::findOne('time', ' date = ? AND mounth = ? AND nraboti = ? ', [$datecheck, $mounthcheck, $nraboticheck]);
         return $workid->id;
-        
     }
     
-    public function GetUserList()
+    /**
+     * @return array
+     */
+    public function getUserList()
     {
         $result = R::findAll('people', ' ORDER BY fio ');
         return $result;
     }
     
-    public function GetUserListById()
+    /**
+     * @return array
+     */
+    public function getUserListById()
     {
-        $result = R::getAll('select fio from time full join people where nprorab = 97  ORDER BY fio');
-        return $result;
+        return $result = R::getAll('select fio from time full join people where nprorab = 97  ORDER BY fio');
     }
     
+    /**
+     * @param $id
+     * @return array
+     */
     public function GetWorkTime($id)
     {
         $result = R::getAll('select SUM(timework) from time left join object_people on time.nraboti = object_people.id where people_id = :id', [':id' => $id]);
         return $result;
     }
     
-    public function FindPeople()
+    /**
+     * @return array
+     */
+    public function findPeople()
     {
         $list = R::findAll('people', 'id > ? ORDER BY fio', [0]);
         return $list;
     }
     
-    public function GetProrab($table, $role)
+    
+    /**
+     * @param $table
+     * @param $role
+     * @return array
+     */
+    public function getProrab($table, $role)
     {
         $result = R::findAll($table, ' role = ?', [$role]);
         return $result;
@@ -329,12 +350,21 @@ class Admin
         
     }
     
+    /**
+     * @param $table
+     * @param $realId
+     * @return array
+     */
     public function getProrabName($table, $realId)
     {
         $result = R::findAll($table, ' id = ?', [$realId]);
         return $result;
     }
     
+    /**
+     * @param $t
+     * @return string
+     */
     public function isWeekend($t)
     {
         setlocale(LC_TIME, 'ru_RU.utf8');

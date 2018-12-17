@@ -39,12 +39,12 @@ class AdminController
             case '/admin1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $admin->CreateObject($data);
+                    $admin->createObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
@@ -55,7 +55,7 @@ class AdminController
                     }
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
-                    $add = $admin->CreateObject($data);
+                    $add = $admin->createObject($data);
                     $admin->createAdd($data);
                 }
                 require_once(ROOT . '/views/project-list.php');
@@ -78,7 +78,7 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add'])) {
@@ -151,7 +151,7 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add']) or isset($_POST['copy'])) {
@@ -169,9 +169,7 @@ class AdminController
                     } else {
                         $id1 = 94;
                     }
-        
-                    echo 'id пользователя' . $id1;
-        
+                    
                     $object = R::load('object', $id);
                     $peoples = R::load('people', $id1);
         

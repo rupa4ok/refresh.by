@@ -31,7 +31,7 @@
                 
                 $table = 'users';
                 $role = 'user';
-                if ( $result = $admin->GetProrab($table, $role)) {
+                if ( $result = $admin->getProrab($table, $role)) {
                     
                     echo '
                     <table class="table" style="margin-top: 30px;">' .

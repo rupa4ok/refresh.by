@@ -8,7 +8,13 @@
 
 class Users {
     
-    public function GetObjectById($table, $id, $role)
+    /**
+     * @param $table
+     * @param $id
+     * @param $role
+     * @return array
+     */
+    public function getObjectById($table, $id, $role)
     {
         if ($role == 'admin') {
             $result = R::findAll($table);

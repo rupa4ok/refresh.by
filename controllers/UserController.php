@@ -38,12 +38,12 @@ class UserController {
             case '/user1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $admin->CreateObject($data);
+                    $admin->createObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
@@ -54,7 +54,7 @@ class UserController {
                     }
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
-                    $add = $admin->CreateObject($data);
+                    $add = $admin->createObject($data);
                     $admin->createAdd($data);
                 }
                 require_once(ROOT . '/views/project-list.php');
@@ -77,7 +77,7 @@ class UserController {
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->ObjectDelete($table, $id);
+                    $admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add'])) {

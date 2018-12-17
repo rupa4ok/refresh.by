@@ -16,7 +16,7 @@ $table = 'object';
 $id = $_POST['id'];
 $role = $_SESSION['role'];
 $admin = new Admin();
-$admin->ObjectDelete($table, $id);
+$admin->objectDelete($table, $id);
 
 if ( $_SESSION['role'] == 'admin' ) {
     $uri = 'admin5';
