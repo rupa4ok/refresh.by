@@ -43,6 +43,10 @@ class Admin
         }
     }
     
+    /**
+     * @param $id
+     * @return array
+     */
     public function getObjectByMounth($id)
     
     {
