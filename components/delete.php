@@ -25,7 +25,7 @@ if ( $_SESSION['role'] == 'admin' ) {
 }
 
 $id = $_SESSION['id'];
-$result = $admin->GetTableByID($table, $id, $role);
+$result = $admin->getTableByID($table, $id, $role);
 
 if ($result) {
     echo '

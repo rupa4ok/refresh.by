@@ -17,20 +17,14 @@
             
             <div class="col-md-9 content-block">
                 <div class="results" style="color: red"></div>
-
-                <a href="file.csv">Скачать файл</a>
                 
-                <?php
-
-                ini_set('display_errors', 0);
-                error_reporting(E_ALL);
-                
-                $table = 'people';
-                $filename = 'file.csv';
-                $csv->ExportCsv($table,$filename);
-                
-                ?>
-                
+                <ul>
+                    <li><a href="file.csv">Список объектов</a></li>
+                    <li><a href="file1.csv">Список работников</a></li>
+                    <li><a href="file2.csv">Список прорабов</a></li>
+                    <li><a href="file3.csv">Сводный табель</a></li>
+                </ul>
+            
             </div>
         </div>
     </div>

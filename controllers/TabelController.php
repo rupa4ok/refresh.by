@@ -8,7 +8,8 @@
 
 include_once ROOT . '/models/Csv.php';
 
-class TabelController {
+class TabelController
+{
     
     public function actionList()
     {
@@ -19,18 +20,16 @@ class TabelController {
             case '/tabel1':
                 $filename = 'file1.csv';
                 $table = 'people';
-                $csv->ExportCsv($table, $filename);
-                $csv->DownloadCsv($filename);
+                $csv->exportCsv($table, $filename);
+                $csv->downloadCsv($filename);
                 break;
             case '/tabel2':
                 $filename = 'file2.csv';
-                $csv->DownloadCsv($filename);
+                $csv->downloadCsv($filename);
                 break;
             default:
                 echo 'Страница 404';
                 break;
         }
-        
     }
-    
 }

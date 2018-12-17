@@ -6,42 +6,51 @@
  * Time: 11:40
  */
 
-class Csv {
+class Csv
+{
     
-    public function ExportCsv($table, $filename)
+    public function exportCsv($table, $filename)
     {
         
         $data = R::findAll($table);
-
-//        foreach ($data as $a) {
-//
-//            foreach ($anton as $s) {
-//
-//                foreach ($a as $t => $key) {
-//                    if($t == $s){
-//                        $array1 = array();
-//                        $list = array(
-//                            array(array_push($array1, $key))
-//                        );
-//                    }
-//                }
-//
-//                print_r($list);
-//            }
-//
-//        }
-        
         $list = array();
         
-        foreach ($data as $item) {
-            $list[] = array_push($list, [$item->fio,$item->fioshort,$item->nrabotnik]);
+        switch ($table) {
+            case 'object':
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [
+                        $item->id,
+                        $item->name,
+                        $item->year,
+                        $item->mounth,
+                        $item->status,
+                        $item->users_id
+                    ]);
+                }
+                break;
+            case 'people':
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [$item->fio, $item->fioshort, $item->nrabotnik]);
+                }
+                break;
+            case 'users':
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [
+                        $item->id,
+                        $item->name,
+                        $item->email
+                    ]);
+                }
+                break;
+            default:
+                return;
         }
         
         $fp = fopen($filename, 'w');
         
         foreach ($list as $fields) {
-            fputcsv($fp, $fields);        }
-        
+            @fputcsv($fp, $fields);
+        }
         fclose($fp);
         
         return;
@@ -53,28 +62,25 @@ class Csv {
      * @param $filename
      */
     
-    public function DownloadCsv($url, $filename)
+    public function downloadCsv($url, $filename)
     {
-        
         header('Content-Type: application/x-force-download');
         header('Content-Disposition: attachment; filename="file.csv');
         readfile($url);
-        
     }
     
-    public function ImportCsv($filename) {
-        
+    public function importCsv($filename)
+    {
         ini_set('auto_detect_line_endings', true);
-        if(!file_exists($filename) || !is_readable($filename)) {
+        if (!file_exists($filename) || !is_readable($filename)) {
             return false;
         }
         $header = null;
         $data = array();
-        if(($handle = fopen($filename, 'r')) !== false) {
-            while(($row = fgetcsv($handle, 100, ';')) !== false) {
-                
-                if(!$header) {
-                    if($row[0] != 'sep=') {
+        if (($handle = fopen($filename, 'r')) !== false) {
+            while (($row = fgetcsv($handle, 100, ';')) !== false) {
+                if (!$header) {
+                    if ($row[0] != 'sep=') {
                         $header = $row;
                     }
                 } else {
@@ -85,7 +91,7 @@ class Csv {
                         }
                     }
                 }
-                if($row[0] != 'sep=') {
+                if ($row[0] != 'sep=') {
                     $data[] = $row;
                 }
             }
@@ -100,6 +106,5 @@ class Csv {
             R::store($user);
         }
         return $data;
-        
     }
 }

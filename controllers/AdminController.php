@@ -119,9 +119,7 @@ class AdminController
                     
                     $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
                     
-                    foreach ($workCurrent as $work)
-                    {
-                        
+                    foreach ($workCurrent as $work) {
                         $options = [
                             'date' => $work['date'],
                             'mounth' => $work['mounth'],
@@ -129,7 +127,6 @@ class AdminController
                         ];
                         
                         $res = ($admin->getTimeByWork($options)) ;
-    
                         $time = R::dispense('time');
                         $time->id = $work['id'];
                         $time->date = $work['date'];
@@ -190,6 +187,22 @@ class AdminController
                 require_once(ROOT . '/views/import.php');
                 break;
             case '/admin7':
+                $table = 'object';
+                $filename = 'file.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'people';
+                $filename = 'file1.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'users';
+                $filename = 'file2.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'people';
+                $filename = 'file3.csv';
+                $csv->exportCsv($table,$filename);
+                
                 require_once(ROOT . '/views/export.php');
                 break;
             case '/admin9':

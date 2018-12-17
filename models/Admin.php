@@ -9,7 +9,7 @@
 class Admin
 {
     
-    public function GetTableById($table, $id, $role)
+    public function getTableById($table, $id, $role)
     {
         if ($role == 'admin') {
             $result = R::getAll("SELECT * FROM {$table} WHERE mounth = :mounth AND year = :year               ORDER BY name",
