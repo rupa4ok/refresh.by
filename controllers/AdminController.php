@@ -189,16 +189,12 @@ class AdminController
                 $filename = 'file.csv';
                 $csv->exportCsv($table,$filename);
                 
-                $table = 'people';
+                $table = 'object_people';
                 $filename = 'file1.csv';
                 $csv->exportCsv($table,$filename);
                 
-                $table = 'users';
-                $filename = 'file2.csv';
-                $csv->exportCsv($table,$filename);
-    
                 $table = 'time';
-                $filename = 'file3.csv';
+                $filename = 'file2.csv';
                 $csv->exportCsv($table,$filename);
                 
                 require_once(ROOT . '/views/export.php');

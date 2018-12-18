@@ -17,39 +17,56 @@ class Csv
         
         switch ($table) {
             case 'object':
+                $list[] = [
+                    'Id объекта - codeObject',
+                    'Название объекта - Naim',
+                    'Дата - Den',
+                    'Статус объекта',
+                    'Id прораба'
+                ];
                 foreach ($data as $item) {
                     $list[] = array_push($list, [
                         $item->id,
                         $item->name,
-                        $item->year,
-                        $item->mounth,
+                        '01.' . $item->mounth . '.' . $item->year,
                         $item->status,
-                        $item->users_id
+                        $item->users_id,
                     ]);
                 }
                 break;
-            case 'people':
-                foreach ($data as $item) {
-                    $list[] = array_push($list, [$item->fio, $item->fioshort, $item->nrabotnik]);
-                }
-                break;
-            case 'users':
+            case 'object_people':
+                $list[] = [
+                    'Id работы - Code',
+                    'Id объекта - codeObject',
+                    'Дата - Den',
+                    'КТУ - koef'
+                ];
                 foreach ($data as $item) {
                     $list[] = array_push($list, [
                         $item->id,
-                        $item->name,
-                        $item->email
+                        $item->people_id,
+                        $item->object_id,
+                        $item->koef
                     ]);
                 }
+                break;
             case 'time':
+                $data = R::findAll($table , 'WHERE timework != 0');
+                $list[] = [
+                    'Порядковый номер - Code',
+                    'N работника - nrabotnik',
+                    'Дата - Den',
+                    'Номер работы - codeRabota',
+                    'Отработано часов',
+                    'Id прораба работы'
+                ];
                 foreach ($data as $item) {
                     $list[] = array_push($list, [
                         $item->id,
-                        $item->date,
-                        $item->mounth,
+                        $item->nrabotnik,
+                        $item->date . '.' . $item->mounth . '.' . $item->year,
                         $item->nraboti,
                         $item->timework,
-                        $item->nrabotnik,
                         $item->nprorab
                     ]);
                 }

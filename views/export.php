@@ -20,9 +20,8 @@
                 
                 <ul>
                     <li><a href="file.csv">Список объектов</a></li>
-                    <li><a href="file1.csv">Список работников</a></li>
-                    <li><a href="file2.csv">Список прорабов</a></li>
-                    <li><a href="file3.csv">Сводный табель</a></li>
+                    <li><a href="file1.csv">Табличная часть объектов</a></li>
+                    <li><a href="file2.csv">Количество отработанных за день</a></li>
                 </ul>
             
             </div>
