@@ -17,40 +17,84 @@ class Csv
         
         switch ($table) {
             case 'object':
+                $list[] = [
+                    'IdObject',
+                    'Naim',
+                    'Data',
+                    'Status',
+                    'IdProrab'
+                ];
                 foreach ($data as $item) {
                     $list[] = array_push($list, [
                         $item->id,
                         $item->name,
-                        $item->year,
-                        $item->mounth,
+                        '01.' . $item->mounth . '.' . $item->year,
                         $item->status,
-                        $item->users_id
+                        $item->users_id,
+                    ]);
+                }
+                break;
+            case 'object_people':
+                $list[] = [
+                    'IdRabota',
+                    'IdRabotnik',
+                    'IdObject',
+                    'Koef'
+                ];
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [
+                        $item->id,
+                        $item->people_id,
+                        $item->object_id,
+                        $item->koef
+                    ]);
+                }
+                break;
+            case 'time':
+                $data = R::findAll($table, 'WHERE timework != 0');
+                $list[] = [
+                    'IdChasy',
+                    'IdRabotnik',
+                    'Data',
+                    'IdRabota',
+                    'Chasy',
+                    'IdProrab'
+                ];
+                foreach ($data as $item) {
+                    $list[] = array_push($list, [
+                        $item->id,
+                        $item->nrabotnik,
+                        $item->date . '.' . $item->mounth . '.' . $item->year,
+                        $item->nraboti,
+                        $item->timework,
+                        $item->nprorab
                     ]);
                 }
                 break;
             case 'people':
+                $list[] = [
+                    'FIO',
+                    'FIOShort',
+                    'Nrabotnik',
+                ];
                 foreach ($data as $item) {
-                    $list[] = array_push($list, [$item->fio, $item->fioshort, $item->nrabotnik]);
+                    $list[] = array_push($list, [
+                        $item->fio,
+                        $item->fioshort,
+                        $item->nrabotnik]);
                 }
                 break;
             case 'users':
+                $list[] = [
+                    'Id',
+                    'Naim',
+                    'Email',
+                ];
                 foreach ($data as $item) {
                     $list[] = array_push($list, [
                         $item->id,
                         $item->name,
                         $item->email
-                    ]);
-                }
-            case 'time':
-                foreach ($data as $item) {
-                    $list[] = array_push($list, [
-                        $item->id,
-                        $item->date,
-                        $item->mounth,
-                        $item->nraboti,
-                        $item->timework,
-                        $item->nrabotnik,
-                        $item->nprorab
                     ]);
                 }
                 break;
@@ -61,62 +105,28 @@ class Csv
         $fp = fopen($filename, 'w');
         
         foreach ($list as $fields) {
-            @fputcsv($fp, $fields);
+            @fputcsv($fp, $fields, '|');
         }
         fclose($fp);
         
         return;
     }
     
-    /**Выгрузка файла
-     *
-     * @param $url
-     * @param $filename
+    /**
+     * Изменение статусов объектов
      */
-    
-    public function downloadCsv($url, $filename)
+    public function block()
     {
-        header('Content-Type: application/x-force-download');
-        header('Content-Disposition: attachment; filename="file.csv');
-        readfile($url);
-    }
-    
-    public function importCsv($filename)
-    {
-        ini_set('auto_detect_line_endings', true);
-        if (!file_exists($filename) || !is_readable($filename)) {
-            return false;
-        }
-        $header = null;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== false) {
-            while (($row = fgetcsv($handle, 100, ';')) !== false) {
-                if (!$header) {
-                    if ($row[0] != 'sep=') {
-                        $header = $row;
-                    }
-                } else {
-                    if (count($header) > count($row)) {
-                        $difference = count($header) - count($row);
-                        for ($i = 1; $i <= $difference; $i++) {
-                            $row[count($row) + 1] = '';
-                        }
-                    }
-                }
-                if ($row[0] != 'sep=') {
-                    $data[] = $row;
-                }
-            }
-            fclose($handle);
-        }
+        $date = date('m');
+        $table = 'object';
+        $result = R::findAll($table, "mounth < $date");
         
-        foreach ($data as $item) {
-            $user = R::dispense('people');
-            $user->fio = $item['2'];
-            $user->fioshort = $item['1'];
-            $user->nrabotnik = $item['0'];
-            R::store($user);
+        foreach ($result as $res) {
+            $object = R::dispense('object');
+            $object->id = $res['id'];
+            $object->status = 'Сдан';
+            R::store($object);
         }
-        return $data;
     }
+    
 }
