@@ -58,6 +58,10 @@ class AdminController
                     $add = $admin->createObject($data);
                     $admin->createAdd($data);
                 }
+                if (isset($_POST['block'])) {
+                    $csv->block();
+                }
+
                 require_once(ROOT . '/views/project-list.php');
                 break;
             case '/admin2':
@@ -195,6 +199,14 @@ class AdminController
                 
                 $table = 'time';
                 $filename = 'file2.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'people';
+                $filename = 'file3.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'users';
+                $filename = 'file4.csv';
                 $csv->exportCsv($table,$filename);
                 
                 require_once(ROOT . '/views/export.php');
