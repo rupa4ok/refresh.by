@@ -190,23 +190,23 @@ class AdminController
                 break;
             case '/admin7':
                 $table = 'object';
-                $filename = 'file.csv';
+                $filename = 'tObjects.csv';
                 $csv->exportCsv($table,$filename);
                 
                 $table = 'object_people';
-                $filename = 'file1.csv';
+                $filename = 'tRaboty.csv';
                 $csv->exportCsv($table,$filename);
                 
                 $table = 'time';
-                $filename = 'file2.csv';
+                $filename = 'tChasy.csv';
                 $csv->exportCsv($table,$filename);
     
                 $table = 'people';
-                $filename = 'file3.csv';
+                $filename = 'sRabotniki.csv';
                 $csv->exportCsv($table,$filename);
     
                 $table = 'users';
-                $filename = 'file4.csv';
+                $filename = 'sProraby.csv';
                 $csv->exportCsv($table,$filename);
                 
                 require_once(ROOT . '/views/export.php');
