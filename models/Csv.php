@@ -105,8 +105,9 @@ class Csv
         $fp = fopen($filename, 'w');
         
         foreach ($list as $fields) {
-            @fputcsv($fp, $fields, '|');
+            @fputcsv($fp, $fields, '|', chr(0));
         }
+        
         fclose($fp);
         
         return;

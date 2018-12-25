@@ -24,6 +24,7 @@
                     <li><a href="tChasy.csv">Количество отработанных за день</a></li>
                     <li><a href="sRabotniki.csv">Список работников</a></li>
                     <li><a href="sProraby.csv">Список прорабов</a></li>
+                    <hr>
                     <form action="/admin1" method="post">
                         <input type="text" name="block" value="true" hidden>
                         <button type="submit" class="btn btn-danger">Заблокировать редактирование</button>

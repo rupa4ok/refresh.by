@@ -36,7 +36,7 @@
                     foreach ($result as $k => $res) {
                         $sheluder[] = $res['date'];
                         if ([$res['fio']]) {
-                            @$fioPeople[$res['fio']][$res['date']] += $res['timework'];
+                            @$fioPeople[$res['fioshort']][$res['date']] += $res['timework'];
                         }
                     }
                     
@@ -47,13 +47,13 @@
                                     ФИО
                             </td>';
                     
-                    foreach ($sheluder as $t) {
-                        $week = $admin->isWeekend($t);
+                    foreach ($sheluder as $th) {
+                        $week = $admin->isWeekend($th);
                         if ($week == 'Суббота' || $week == 'Воскресенье') {
                             $week = 'Sun';
                         }
                         echo '<td class = "'.$week.'">
-                                    ' . $t . '
+                                    ' . $th . '
                             </td>
                             ';
                     }
@@ -74,13 +74,17 @@
                                     $s = $val;
                                 }
                             }
-                            echo '<td class = "">
+    
+                            $week = $admin->isWeekend($t);
+                            if ($week == 'Суббота' || $week == 'Воскресенье') {
+                                $week = 'Sun';
+                            }
+                            
+                            echo '<td class = "'.$week.'">
                                 ' . $s . '
                             </td>
                             ';
                         }
-                        
-
                     }
                     
                     echo '</tr>';
