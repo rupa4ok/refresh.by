@@ -37,8 +37,10 @@
                         echo '<h1>' . $res->name . '</h1>';
                         if ($res->status == 'Сдан' and $_SESSION['role'] == 'user') {
                             $objectStatus = 'class="inline-input"';
-                        } else {
+                            $objectTrigger = 'true';
+                         } else {
                             $objectStatus = 'class="myeditable editable inline-input"';
+                            $objectTrigger = 'false';
                         }
                     }
                     
@@ -263,10 +265,18 @@
                         $timedata = $admin->getWorkId($options);
                         $dayWeek = $day . '-' . $month . '-2018';
                         $dayWeek = strftime("%a", strtotime($dayWeek));
-                        echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
+                        
+                        if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
+                            echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
+                ' . $admin->getData($timedata) . '</td>';
+                        } else {
+                            echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
                 <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->getData($timedata) . '</a></td>
                 
                 ';
+                        }
+                        
+                        
                         
                     }
                     echo '</tr>';
