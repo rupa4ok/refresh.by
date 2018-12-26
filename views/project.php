@@ -180,10 +180,12 @@
                     $peopleId = $people->id;
                     $objectId = $object->id;
                     $year = $object->year;
+                    $number = $admin->getWorkNumber($objectId, $peopleId);
+                    $ktu = $admin->getKtu($number);
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="ktu" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax1.php" >1</a>';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="'.$number.'" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >'.$ktu.'</a>';
                         } else {
                             echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>1';
                         }
@@ -203,8 +205,6 @@
         <button type="submit">Добавить работника</button>
         </form>';
                     }
-                    
-                    $number = $admin->getWorkNumber($objectId, $peopleId);
                     
                     if ($_SESSION['role'] == 'admin') {
                         echo ' Номер работы: ' . $number;

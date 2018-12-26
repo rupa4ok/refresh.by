@@ -238,20 +238,30 @@ class Admin
         }
         
         //получаем привязки старого объекта
-        $object = $this->getShared($data['id']);
-        $peoples = $this->getList($object);
+        $oldObject = $this->getShared($data['id']);
+        $peoples = $this->getList($oldObject);
         
         //создаем новую работу для объекта
         foreach ($peoples as $k => $people) {
             $id1 = $people->id;
-            echo $id;
             $object = R::load('object', $id);
             $peoples = R::load('people', $id1);
             
             $object->sharedPeopleList[] = $peoples;
             
             R::store($object);
+            
+            $nwork = R::getInsertID();
+            $oldObjectId = $oldObject['id'];
+    
+            //получаем ktu старой работы
+            $ktu = $this->getNwork($id1, $oldObjectId);
+
+            //добавляем ktu к новой работе
+    
+            R::exec( "UPDATE object_people SET koef = $ktu WHERE id = $nwork");
         }
+        
     }
     
     /**
@@ -412,6 +422,24 @@ class Admin
     {
         return R::getRow("SELECT * FROM people WHERE id = :id",
             [':id' => $this->getIdByWork($nwork)]);
+    }
+    
+    /**
+     * @param $timedata
+     * @return mixed
+     */
+    public function getKtu($nwork)
+    {
+        $id = R::getRow("SELECT * FROM object_people WHERE id = :nwork",
+            [':nwork' => $nwork]);
+        return $id['koef'];
+    }
+    
+    public function getNwork($people_id, $object)
+    {
+        $id = R::getRow("SELECT * FROM object_people WHERE object_id = ? AND people_id = ?",
+            [$object, $people_id]);
+        return $id['koef'];
     }
     
 }
