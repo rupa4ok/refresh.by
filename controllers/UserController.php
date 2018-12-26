@@ -1,16 +1,16 @@
 <?php
 
-if ($_SESSION['role'] !== 'user') {
-    header('Location:/',true, 301); //редирект на главную если не залогинен
-}
-
-include_once ROOT . '/models/Admin.php';
+use Models\Admin;
 
 class UserController {
     
-    /**
-     * @return bool
-     */
+    public function __construct()
+    {
+        if ($_SESSION['role'] !== 'user') {
+            header('Location:/',true, 301); //редирект на главную если не залогинен
+        }
+    }
+    
     public function actionPage()
     {
         require_once(ROOT . '/config/config.php');

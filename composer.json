@@ -1,5 +1,9 @@
 {
-    "require": {
-        "squizlabs/php_codesniffer": "*"
+    "autoload": {
+        "psr-4": {
+            "Models\\": "models/",
+            "Libs\\": "libs/",
+            "Components\\": "components/"
+        }
     }
 }

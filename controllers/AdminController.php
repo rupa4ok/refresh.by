@@ -1,24 +1,26 @@
 <?php
 
-if ($_SESSION['role'] !== 'admin') {
-    header('Location: /', true, 301); //редирект на главную если не залогинен
-}
-
-include_once ROOT . '/models/Admin.php';
-include_once ROOT . '/models/Csv.php';
+use Models\Admin;
+use Models\Csv;
 
 class AdminController
 {
+    public function __construct()
+    {
+        if ($_SESSION['role'] !== 'admin') {
+            header('Location: /', true, 301); //редирект на главную если не залогинен
+        }
+    }
     
     public function actionPanel()
     {
+        $admin = new Admin();
+        $csv = new Csv();
+        
         require_once(ROOT . '/config/config.php');
         require_once(ROOT . '/views/header.php');
         
         $uri = $_SERVER['REQUEST_URI'];
-
-        $admin = new Admin();
-        $csv = new Csv;
 
         if (!isset($_POST['month']) and !isset($_SESSION['month'])) {
             $_SESSION['month'] = date('m');
