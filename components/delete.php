@@ -6,10 +6,11 @@
      * Time: 21:14
      */
 
+use Models\Admin;
+
 session_start();
     
 require_once"../config/config.php";
-require_once"../models/Admin.php";
 require_once"../models/Users.php";
 
 $table = 'object';

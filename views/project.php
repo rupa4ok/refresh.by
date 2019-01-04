@@ -185,9 +185,9 @@
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="'.$number.'" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >'.$ktu.'</a>';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="'.$number.'" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >'.str_replace('.',',',$ktu).'</a>';
                         } else {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>1';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>' . str_replace('.',',',$ktu);
                         }
                     } else {
                         echo '
@@ -268,10 +268,10 @@
                         
                         if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                ' . $admin->getData($timedata) . '</td>';
+                ' .str_replace('.',',',$admin->getData($timedata)). '</td>';
                         } else {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . $admin->getData($timedata) . '</a></td>
+                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.',',',$admin->getData($timedata)) . '</a></td>
                 
                 ';
                         }

@@ -6,9 +6,9 @@
  * Time: 21:14
  */
 
+use Models\Admin;
+
 require_once"../config/config.php";
-require_once"../models/Admin.php";
-require_once"../models/Users.php";
 
 $table = 'object';
 $id = $_SESSION['id'];

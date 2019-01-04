@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once('/var/www/site19.websfera.by/data/www/site19.websfera.by/libs/rb.php');
+require_once('/home/refresh/tabel.refresh.by/libs/rb.php');
 
 //Подключение к бд
-R::setup('mysql:host=localhost;dbname=refresh', 'refresh', 'refreshrefresh');
+R::setup('mysql:host=localhost;dbname=refresh_tabel', 'refresh_tabel', 'tabeltabeltabel');
