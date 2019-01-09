@@ -20,4 +20,3 @@ require_once(ROOT.'/config/config.php');
 use Components\Router;
 $router = new Router();
 $router->run();
-

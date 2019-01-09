@@ -48,7 +48,9 @@ class AdminController
                     $id = $_POST['id'];
                     $nworkId = $admin->getNworkByObject($id);
                     $admin->objectDelete($table, $id);
-                    $admin->timeDelete($nworkId);
+                    if ($nworkId) {
+                        $admin->timeDelete($nworkId);
+                    }
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
