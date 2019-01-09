@@ -4,6 +4,7 @@ $link = mysqli_connect(
     'refresh_tabel',       /* Имя пользователя */
     'tabeltabeltabel',   /* Используемый пароль */
     'refresh_tabel');     /* База данных для запросов по умолчанию */
+    mysqli_set_charset($link, "utf8");
 
 if (!$link) {
     printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());

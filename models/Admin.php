@@ -5,7 +5,8 @@
  * Date: 26.09.2018
  * Time: 11:34
  */
-namespace Models;
+
+namespace models;
 use R;
 
 class Admin
@@ -52,8 +53,7 @@ class Admin
     public function getObjectByMounth($id)
     
     {
-        $result = R::loadAll('object', array($id));
-        return $result;
+        return R::loadAll('object', array($id));
     }
     
     /**
@@ -62,7 +62,8 @@ class Admin
      */
     public function objectDelete($table, $id)
     {
-        return R::trash($table, $id);
+        R::trash($table, $id);
+        R::exec("DELETE FROM time WHERE nraboti = $id");
     }
     
     public function copyObject($table, $id)
@@ -168,8 +169,7 @@ class Admin
     public function getWorkNumber($objectId, $peopleId)
     {
         $worknumber = R::getRow('SELECT * FROM object_people WHERE object_id = ? AND people_id = ?', [$objectId, $peopleId]);
-        $number = $worknumber['id'];
-        return $number;
+        return $number = $worknumber['id'];
     }
     
     /**
@@ -179,7 +179,7 @@ class Admin
     public function getList($object)
     {
         //ищем работников, закрепленных за данным объектом
-        return $peoples = $object->with('ORDER BY `fio` ASC')->sharedPeopleList;
+        return $object->with('ORDER BY `fio` ASC')->sharedPeopleList;
     }
     
     /**
@@ -240,30 +240,20 @@ class Admin
         }
         
         //получаем привязки старого объекта
-        $oldObject = $this->getShared($data['id']);
-        $peoples = $this->getList($oldObject);
+        $object = $this->getShared($data['id']);
+        $peoples = $this->getList($object);
         
         //создаем новую работу для объекта
         foreach ($peoples as $k => $people) {
             $id1 = $people->id;
+            echo $id;
             $object = R::load('object', $id);
             $peoples = R::load('people', $id1);
             
             $object->sharedPeopleList[] = $peoples;
             
             R::store($object);
-            
-            $nwork = R::getInsertID();
-            $oldObjectId = $oldObject['id'];
-    
-            //получаем ktu старой работы
-            $ktu = $this->getNwork($id1, $oldObjectId);
-
-            //добавляем ktu к новой работе
-    
-            R::exec( "UPDATE object_people SET koef = $ktu WHERE id = $nwork");
         }
-        
     }
     
     /**
