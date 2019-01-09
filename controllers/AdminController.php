@@ -46,7 +46,9 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
+                    $nworkId = $admin->getNworkByObject($id);
                     $admin->objectDelete($table, $id);
+                    $admin->timeDelete($nworkId);
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
@@ -85,6 +87,7 @@ class AdminController
                     $table = 'object_people';
                     $id = $_POST['number'];
                     $admin->objectDelete($table, $id);
+                    $admin->timeDelete($id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add'])) {

@@ -63,7 +63,12 @@ class Admin
     public function objectDelete($table, $id)
     {
         R::trash($table, $id);
-        R::exec("DELETE FROM time WHERE nraboti = $id");
+        
+    }
+    
+    public function timeDelete($id)
+    {
+        R::exec("DELETE FROM time WHERE nraboti = {$id}");
     }
     
     public function copyObject($table, $id)
@@ -257,18 +262,6 @@ class Admin
     }
     
     /**
-     * Получаем данные о привязанных работах и рабочих
-     *
-     * @param $data
-     * @return array
-     */
-    public function getSharedData($data)
-    {
-        $name = 'Копия ' . $data['newName'];
-        return $result = R::findAll('object', ' name = ?', [$name]);
-    }
-    
-    /**
      * Получаем данные об объекьте-родителе
      *
      * @param $data
@@ -432,6 +425,12 @@ class Admin
         $id = R::getRow("SELECT * FROM object_people WHERE object_id = ? AND people_id = ?",
             [$object, $people_id]);
         return $id['koef'];
+    }
+    
+    public function getNworkByObject($id)
+    {
+        $nwork = R::getRow("SELECT * FROM object_people WHERE object_id = $id");
+        return $nwork['id'];
     }
     
 }
