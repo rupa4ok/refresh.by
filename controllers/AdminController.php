@@ -79,7 +79,39 @@ class AdminController
             case '/admin4':
                 require_once(ROOT . '/views/users-list.php');
                 break;
-            case '/admin5':
+            case '/admin6':
+                require_once(ROOT . '/views/import.php');
+                break;
+            case '/admin7':
+                $table = 'object';
+                $filename = 'tObjects.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'object_people';
+                $filename = 'tRaboty.csv';
+                $csv->exportCsv($table,$filename);
+                
+                $table = 'time';
+                $filename = 'tChasy.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'people';
+                $filename = 'sRabotniki.csv';
+                $csv->exportCsv($table,$filename);
+    
+                $table = 'users';
+                $filename = 'sProraby.csv';
+                $csv->exportCsv($table,$filename);
+                
+                require_once(ROOT . '/views/export.php');
+                break;
+            case '/admin9':
+                require_once(ROOT . '/views/project.php');
+                break;
+            case '/admin12':
+                require_once(ROOT . '/views/project.php');
+                break;
+            default:
                 if (isset($_POST['id'])) {
                     $id = $_POST['id'];
                 } else {
@@ -127,16 +159,16 @@ class AdminController
                     if (isset($_POST['prevId'])) {
                         $prevId = $_POST['prevId'];
                     }
-                    
+        
                     $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
-                    
+        
                     foreach ($workCurrent as $work) {
                         $options = [
                             'date' => $work['date'],
                             'mounth' => $work['mounth'],
                             'nraboti' => $prevId
                         ];
-                        
+            
                         $res = ($admin->getTimeByWork($options)) ;
                         $time = R::dispense('time');
                         $time->id = $work['id'];
@@ -146,85 +178,11 @@ class AdminController
                         $time->nrabotnik = $work['nrabotnik'];
                         $time->nprorab = $work['nprorab'];
                         $time->timework = $res['timework'];
-    
+            
                         R::store($time);
                     }
                 }
                 $objectStatus = '$class="myeditable editable inline-input"';
-                require_once(ROOT . '/views/project.php');
-                break;
-            case '/admin5/11':
-                if (isset($_POST['id'])) {
-                    $id = $_POST['id'];
-                } else {
-                    $id = $_SESSION['id'];
-                }
-                if (isset($_POST['delete'])) {
-                    $table = 'object_people';
-                    $id = $_POST['number'];
-                    $admin->objectDelete($table, $id);
-                    $id = $_POST['id'];
-                }
-                if (isset($_POST['add']) or isset($_POST['copy'])) {
-                    if (isset($_POST['tagger-1'])) {
-                        $fio = $_POST['tagger-1'];
-                    }
-                    if (isset($_POST['tagger-2'])) {
-                        $id = $_POST['tagger-2'];
-                    }
-        
-                    $peopleid = R::getRow('SELECT id FROM people WHERE fio LIKE ? LIMIT 1', [ $fio ]);
-        
-                    if (isset($peopleid['id'])) {
-                        $id1 = $peopleid['id'];
-                    } else {
-                        $id1 = 94;
-                    }
-                    
-                    $object = R::load('object', $id);
-                    $peoples = R::load('people', $id1);
-        
-                    $object->sharedPeopleList[] = $peoples;
-        
-                    R::store($object);
-                }
-                $objectStatus = '$class="myeditable editable inline-input"';
-                $day = explode("/", $_SERVER['REQUEST_URI']);
-                require_once(ROOT . '/views/project_new.php');
-                break;
-            case '/admin6':
-                require_once(ROOT . '/views/import.php');
-                break;
-            case '/admin7':
-                $table = 'object';
-                $filename = 'tObjects.csv';
-                $csv->exportCsv($table,$filename);
-                
-                $table = 'object_people';
-                $filename = 'tRaboty.csv';
-                $csv->exportCsv($table,$filename);
-                
-                $table = 'time';
-                $filename = 'tChasy.csv';
-                $csv->exportCsv($table,$filename);
-    
-                $table = 'people';
-                $filename = 'sRabotniki.csv';
-                $csv->exportCsv($table,$filename);
-    
-                $table = 'users';
-                $filename = 'sProraby.csv';
-                $csv->exportCsv($table,$filename);
-                
-                require_once(ROOT . '/views/export.php');
-                break;
-            case '/admin9':
-                require_once(ROOT . '/views/project.php');
-                break;
-            case '/admin12':
-                require_once(ROOT . '/views/project.php');
-                break;
-            default:
                 require_once(ROOT . '/views/project.php');
                 break;
         }

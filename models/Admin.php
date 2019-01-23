@@ -208,12 +208,13 @@ class Admin
         //@TODO: Проверка наличия работы при каждой загрузке страницы, проверять только при создании работы
         $datecheck = $options['day'];
         $mounthcheck = $options['mounth'];
+        $yearcheck = $options['year'];
         $nraboticheck = $options['nraboti'];
         $nrabotnik = $options['nrabotnik'];
         $nprorab = $options['nprorab'];
         $workcheck = R::getRow('SELECT * FROM time WHERE date = ?
-        AND mounth = ? AND nraboti = ? AND nprorab = ?',
-            [$datecheck, $mounthcheck, $nraboticheck, $nprorab]);
+        AND mounth = ? AND year = ? AND nraboti = ? AND nprorab = ?',
+            [$datecheck, $mounthcheck, $yearcheck, $nraboticheck, $nprorab]);
         
         //если номер работы отсутствует, создаем работу на месяц
         
@@ -221,6 +222,7 @@ class Admin
             $time = R::dispense('time');
             $time->date = $datecheck;
             $time->mounth = $mounthcheck;
+            $time->year = $yearcheck;
             $time->nraboti = $nraboticheck;
             $time->nrabotnik = $nrabotnik;
             $time->nprorab = $nprorab;

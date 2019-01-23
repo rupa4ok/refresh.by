@@ -256,6 +256,7 @@
                         $options = array(
                             'day' => $day,
                             'mounth' => $month,
+                            'year' => $year,
                             'nraboti' => $number,
                             'nrabotnik' => $peopleId,
                             'nprorab' => $_SESSION['id']
@@ -263,7 +264,7 @@
                         
                         $admin->createWork($options);
                         $timedata = $admin->getWorkId($options);
-                        $dayWeek = $day . '-' . $month . '-2018';
+                        $dayWeek = $day . '-' . $month . '-' . $year;
                         $dayWeek = strftime("%a", strtotime($dayWeek));
                         
                         if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
