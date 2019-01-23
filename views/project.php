@@ -38,7 +38,7 @@
                         if ($res->status == 'Сдан' and $_SESSION['role'] == 'user') {
                             $objectStatus = 'class="inline-input"';
                             $objectTrigger = 'true';
-                         } else {
+                        } else {
                             $objectStatus = 'class="myeditable editable inline-input"';
                             $objectTrigger = 'false';
                         }
@@ -114,9 +114,9 @@
                 }
                 
                 $list = $admin->findPeople();
-
+                
                 if ($status !== 'Сдан') {
-    
+                    
                     echo '
         <form method="POST">
         <select class="js-example-basic-single" id="event-list">';
@@ -134,43 +134,17 @@
 
         ';
                 }
-                
-                $uri = $_SERVER['REQUEST_URI'];
-                if ($uri == '/admin5') {
-                    echo '<div class="paginator"><div><form method="post" action="/admin' . $mounthprev = ($month - 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button></form></div><div class="curent">Месяц: ' . $month . '</div>
+            
+                    echo '<div class="paginator"><div><a href="/admin5?id='.$prevPage.'&objid='.$id.'"><i class="fas fa-arrow-circle-left"></i></a></div><div class="curent">Месяц: ' . $month . '</div>
                     
-<div><form method="post" action="/admin' . $mounthnext = ($month + 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-right"></i></button></form></div></div>';
-                }
+<div><i class="fas fa-arrow-circle-right"></i></div></div>';
+                
                 if ($uri == '/user5') {
                     echo '<div class="paginator"><div><form method="post" action="/user' . $mounthprev = ($month - 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button></form></div><div class="curent">Месяц: ' . $month . '</div>
                     
 <div><form method="post" action="/user' . $mounthnext = ($month + 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-right"></i></button></form></div></div>';
                 }
                 
-                $uri = $_SERVER['REQUEST_URI'];
-                if ($uri == '/admin10') {
-                    echo '<div class="paginator"><div><form method="post" action="/admin' . $mounthprev = ($month - 1) . '"> </form></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-right"></i></button></form></div></div>';
-                }
-                if ($uri == '/user10') {
-                    echo '<div class="paginator"><div><form method="post" action="/user' . $mounthprev = ($month - 1) . '"></form></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-right"></i></button></i></form></div></div>';
-                }
-                
-                $uri = $_SERVER['REQUEST_URI'];
-                if ($uri == '/admin12') {
-                    echo '<div class="paginator"><div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><form method="post" action="/admin5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
-                }
-                if ($uri == '/user12') {
-                    echo '<div class="paginator"><div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button> </form></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><form method="post" action="/user5"><input name="id" value="' . $id . '" hidden/></form></div></div>';
-                }
-
                 $prevId = '';
                 
                 $object = $admin->getShared($id);
@@ -185,9 +159,9 @@
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="'.$number.'" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >'.str_replace('.',',',$ktu).'</a>';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="' . $number . '" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >' . str_replace('.', ',', $ktu) . '</a>';
                         } else {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>' . str_replace('.',',',$ktu);
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>' . str_replace('.', ',', $ktu);
                         }
                     } else {
                         echo '
@@ -214,7 +188,7 @@
                         if ($prevId !== '') {
                             echo '
 <form method="post" >
-<input name="tagger-1" id="event" value="'. $number .'" hidden>
+<input name="tagger-1" id="event" value="' . $number . '" hidden>
 <input name="tagger-2" id="event1" value="' . $id . '" hidden>
 <input type="text" value="' . $prevId . '" name="prevId" hidden>
 <input type="text" name="copy" value="copy" hidden>
@@ -231,7 +205,7 @@
  ';
                     
                     }
-    
+                    
                     $prevId = $number;
                     
                     echo '</div><table id="user" class="table table-bordered  table-striped results tableObject">
@@ -268,22 +242,17 @@
                         
                         if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                ' .str_replace('.',',',$admin->getData($timedata)). '</td>';
+                ' . str_replace('.', ',', $admin->getData($timedata)) . '</td>';
                         } else {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.',',',$admin->getData($timedata)) . '</a></td>
+                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $admin->getData($timedata)) . '</a></td>
                 
                 ';
                         }
-                        
-                        
-                        
                     }
                     echo '</tr>';
                     echo '</tbody>
                         </table>';
                 }
-                
-                
                 ?>
             </div>

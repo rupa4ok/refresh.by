@@ -89,7 +89,7 @@
  <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
 <button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
-                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><i class="fas fa-long-arrow-alt-right"></i></button></form></td>' .
+                                '<td><form action="' . $uri . '?id=12" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><a href="/admin5/?id=12"><i class="fas fa-long-arrow-alt-right"></i></a></button></form></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .
