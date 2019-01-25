@@ -28,7 +28,7 @@
                 
                 $month = $_SESSION['month'];
                 
-                $result = $admin->getObjectByMounth($id);
+                $result = $this->admin->getObjectByMounth($id);
                 
                 $objectStatus = '$class="inline-input"';
                 
@@ -57,7 +57,7 @@
                     foreach ($result as $res) {
                         $realId = $res['users_id'];
                         $table = 'users';
-                        $realName = $admin->getProrabName($table, $realId);
+                        $realName = $this->admin->getProrabName($table, $realId);
                         
                         switch ($uri) {
                             case '/admin5':
@@ -113,7 +113,7 @@
                     echo '</table><br>';
                 }
                 
-                $list = $admin->findPeople();
+                $list = $this->admin->findPeople();
                 
                 if ($status !== 'Сдан') {
                     
@@ -137,7 +137,7 @@
             
                     echo '<div class="paginator"><div><a href="/admin5?id='.$prevPage.'&objid='.$id.'"><i class="fas fa-arrow-circle-left"></i></a></div><div class="curent">Месяц: ' . $month . '</div>
                     
-<div><i class="fas fa-arrow-circle-right"></i></div></div>';
+<div><a href="/admin5?id='.$nextPage.'&objid='.$id.'"><i class="fas fa-arrow-circle-right"></i></a></div></div>';
                 
                 if ($uri == '/user5') {
                     echo '<div class="paginator"><div><form method="post" action="/user' . $mounthprev = ($month - 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button></form></div><div class="curent">Месяц: ' . $month . '</div>
@@ -147,15 +147,15 @@
                 
                 $prevId = '';
                 
-                $object = $admin->getShared($id);
-                $peoples = $admin->getList($object);
+                $object = $this->admin->getShared($id);
+                $peoples = $this->admin->getList($object);
                 
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
                     $objectId = $object->id;
                     $year = $object->year;
-                    $number = $admin->getWorkNumber($objectId, $peopleId);
-                    $ktu = $admin->getKtu($number);
+                    $number = $this->admin->getWorkNumber($objectId, $peopleId);
+                    $ktu = $this->admin->getKtu($number);
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
@@ -235,18 +235,18 @@
                             'nrabotnik' => $peopleId,
                             'nprorab' => $_SESSION['id']
                         );
-                        
-                        $admin->createWork($options);
-                        $timedata = $admin->getWorkId($options);
+    
+                        $this->admin->createWork($options);
+                        $timedata = $this->admin->getWorkId($options);
                         $dayWeek = $day . '-' . $month . '-' . $year;
                         $dayWeek = strftime("%a", strtotime($dayWeek));
                         
                         if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                ' . str_replace('.', ',', $admin->getData($timedata)) . '</td>';
+                ' . str_replace('.', ',', $this->admin->getData($timedata)) . '</td>';
                         } else {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $admin->getData($timedata)) . '</a></td>
+                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $this->admin->getData($timedata)) . '</a></td>
                 
                 ';
                         }

@@ -36,7 +36,7 @@
                     foreach ($result as $k => $res) {
                         $sheluder[] = $res['date'];
                         if ([$res['fio']]) {
-                            @$fioPeople[$res['fio']][$res['date']] += $res['timework'];
+                            @$fioPeople[$res['fioshort']][$res['date']] += $res['timework'];
                         }
                     }
                     

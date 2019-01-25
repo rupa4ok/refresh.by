@@ -5,17 +5,20 @@ use Models\Csv;
 
 class AdminController
 {
+    public $admin;
+    public $csv;
+    
     public function __construct()
     {
         if ($_SESSION['role'] !== 'admin') {
             header('Location: /', true, 301); //редирект на главную если не залогинен
         }
+        $this->admin = new Admin();
+        $this->csv = new Admin();
     }
     
     public function actionPanel()
     {
-        $admin = new Admin();
-        $csv = new Csv();
         
         require_once(ROOT . '/config/config.php');
         require_once(ROOT . '/views/header.php');
@@ -41,31 +44,31 @@ class AdminController
             case '/admin1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $admin->createObject($data);
+                    $this->admin->createObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $nworkId = $admin->getNworkByObject($id);
-                    $admin->objectDelete($table, $id);
+                    $nworkId = $this->admin->getNworkByObject($id);
+                    $this->admin->objectDelete($table, $id);
                     if ($nworkId) {
-                        $admin->timeDelete($nworkId);
+                        $this->admin->timeDelete($nworkId);
                     }
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $result = $admin->copyObject($table, $id);
+                    $result = $this->admin->copyObject($table, $id);
                     foreach ($result as $res) {
                         $newName = $res->name;
                     }
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
-                    $add = $admin->createObject($data);
-                    $admin->createAdd($data);
+                    $add = $this->admin->createObject($data);
+                    $this->admin->createAdd($data);
                 }
                 if (isset($_POST['block'])) {
-                    $csv->block();
+                    $this->csv->block();
                 }
 
                 require_once(ROOT . '/views/project-list.php');
@@ -85,23 +88,23 @@ class AdminController
             case '/admin7':
                 $table = 'object';
                 $filename = 'tObjects.csv';
-                $csv->exportCsv($table,$filename);
+                $this->csv->exportCsv($table,$filename);
                 
                 $table = 'object_people';
                 $filename = 'tRaboty.csv';
-                $csv->exportCsv($table,$filename);
+                $this->csv->exportCsv($table,$filename);
                 
                 $table = 'time';
                 $filename = 'tChasy.csv';
-                $csv->exportCsv($table,$filename);
+                $this->csv->exportCsv($table,$filename);
     
                 $table = 'people';
                 $filename = 'sRabotniki.csv';
-                $csv->exportCsv($table,$filename);
+                $this->csv->exportCsv($table,$filename);
     
                 $table = 'users';
                 $filename = 'sProraby.csv';
-                $csv->exportCsv($table,$filename);
+                $this->csv->exportCsv($table,$filename);
                 
                 require_once(ROOT . '/views/export.php');
                 break;
@@ -120,8 +123,8 @@ class AdminController
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->objectDelete($table, $id);
-                    $admin->timeDelete($id);
+                    $this->admin->objectDelete($table, $id);
+                    $this->admin->timeDelete($id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add'])) {
@@ -150,45 +153,53 @@ class AdminController
                     R::store($object);
                 }
                 if (isset($_POST['copy'])) {
-                    if (isset($_POST['tagger-1'])) {
-                        $currentId = $_POST['tagger-1'];
-                    }
-                    if (isset($_POST['tagger-2'])) {
-                        $id = $_POST['tagger-2'];
-                    }
-                    if (isset($_POST['prevId'])) {
-                        $prevId = $_POST['prevId'];
-                    }
-        
-                    $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
-        
-                    foreach ($workCurrent as $work) {
-                        $options = [
-                            'date' => $work['date'],
-                            'mounth' => $work['mounth'],
-                            'nraboti' => $prevId
-                        ];
-            
-                        $res = ($admin->getTimeByWork($options)) ;
-                        $time = R::dispense('time');
-                        $time->id = $work['id'];
-                        $time->date = $work['date'];
-                        $time->mounth = $work['mounth'];
-                        $time->nraboti = $work['nraboti'];
-                        $time->nrabotnik = $work['nrabotnik'];
-                        $time->nprorab = $work['nprorab'];
-                        $time->timework = $res['timework'];
-            
-                        R::store($time);
-                    }
+                    $this->copyObject();
                 }
                 $objectStatus = '$class="myeditable editable inline-input"';
+                $prevPage = 12;
+                $nextPage = 2;
                 require_once(ROOT . '/views/project.php');
                 break;
         }
         
         require_once(ROOT . '/views/footer.php');
         return true;
+    }
+    
+    public function copyObject()
+    {
+        if (isset($_POST['tagger-1'])) {
+            $currentId = $_POST['tagger-1'];
+        }
+        if (isset($_POST['tagger-2'])) {
+            $id = $_POST['tagger-2'];
+        }
+        if (isset($_POST['prevId'])) {
+            $prevId = $_POST['prevId'];
+        }
+    
+        $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
+    
+        foreach ($workCurrent as $work) {
+            $options = [
+                'date' => $work['date'],
+                'mounth' => $work['mounth'],
+                'nraboti' => $prevId
+            ];
+        
+            $res = ($this->admin->getTimeByWork($options)) ;
+            $time = R::dispense('time');
+            $time->id = $work['id'];
+            $time->date = $work['date'];
+            $time->mounth = $work['mounth'];
+            $time->year = $work['year'];
+            $time->nraboti = $work['nraboti'];
+            $time->nrabotnik = $work['nrabotnik'];
+            $time->nprorab = $work['nprorab'];
+            $time->timework = $res['timework'];
+        
+            R::store($time);
+        }
     }
     
 }

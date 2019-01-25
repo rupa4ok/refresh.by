@@ -14,7 +14,7 @@
             $id = $_SESSION['id'];
             $table = 'object';
             $role = $_SESSION['role'];
-            $result = $admin->GetTableById($table, $id, $role);
+            $result = $this->admin->GetTableById($table, $id, $role);
             
             if ($_SESSION['role'] == 'admin') {
                 $uri = 'admin5';
@@ -66,7 +66,7 @@
                     foreach ($result as $row) {
                         $realId = $row['users_id'];
                         $table = 'users';
-                        $realName = $admin->getProrabName($table, $realId);
+                        $realName = $this->admin->getProrabName($table, $realId);
                         
                         foreach ($realName as $value) {
                             $real = $value['name'];
@@ -89,7 +89,7 @@
  <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
 <button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
-                                '<td><form action="' . $uri . '?id=12" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><a href="/admin5/?id=12"><i class="fas fa-long-arrow-alt-right"></i></a></button></form></td>' .
+                                '<td><form action="' . $uri . '?id='.$row['mounth'].'&='.$row['year'].'" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><a href="/admin5/?id='.$row['mounth'].'&='.$row['year'].'"><i class="fas fa-long-arrow-alt-right"></i></a></button></form></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .
