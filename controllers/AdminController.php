@@ -120,8 +120,6 @@ class AdminController
                 
                 $delta = $pagination->delta();
                 
-                echo $delta;
-    
                 $month = $_SESSION['month'];
     
                 $prevPage = $pagination->getPrevPage();

@@ -48,7 +48,7 @@
                             </td>';
                     
                     foreach ($sheluder as $th) {
-                        $week = $admin->isWeekend($th);
+                        $week = $this->admin->isWeekend($th);
                         if ($week == 'Суббота' || $week == 'Воскресенье') {
                             $week = 'Sun';
                         }
@@ -75,7 +75,7 @@
                                 }
                             }
     
-                            $week = $admin->isWeekend($t);
+                            $week = $this->admin->isWeekend($t);
                             if ($week == 'Суббота' || $week == 'Воскресенье') {
                                 $week = 'Sun';
                             }

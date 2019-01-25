@@ -1,14 +1,21 @@
 <?php
 
 use Models\Admin;
+use Models\Csv;
+use Models\Pagination;
 
 class UserController {
+    
+    public $admin;
+    public $csv;
     
     public function __construct()
     {
         if ($_SESSION['role'] !== 'user') {
             header('Location:/',true, 301); //редирект на главную если не залогинен
         }
+        $this->admin = new Admin();
+        $this->csv = new Csv();
     }
     
     public function actionPage()
@@ -17,8 +24,7 @@ class UserController {
         require_once(ROOT . '/views/header.php');
     
         $uri = $_SERVER['REQUEST_URI'];
-        $admin = new Admin();
-
+        
         if (!isset($_POST['month']) and !isset($_SESSION['month'])) {
             $_SESSION['month'] = date('m');
         }
@@ -38,24 +44,24 @@ class UserController {
             case '/user1':
                 if (isset($_POST['addobject'])) {
                     $data = $_POST; //получаем данные из массива
-                    $admin->createObject($data);
+                    $this->admin->createObject($data);
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $admin->objectDelete($table, $id);
+                    $this->admin->objectDelete($table, $id);
                 }
                 if (isset($_POST['copy'])) {
                     $table = 'object';
                     $id = $_POST['id'];
-                    $result = $admin->copyObject($table, $id);
+                    $result = $this->admin->copyObject($table, $id);
                     foreach ($result as $res) {
                         $newName = $res->name;
                     }
                     $_POST['newName'] = $newName;
                     $data = $_POST; //получаем данные из массива
-                    $add = $admin->createObject($data);
-                    $admin->createAdd($data);
+                    $add = $this->admin->createObject($data);
+                    $this->admin->createAdd($data);
                 }
                 require_once(ROOT . '/views/project-list.php');
                 break;
@@ -77,7 +83,7 @@ class UserController {
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];
-                    $admin->objectDelete($table, $id);
+                    $this->admin->objectDelete($table, $id);
                     $id = $_POST['id'];
                 }
                 if (isset($_POST['add'])) {
@@ -127,7 +133,7 @@ class UserController {
                             'nraboti' => $prevId
                         ];
             
-                        $res = ($admin->getTimeByWork($options)) ;
+                        $res = ($this->admin->getTimeByWork($options)) ;
             
                         $time = R::dispense('time');
                         $time->id = $work['id'];
@@ -150,6 +156,56 @@ class UserController {
                 require_once(ROOT . '/views/project.php');
                 break;
             default:
+                $pagination = new Pagination();
+    
+                $delta = $pagination->delta();
+    
+                $month = $_SESSION['month'];
+    
+                $prevPage = $pagination->getPrevPage();
+                $nextPage = $pagination->getNextPage();
+                $prevYear = $pagination->getPrevYear($prevPage);
+                $nextYear = $pagination->getNextYear($nextPage);
+    
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                } else {
+                    $id = $_SESSION['id'];
+                }
+                if (isset($_POST['delete'])) {
+                    $table = 'object_people';
+                    $id = $_POST['number'];
+                    $this->admin->objectDelete($table, $id);
+                    $this->admin->timeDelete($id);
+                    $id = $_POST['id'];
+                }
+                if (isset($_POST['add'])) {
+                    if (isset($_POST['tagger-1'])) {
+                        $fio = $_POST['tagger-1'];
+                    }
+                    if (isset($_POST['tagger-2'])) {
+                        $id = $_POST['tagger-2'];
+                    }
+        
+                    $peopleid = R::getRow('SELECT id FROM people WHERE fio LIKE ? LIMIT 1', [ $fio ]);
+        
+                    if (isset($peopleid['id'])) {
+                        $id1 = $peopleid['id'];
+                    } else {
+                        $id1 = 94;
+                    }
+        
+                    $object = R::load('object', $id);
+                    $peoples = R::load('people', $id1);
+        
+                    $object->sharedPeopleList[] = $peoples;
+        
+                    R::store($object);
+                }
+                if (isset($_POST['copy'])) {
+                    $this->copyObject();
+                }
+                $objectStatus = '$class="myeditable editable inline-input"';
                 require_once(ROOT . '/views/project.php');
                 break;
         }
