@@ -26,8 +26,6 @@
                 
                 <?php
                 
-                $month = $_SESSION['month'];
-                
                 $result = $this->admin->getObjectByMounth($id);
                 
                 $objectStatus = '$class="inline-input"';
@@ -134,10 +132,18 @@
 
         ';
                 }
-            
-                    echo '<div class="paginator"><div><a href="/admin5?id='.$prevPage.'&objid='.$id.'"><i class="fas fa-arrow-circle-left"></i></a></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><a href="/admin5?id='.$nextPage.'&objid='.$id.'"><i class="fas fa-arrow-circle-right"></i></a></div></div>';
+
+                echo '<div class="paginator">';
+if ($prevPage - $month > -2) {
+    echo '<div><a href="/admin5?month='.$prevPage.'&year='.$prevYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
+}
+                echo '<div class="curent">Месяц: ' . $_GET['month'] . '</div>';
+
+if ($nextPage - $month < 2) {
+    echo '<div><a href="/admin5?month='.$nextPage.'&year='.$nextYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
+    
+}
+                echo '</div>';
                 
                 if ($uri == '/user5') {
                     echo '<div class="paginator"><div><form method="post" action="/user' . $mounthprev = ($month - 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button></form></div><div class="curent">Месяц: ' . $month . '</div>
@@ -153,7 +159,8 @@
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
                     $objectId = $object->id;
-                    $year = $object->year;
+                    $year = $_GET['year'];
+                    $month = $_GET['month'];
                     $number = $this->admin->getWorkNumber($objectId, $peopleId);
                     $ktu = $this->admin->getKtu($number);
                     

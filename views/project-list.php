@@ -89,7 +89,7 @@
  <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
 <button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
-                                '<td><form action="' . $uri . '?id='.$row['mounth'].'&='.$row['year'].'" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><a href="/admin5/?id='.$row['mounth'].'&='.$row['year'].'"><i class="fas fa-long-arrow-alt-right"></i></a></button></form></td>' .
+                                '<td><button><a href="/admin5/?month='.$row['mounth'].'&year='.$row['year'].'&id='.$row['id'].'"><i class="fas fa-long-arrow-alt-right"></i></a></button></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .

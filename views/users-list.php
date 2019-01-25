@@ -27,7 +27,7 @@
                     
                     <?php
                     $id = $_SESSION['id'];
-                    $result = $admin->getTabelList($id, $_SESSION['month']);
+                    $result = $this->admin->getTabelList($id, $_SESSION['month']);
                     $dataFio = array();
                     $dataCell = array();
 

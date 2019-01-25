@@ -2,6 +2,7 @@
 
 use Models\Admin;
 use Models\Csv;
+use Models\Pagination;
 
 class AdminController
 {
@@ -14,7 +15,7 @@ class AdminController
             header('Location: /', true, 301); //редирект на главную если не залогинен
         }
         $this->admin = new Admin();
-        $this->csv = new Admin();
+        $this->csv = new Csv();
     }
     
     public function actionPanel()
@@ -115,8 +116,21 @@ class AdminController
                 require_once(ROOT . '/views/project.php');
                 break;
             default:
-                if (isset($_POST['id'])) {
-                    $id = $_POST['id'];
+                $pagination = new Pagination();
+                
+                $delta = $pagination->delta();
+                
+                echo $delta;
+    
+                $month = $_SESSION['month'];
+    
+                $prevPage = $pagination->getPrevPage();
+                $nextPage = $pagination->getNextPage();
+                $prevYear = $pagination->getPrevYear($prevPage);
+                $nextYear = $pagination->getNextYear($nextPage);
+                
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
                 } else {
                     $id = $_SESSION['id'];
                 }
@@ -143,8 +157,6 @@ class AdminController
                         $id1 = 94;
                     }
         
-                    echo 'id пользователя' . $id1;
-        
                     $object = R::load('object', $id);
                     $peoples = R::load('people', $id1);
         
@@ -156,8 +168,7 @@ class AdminController
                     $this->copyObject();
                 }
                 $objectStatus = '$class="myeditable editable inline-input"';
-                $prevPage = 12;
-                $nextPage = 2;
+                
                 require_once(ROOT . '/views/project.php');
                 break;
         }
