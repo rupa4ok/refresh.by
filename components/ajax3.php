@@ -5,17 +5,12 @@ $link = mysqli_connect(
     'tabeltabeltabel',   /* Используемый пароль */
     'refresh_tabel');     /* База данных для запросов по умолчанию */
 
-if (!$link) {
-    printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-    exit;
-}
+echo 'успешная отправка';
 
-print_r($_POST);
+$number = $_POST['name'];
+$people_id = $_POST['pk'];
+$newValue = str_replace(',','.',$_POST['value']);
 
-if (isset($_POST['name'])) {
-    $newValue = str_replace(',','.',$_POST['value']);
-    $number = $_POST['name'];
-    $id = $_POST['pk'];
-    $sql = "UPDATE `object_people` SET koef = '$newValue' WHERE people_id = $id AND id = $number";
-    mysqli_query($link, $sql);
-}
+$sql = "UPDATE `object_people` SET koef = '$newValue' WHERE people_id = $people_id AND id = $number";
+mysqli_query($link, $sql);
+

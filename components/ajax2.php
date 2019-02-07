@@ -10,8 +10,6 @@ if (!$link) {
     exit;
 }
 
-var_dump($_POST);
-
 $column = $_POST['name'];
 if ($_POST['name'] == 'timework') {
     $newValue = $_POST['timework'];
@@ -21,3 +19,4 @@ $id = $_POST['pk'];
 $newValue = str_replace(',','.',$_POST['value']);
 $sql = "UPDATE `time` SET timework = '$newValue' where id = $id";
 mysqli_query($link, $sql);
+

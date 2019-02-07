@@ -160,17 +160,18 @@ class UserController {
     
                 $delta = $pagination->delta();
     
-                $month = $_SESSION['month'];
+                $month = $pagination->getMonth();
+                $year = $pagination->getYear();
     
                 $prevPage = $pagination->getPrevPage();
                 $nextPage = $pagination->getNextPage();
                 $prevYear = $pagination->getPrevYear($prevPage);
                 $nextYear = $pagination->getNextYear($nextPage);
     
-                if (isset($_GET['id'])) {
-                    $id = $_GET['id'];
+                if (isset($_GET['idx'])) {
+                    $id = $_GET['idx'];
                 } else {
-                    $id = $_SESSION['id'];
+                    $id = $_SESSION['idx'];
                 }
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
@@ -206,6 +207,7 @@ class UserController {
                     $this->copyObject();
                 }
                 $objectStatus = '$class="myeditable editable inline-input"';
+    
                 require_once(ROOT . '/views/project.php');
                 break;
         }

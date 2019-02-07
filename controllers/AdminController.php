@@ -120,18 +120,21 @@ class AdminController
                 
                 $delta = $pagination->delta();
                 
-                $month = $_SESSION['month'];
+                $month = $pagination->getMonth();
+                $year = $pagination->getYear();
+    
+                if (isset($_GET['idx'])) {
+                    $id = $_GET['idx'];
+                    $_SESSION['idx'] = $_GET['idx'];
+                } else {
+                    $id = $_SESSION['idx'];
+                }
     
                 $prevPage = $pagination->getPrevPage();
                 $nextPage = $pagination->getNextPage();
                 $prevYear = $pagination->getPrevYear($prevPage);
                 $nextYear = $pagination->getNextYear($nextPage);
                 
-                if (isset($_GET['id'])) {
-                    $id = $_GET['id'];
-                } else {
-                    $id = $_SESSION['id'];
-                }
                 if (isset($_POST['delete'])) {
                     $table = 'object_people';
                     $id = $_POST['number'];

@@ -11,23 +11,44 @@ namespace Models;
 class Pagination
 {
     public $delta;
+    public $month;
+    public $year;
     
     public function __construct()
     {
+        if (isset($_GET['month'])) {
+            $this->month = $_GET['month'];
+        } else {
+            $this->month = $_SESSION['month'];
+        }
+        if (isset($_GET['month'])) {
+            $this->year = $_GET['year'];
+        } else {
+            $this->year = $_SESSION['year'];
+        }
+    }
     
+    public function getMonth()
+    {
+        return $this->month;
+    }
+    
+    public function getYear()
+    {
+        return $this->year;
     }
     
     public function delta()
     {
-        return abs($_GET['month'] - $_SESSION['month']);
+            return abs($this->month - $_SESSION['month']);
     }
     
     public function getPrevPage()
     {
-        if ($_GET['month'] == 01) {
+        if ($this->month == 01) {
             return 12;
         } else {
-            $month = $_GET['month'] - 1;
+            $month = $this->month - 1;
             if ($month < 10) {
                 return '0'.$month;
             } else {
@@ -38,10 +59,10 @@ class Pagination
     
     public function getNextPage()
     {
-        if ($_GET['month'] == 12) {
+        if ($this->month == 12) {
             return 01;
         } else {
-            $month = $_GET['month'] + 1;
+            $month = $this->month + 1;
             if ($month < 10) {
                 return '0'.$month;
             } else {
@@ -53,18 +74,18 @@ class Pagination
     public function getPrevYear($prevPage)
     {
         if ($prevPage == 12) {
-            return $_GET['year'] - 1;
+            return $this->year - 1;
         } else {
-            return $_GET['year'];
+            return $this->year;
         }
     }
     
     public function getNextYear($nextPage)
     {
         if ($nextPage == 01) {
-            return $_GET['year'] + 1;
+            return $this->year + 1;
         } else {
-            return $_GET['year'];
+            return $this->year;
         }
     }
     

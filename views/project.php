@@ -57,39 +57,6 @@
                         $table = 'users';
                         $realName = $this->admin->getProrabName($table, $realId);
                         
-                        switch ($uri) {
-                            case '/admin5':
-                                $month = $res->mounth;
-                                break;
-                            case '/admin10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/admin11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/admin12':
-                                $month = $res->mounth + 1;
-                                break;
-                            case '/user5':
-                                if (isset($res->mounth)) {
-                                    $month = $res->mounth;
-                                } else {
-                                    $month = $_SESSION['month'];
-                                }
-                                break;
-                            case '/user10':
-                                $month = $res->mounth - 1;
-                                break;
-                            case '/user11':
-                                header('Location: /admin5', true, 301);
-                                break;
-                            case '/user12':
-                                $month = $res->mounth + 1;
-                                break;
-                            default:
-                                break;
-                        }
-                        
                         if ($_SESSION['role'] == 'admin') {
                             echo '<tr>' .
                                 '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
@@ -132,12 +99,12 @@
 
         ';
                 }
-
+                
                 echo '<div class="paginator">';
 if ($prevPage - $month > -2) {
     echo '<div><a href="/admin5?month='.$prevPage.'&year='.$prevYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
 }
-                echo '<div class="curent">Месяц: ' . $_GET['month'] . '</div>';
+                echo '<div class="curent">Месяц: ' . $month . '</div>';
 
 if ($nextPage - $month < 2) {
     echo '<div><a href="/admin5?month='.$nextPage.'&year='.$nextYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
@@ -159,14 +126,12 @@ if ($nextPage - $month < 2) {
                 foreach ($peoples as $people) {
                     $peopleId = $people->id;
                     $objectId = $object->id;
-                    $year = $_GET['year'];
-                    $month = $_GET['month'];
                     $number = $this->admin->getWorkNumber($objectId, $peopleId);
                     $ktu = $this->admin->getKtu($number);
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="' . $number . '" data-type="text" data-pk="' . $people['id'] . '" data-url="components/ajax3.php" >' . str_replace('.', ',', $ktu) . '</a>';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="' . $number . '" data-type="text" data-pk="' . $people['id'] . '" data-url="http://tabel.refresh.by/components/ajax3.php" >' . str_replace('.', ',', $ktu) . '</a>';
                         } else {
                             echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>' . str_replace('.', ',', $ktu);
                         }
@@ -210,9 +175,7 @@ if ($nextPage - $month < 2) {
   <button name="copyPeople" value="delete" onclick="return proverka2();"><i class="fas fa-trash-alt"></i></button>
  </form>
  ';
-                    
                     }
-                    
                     $prevId = $number;
                     
                     echo '</div><table id="user" class="table table-bordered  table-striped results tableObject">
@@ -253,7 +216,7 @@ if ($nextPage - $month < 2) {
                 ' . str_replace('.', ',', $this->admin->getData($timedata)) . '</td>';
                         } else {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $this->admin->getData($timedata)) . '</a></td>
+                <a style="width: 50%" href="http://tabel.refresh.by/admin5/#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="http://tabel.refresh.by/components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $this->admin->getData($timedata)) . '</a></td>
                 
                 ';
                         }

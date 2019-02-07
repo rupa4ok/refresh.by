@@ -106,12 +106,10 @@ class Admin
             }
             
             if (isset($data['mounth'])) {
-                if ($data['mounth'] == 'Месяц') {
                     $mounth = date("m");
                 } else {
-                    $mounth = $data['mounth'];
+                    $mounth = $_SESSION['month'];
                 }
-            }
             
             if (isset($data['name'])) {
                 $obj = R::findOne('object', 'name = ?', [$data['name']]);
