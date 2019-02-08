@@ -48,8 +48,9 @@
                             </td>';
                     
                     foreach ($sheluder as $th) {
-                        $week = $this->admin->isWeekend($th);
-                        if ($week == 'Суббота' || $week == 'Воскресенье') {
+                        $week = $this->admin->helpers->dayCheck('vyhodnye', $th);
+    
+                        if ($week['tip'] == 1 || $week['tip'] == 2) {
                             $week = 'Sun';
                         }
                         echo '<td class = "'.$week.'">
@@ -81,8 +82,9 @@
                                 }
                             }
     
-                            $week = $this->admin->isWeekend($t);
-                            if ($week == 'Суббота' || $week == 'Воскресенье') {
+                            $week = $this->admin->helpers->dayCheck('vyhodnye', $t);
+
+                            if ($week['tip'] == 1 || $week['tip'] == 2) {
                                 $week = 'Sun';
                             }
                             

@@ -8,9 +8,16 @@
 
 namespace models;
 use R;
+use Models\Helpers;
 
 class Admin
 {
+    public $helpers;
+    
+    public function __construct()
+    {
+        $this->helpers = new Helpers;
+    }
     
     public function getTableById($table, $id, $role)
     {
