@@ -48,10 +48,17 @@
                             </td>';
                     
                     foreach ($sheluder as $th) {
-                        $week = $this->admin->helpers->dayCheck('vyhodnye', $th);
     
-                        if ($week['tip'] == 1 || $week['tip'] == 2) {
-                            $week = 'Sun';
+                        $week = '';
+                        
+                        $weekCheck = $this->admin->helpers->dayCheck('vyhodnye', $th);
+    
+                        if ($weekCheck['tip'] == 1) {
+                            $week = 'sat';
+                        }
+    
+                        if ($weekCheck['tip'] == 2) {
+                            $week = 'sun';
                         }
                         echo '<td class = "'.$week.'">
                                     ' . $th . '
@@ -59,7 +66,7 @@
                             ';
                     }
 
-                    echo '<td>
+                    echo '<td class="sat">
                                   Итого
                               </td>';
 
@@ -82,10 +89,16 @@
                                 }
                             }
     
-                            $week = $this->admin->helpers->dayCheck('vyhodnye', $t);
+                            $week = '';
+    
+                            $weekCheck = $this->admin->helpers->dayCheck('vyhodnye', $t);
 
-                            if ($week['tip'] == 1 || $week['tip'] == 2) {
-                                $week = 'Sun';
+                            if ($weekCheck['tip'] == 1) {
+                                $week = 'sat';
+                            }
+    
+                            if ($weekCheck['tip'] == 2) {
+                                $week = 'sun';
                             }
                             
                             $summary = $summary + $s;
@@ -95,7 +108,7 @@
                             </td>
                             ';
                         }
-                        echo '<td>
+                        echo '<td class="sat">
                                  '. $summary .'
                               </td>';
                     }
