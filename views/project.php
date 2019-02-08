@@ -102,21 +102,15 @@
                 
                 echo '<div class="paginator">';
 if ($prevPage - $month > -2) {
-    echo '<div><a href="/admin5?month='.$prevPage.'&year='.$prevYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
+    echo '<div><a href="/' . $_SESSION['role'] . '5?month='.$prevPage.'&year='.$prevYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
 }
                 echo '<div class="curent">Месяц: ' . $month . '</div>';
 
 if ($nextPage - $month < 2) {
-    echo '<div><a href="/admin5?month='.$nextPage.'&year='.$nextYear.'&id=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
+    echo '<div><a href="/' . $_SESSION['role'] . '5?month='.$nextPage.'&year='.$nextYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
     
 }
                 echo '</div>';
-                
-                if ($uri == '/user5') {
-                    echo '<div class="paginator"><div><form method="post" action="/user' . $mounthprev = ($month - 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-left"></i></button></form></div><div class="curent">Месяц: ' . $month . '</div>
-                    
-<div><form method="post" action="/user' . $mounthnext = ($month + 1) . '"><input name="id" value="' . $id . '" hidden/><button type="submit"><i class="fas fa-arrow-circle-right"></i></button></form></div></div>';
-                }
                 
                 $prevId = '';
                 

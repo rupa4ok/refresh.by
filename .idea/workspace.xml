@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f768136-5b95-438c-a3f2-c15ccf529aa9" name="Default" comment="Правки выходных">
+    <list default="true" id="1f768136-5b95-438c-a3f2-c15ccf529aa9" name="Default" comment="Правки за доп плату - вывод прораба в списке объектов и задач">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ajax2.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/ajax2.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ajax3.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/ajax3.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file.csv" beforeDir="false" afterPath="$PROJECT_DIR$/file.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/template/js/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/js/npm.js" beforeDir="false" afterPath="$PROJECT_DIR$/template/js/npm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/adduser.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adduser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/export.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/export.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/import.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/import.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/news/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/news/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/news/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/news/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/personal.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/personal.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/project-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/project-list.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/project.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/project_new.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/project_new.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/prorab.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/prorab.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/reg.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/reg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/top-menu1.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/top-menu1.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/user.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,33 +38,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Pagination.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/project-list.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="91" column="178" lean-forward="true" selection-start-line="91" selection-start-column="178" selection-end-line="91" selection-end-column="178" />
-              <folding>
-                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/project.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+            <state relative-caret-position="260">
+              <caret line="106" column="71" lean-forward="true" selection-start-line="106" selection-start-column="71" selection-end-line="106" selection-end-column="71" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
@@ -96,55 +53,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/ajax2.php">
+        <entry file="file://$PROJECT_DIR$/views/project-list.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="520">
-              <caret line="19" column="65" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/ajax3.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="13" column="101" selection-start-line="13" selection-start-column="101" selection-end-line="13" selection-end-column="101" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/js/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/AdminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="123" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/UserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="173" column="43" lean-forward="true" selection-start-line="173" selection-start-column="43" selection-end-line="173" selection-end-column="43" />
+              <caret line="90" column="72" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="72" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,12 +142,12 @@
         <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/views/users-list.php" />
         <option value="$PROJECT_DIR$/template/js/common.js" />
-        <option value="$PROJECT_DIR$/models/Admin.php" />
         <option value="$PROJECT_DIR$/models/Pagination.php" />
+        <option value="$PROJECT_DIR$/views/project-list.php" />
+        <option value="$PROJECT_DIR$/models/Admin.php" />
         <option value="$PROJECT_DIR$/controllers/AdminController.php" />
         <option value="$PROJECT_DIR$/controllers/UserController.php" />
         <option value="$PROJECT_DIR$/views/project.php" />
-        <option value="$PROJECT_DIR$/views/project-list.php" />
       </list>
     </option>
   </component>
@@ -257,7 +172,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="57" />
+    <option name="x" value="1081" />
     <option name="y" value="34" />
     <option name="width" value="1863" />
     <option name="height" value="1046" />
@@ -268,6 +183,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,23 +194,12 @@
             <path>
               <item name="refresh.by" type="b2602c69:ProjectViewProjectNode" />
               <item name="refresh.by" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="refresh.by" type="b2602c69:ProjectViewProjectNode" />
-              <item name="refresh.by" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="refresh.by" type="b2602c69:ProjectViewProjectNode" />
-              <item name="refresh.by" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,7 +346,9 @@
       <workItem from="1548333793806" duration="3023000" />
       <workItem from="1548387845469" duration="5617000" />
       <workItem from="1548396913455" duration="6551000" />
-      <workItem from="1549532522415" duration="6407000" />
+      <workItem from="1549532522415" duration="8338000" />
+      <workItem from="1549549418317" duration="1939000" />
+      <workItem from="1549612858676" duration="212000" />
     </task>
     <task id="LOCAL-00001" summary="Убрал ajax из авторизации с главной">
       <created>1538155836444</created>
@@ -709,11 +616,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549534868922</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Правки за доп плату - вывод прораба в списке объектов и задач">
+      <created>1549542730260</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1549542730260</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288833000" />
+    <option name="totallyTimeSpent" value="292915000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -725,10 +639,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="34" width="1863" height="1046" extended-state="6" />
+    <frame x="1081" y="34" width="1863" height="1046" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19756502" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20309906" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="DB Browser" order="3" />
@@ -812,7 +726,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Импорт-экспорт" />
     <MESSAGE value="ПОмесячная разбивка работ" />
     <MESSAGE value="Правки вторая часть" />
     <MESSAGE value="Merge branch 'develop' of https://github.com/rupa4ok/refresh.by into develop&#10;&#10;# Conflicts:&#10;#&#9;.idea/deployment.xml&#10;#&#9;components/adduser.php&#10;#&#9;components/delete.php&#10;#&#9;components/filter.php&#10;#&#9;components/newobject.php&#10;#&#9;controllers/UserController.php&#10;#&#9;models/Admin.php&#10;#&#9;template/css/style.css&#10;#&#9;template/js/common.js&#10;#&#9;template/js/main.js&#10;#&#9;views/left-menu.php&#10;#&#9;views/left-menu1.php&#10;#&#9;views/project-list.php&#10;#&#9;views/project.php&#10;#&#9;views/user.php" />
@@ -837,7 +750,8 @@
     <MESSAGE value="Перерасчет ktu при копировании" />
     <MESSAGE value="Рефакторинг контроллера админа" />
     <MESSAGE value="Правки выходных" />
-    <option name="LAST_COMMIT_MESSAGE" value="Правки выходных" />
+    <MESSAGE value="Правки за доп плату - вывод прораба в списке объектов и задач" />
+    <option name="LAST_COMMIT_MESSAGE" value="Правки за доп плату - вывод прораба в списке объектов и задач" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://E:/Storm/refresh.by/controllers/AdminController.php" />
@@ -1062,27 +976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="107" column="34" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/ajax2.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
@@ -1111,37 +1004,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/AdminController.php">
+    <entry file="file://$PROJECT_DIR$/template/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="123" selection-end-column="47" />
+        <state relative-caret-position="2132">
+          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="400" column="20" selection-start-line="400" selection-start-column="20" selection-end-line="400" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="173" column="43" lean-forward="true" selection-start-line="173" selection-start-column="43" selection-end-line="173" selection-end-column="43" />
+        <state relative-caret-position="302">
+          <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/project.php">
+    <entry file="file://$PROJECT_DIR$/controllers/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="359">
+          <caret line="201" column="42" selection-start-line="201" selection-start-column="42" selection-end-line="201" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/project-list.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="91" column="178" lean-forward="true" selection-start-line="91" selection-start-column="178" selection-end-line="91" selection-end-column="178" />
+        <state relative-caret-position="520">
+          <caret line="90" column="72" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="72" />
           <folding>
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/project.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="106" column="71" lean-forward="true" selection-start-line="106" selection-start-column="71" selection-end-line="106" selection-end-column="71" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

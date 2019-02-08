@@ -43,7 +43,6 @@
   </div>
   <button type="submit" class="btn btn-primary" name="addobject" value="addobject">Сохранить</button>
 </form>
-                        
                         <div>
                         </div>
                     </div>';
@@ -89,7 +88,7 @@
  <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
 <button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
-'<td><a href="/'.$_SESSION['role'].'5/?month='.$row['mounth'].'&year='.$row['year'].'&idx='.$row['id'].'"><button><i class="fas fa-long-arrow-alt-right"></i></button></a></td>' .
+                                '<td><a href="/' . $_SESSION['role'] . '5/?month=' . $row['mounth'] . '&year=' . $row['year'] . '&idx=' . $row['id'] . '"><button><i class="fas fa-long-arrow-alt-right"></i></button></a></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .

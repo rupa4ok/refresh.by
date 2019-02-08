@@ -216,4 +216,42 @@ class UserController {
 
         return true;
     }
+    
+    public function copyObject()
+    {
+        if (isset($_POST['tagger-1'])) {
+            $currentId = $_POST['tagger-1'];
+        }
+        if (isset($_POST['tagger-2'])) {
+            $id = $_POST['tagger-2'];
+        }
+        if (isset($_POST['prevId'])) {
+            $prevId = $_POST['prevId'];
+        }
+        
+        $workCurrent = R::findAll('time', 'nraboti = ?', [ $currentId ]);
+        
+        foreach ($workCurrent as $work) {
+
+            $options = [
+                'date' => $work['date'],
+                'mounth' => $work['mounth'],
+                'nraboti' => $prevId
+            ];
+            
+            $res = ($this->admin->getTimeByWork($options)) ;
+            $time = R::dispense('time');
+            $time->id = $work['id'];
+            $time->date = $work['date'];
+            $time->mounth = $work['mounth'];
+            $time->year = $work['year'];
+            $time->nraboti = $work['nraboti'];
+            $time->nrabotnik = $work['nrabotnik'];
+            $time->nprorab = $work['nprorab'];
+            $time->timework = $res['timework'];
+            
+            R::store($time);
+        }
+    }
+    
 }
