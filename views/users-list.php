@@ -28,6 +28,9 @@
                     <?php
                     $id = $_SESSION['id'];
                     $result = $this->admin->getTabelList($id, $_SESSION['month']);
+
+                    //@TODO: сделать сортировку массива
+                    
                     $dataFio = array();
                     $dataCell = array();
 
@@ -51,15 +54,8 @@
     
                         $week = '';
                         
-                        $weekCheck = $this->admin->helpers->dayCheck('vyhodnye', $th);
-    
-                        if ($weekCheck['tip'] == 1) {
-                            $week = 'sat';
-                        }
-    
-                        if ($weekCheck['tip'] == 2) {
-                            $week = 'sun';
-                        }
+                        $week = $this->admin->helpers->dayColor('vyhodnye', $th);
+                        
                         echo '<td class = "'.$week.'">
                                     ' . $th . '
                             </td>
@@ -89,17 +85,7 @@
                                 }
                             }
     
-                            $week = '';
-    
-                            $weekCheck = $this->admin->helpers->dayCheck('vyhodnye', $t);
-
-                            if ($weekCheck['tip'] == 1) {
-                                $week = 'sat';
-                            }
-    
-                            if ($weekCheck['tip'] == 2) {
-                                $week = 'sun';
-                            }
+                            $week = $this->admin->helpers->dayColor('vyhodnye', $t);
                             
                             $summary = $summary + $s;
                             

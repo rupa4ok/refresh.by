@@ -18,4 +18,16 @@ class Helpers
         $data = $_SESSION['year']. '-' . $_SESSION['month'] . '-' .$day;
         return R::getRow("SELECT * FROM {$table} WHERE data = ?", [$data]);
     }
+    
+    public function dayColor($table, $day)
+    {
+        $weekCheck = $this->dayCheck($table, $day);
+        if ($weekCheck['tip'] == 1) {
+            return 'sat';
+        }
+    
+        if ($weekCheck['tip'] == 2) {
+            return 'sun';
+        }
+    }
 }
