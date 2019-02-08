@@ -59,7 +59,7 @@
                     }
 
                     echo '<td>
-                                    Сумма
+                                  Итого
                               </td>';
 
                     foreach ($fioPeople as $k => $tab) {
@@ -67,6 +67,8 @@
                                     ' . $k . '
                             </td>
                             ';
+    
+                        $summary = 0;
     
                         foreach ($sheluder as $t) {
                             $i = 0;
@@ -84,11 +86,16 @@
                                 $week = 'Sun';
                             }
                             
+                            $summary = $summary + $s;
+                            
                             echo '<td class = "'.$week.'">
                                 ' . $s . '
                             </td>
                             ';
                         }
+                        echo '<td>
+                                 '. $summary .'
+                              </td>';
                     }
                     
                     echo '</tr>';
