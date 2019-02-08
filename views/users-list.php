@@ -23,7 +23,7 @@
             ?>
             <div class="col-md-9 content-block">
                 
-                <div class="col-md-9 content-block">
+                <div class="col-md-12 content-block">
                     
                     <?php
                     $id = $_SESSION['id'];
@@ -42,8 +42,8 @@
                     
                     $sheluder = array_unique($sheluder, SORT_REGULAR);
                     
-                    echo '<table id="user" class="table table-bordered  table-striped results">
-                            <tbody><tr><td class = "">
+                    echo '<table id="user" class="table table-bordered  table-striped results tabel">
+                            <tbody><tr><td width="150px" class = "">
                                     ФИО
                             </td>';
                     
@@ -57,6 +57,10 @@
                             </td>
                             ';
                     }
+
+                    echo '<td>
+                                    Сумма
+                              </td>';
 
                     foreach ($fioPeople as $k => $tab) {
                         echo '<tr><td class = "">

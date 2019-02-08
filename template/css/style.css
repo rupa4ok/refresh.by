@@ -101,3 +101,10 @@ hr {
     border: 0;
     border-top: 1px solid gray;
 }
+.table-striped > tbody > tr > td:nth-of-type(1) {
+    width: 150px;
+}
+
+.tabel td {
+    padding: 0;
+}
