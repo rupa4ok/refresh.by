@@ -461,4 +461,27 @@ class Admin
         return $nwork['id'];
     }
     
+    public function copyDay()
+    {
+        $nraboti = $_POST['number'];
+        $result = $this->getIdByNwork($nraboti);
+        $time = R::dispense('time');
+        
+        foreach ($result as $item) {
+            $time->id = $item['id'];
+            $time->date = $item['date'];
+            $time->year = $item['year'];
+            $time->nraboti = $nraboti;
+            $time->timework = 8;
+            R::store($time);
+        }
+        
+        
+    }
+    
+    public function getIdByNwork($nraboti)
+    {
+        return R::getAll('SELECT * FROM time WHERE nraboti = :nraboti', [':nraboti' => $nraboti]);
+    }
+    
 }
