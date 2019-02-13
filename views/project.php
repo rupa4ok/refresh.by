@@ -169,6 +169,14 @@ if ($nextPage - $month < 2) {
   <button name="copyPeople" value="delete" onclick="return proverka2();"><i class="fas fa-trash-alt"></i></button>
  </form>
  ';
+                        echo '
+<form method="post" >
+<input type="text" value="' . $id . '" name="id" hidden>
+<input type="text" value="' . $number . '" name="number" hidden>
+<input type="text" name="copyDay" value="copyDay" hidden>
+  <button name="copyDay" value="copyDay"">8</button>
+ </form>
+ ';
                     }
                     $prevId = $number;
                     
@@ -202,8 +210,7 @@ if ($nextPage - $month < 2) {
     
                         $this->admin->createWork($options);
                         $timedata = $this->admin->getWorkId($options);
-                        $dayWeek = $day . '-' . $month . '-' . $year;
-                        $dayWeek = strftime("%a", strtotime($dayWeek));
+                        $dayWeek = $this->admin->helpers->dayColor('vyhodnye', $day);
                         
                         if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>

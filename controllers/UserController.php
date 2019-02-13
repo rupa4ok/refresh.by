@@ -206,6 +206,9 @@ class UserController {
                 if (isset($_POST['copy'])) {
                     $this->copyObject();
                 }
+                if (isset($_POST['copyDay'])) {
+                    $this->admin->copyDay();
+                }
                 $objectStatus = '$class="myeditable editable inline-input"';
     
                 require_once(ROOT . '/views/project.php');
