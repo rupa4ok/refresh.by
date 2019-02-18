@@ -70,7 +70,6 @@ class Admin
     public function objectDelete($table, $id)
     {
         R::trash($table, $id);
-        
     }
     
     public function timeDelete($id)

@@ -29,6 +29,11 @@
                         <input type="text" name="block" value="true" hidden>
                         <button type="submit" class="btn btn-danger">Заблокировать редактирование</button>
                     </form>
+                    <hr>
+                    <form action="" method="post">
+                        <input type="text" name="clear" value="true" hidden>
+                        <button type="submit" class="btn btn-danger">Очистка мусора</button>
+                    </form>
                 </ul>
             
             </div>

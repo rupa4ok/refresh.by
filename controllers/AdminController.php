@@ -87,6 +87,16 @@ class AdminController
                 require_once(ROOT . '/views/import.php');
                 break;
             case '/admin7':
+    
+                if ($_POST['clear'] == true) {
+                    $idf = $this->admin->helpers->getRealWork();
+                    foreach ($idf as $k => $item) {
+                        echo $k . '<br>';
+                    }
+                    $idt = $this->admin->helpers->getRealWork();
+                    print_r($idt);
+                }
+                
                 $table = 'object';
                 $filename = 'tObjects.csv';
                 $this->csv->exportCsv($table,$filename);

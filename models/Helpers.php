@@ -30,4 +30,14 @@ class Helpers
             return 'sun';
         }
     }
+    
+    public function getRealWork()
+    {
+        return R::findAll('object_people');
+    }
+    
+    public function getTrashWork($workId)
+    {
+        return R::findAll('time', 'nraboti = ?', 772);
+    }
 }
