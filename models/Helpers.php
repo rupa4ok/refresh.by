@@ -31,13 +31,14 @@ class Helpers
         }
     }
     
-    public function getRealWork()
+    public function getRealWork($workId)
     {
-        return R::findAll('object_people');
+        return R::getRow("SELECT * FROM object_people WHERE id = ?", [$workId]);
     }
     
-    public function getTrashWork($workId)
+    public function getTrashWork()
     {
-        return R::findAll('time', 'nraboti = ?', 772);
+        return R::findAll('time', 'GROUP BY nraboti');
     }
+    
 }

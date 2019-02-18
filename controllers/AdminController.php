@@ -88,13 +88,15 @@ class AdminController
                 break;
             case '/admin7':
     
-                if ($_POST['clear'] == true) {
-                    $idf = $this->admin->helpers->getRealWork();
+                if (isset($_POST['clear'])) {
+                    $idf = $this->admin->helpers->getTrashWork();
                     foreach ($idf as $k => $item) {
-                        echo $k . '<br>';
+                        $answer = $this->admin->helpers->getRealWork($item['nraboti']);
+                        if (!$answer) {
+                            $this->admin->timeDelete($item['nraboti']);
+                        }
                     }
-                    $idt = $this->admin->helpers->getRealWork();
-                    print_r($idt);
+                    echo 'Очищено';
                 }
                 
                 $table = 'object';
