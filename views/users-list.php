@@ -13,15 +13,9 @@
         </div>
         <div class="row">
             <?php
-            if ($_SESSION['role'] == 'admin') {
-                $uri = 'admin2';
-                include_once ROOT . '/views/left-menu.php';
-            } else {
-                $uri = 'user2';
-                include_once ROOT . '/views/left-menu1.php';
-            }
+                include_once ROOT . '/views/left-menu2.php';
             ?>
-            <div class="col-md-9 content-block">
+            <div class="col-md-12 content-block">
                 
                 <div class="col-md-12 content-block">
                     
@@ -51,7 +45,7 @@
                             </td>';
                     
                     foreach ($sheluder as $th) {
-    
+                        
                         $week = '';
                         
                         $week = $this->admin->helpers->dayColor('vyhodnye', $th);
@@ -65,7 +59,9 @@
                     echo '<td class="sat">
                                   Итого
                               </td>';
-
+                    
+                    ksort($fioPeople);
+                    
                     foreach ($fioPeople as $k => $tab) {
                         echo '<tr><td class = "">
                                     ' . $k . '
