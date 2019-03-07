@@ -22,8 +22,6 @@
                     <?php
                     $id = $_SESSION['id'];
                     $result = $this->admin->getTabelList($id, $_SESSION['month']);
-
-                    //@TODO: сделать сортировку массива
                     
                     $dataFio = array();
                     $dataCell = array();
