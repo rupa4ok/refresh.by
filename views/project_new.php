@@ -40,7 +40,7 @@
                 if ($result) {
                     foreach ($result as $res) {
                         echo '<h1>' . $res->name . '</h1>';
-                        if ($res->status == 'Сдан' and $_SESSION['role'] == 'user') {
+                        if ($res->status == 'Сдан' and $_SESSION['role'] == 'UserInfo') {
                             $objectStatus = 'class="inline-input"';
                         } else {
                             $objectStatus = 'class="myeditable editable inline-input"';

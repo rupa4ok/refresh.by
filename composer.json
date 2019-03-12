@@ -3,7 +3,13 @@
         "psr-4": {
             "Models\\": "models/",
             "Libs\\": "libs/",
-            "Components\\": "components/"
+            "Components\\": "components/",
+            "Interfaces\\": "interfaces/",
+            "Tests\\": "tests/",
+            "Storage\\": "storage/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "7"
     }
 }

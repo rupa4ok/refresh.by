@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 
 define('ROOT', dirname(__FILE__));
 
-require_once(ROOT.'/vendor/autoload.php');
+require_once('vendor/autoload.php');
 
 // Установка соединения с БД
 

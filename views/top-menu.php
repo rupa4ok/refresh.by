@@ -5,7 +5,7 @@
                 
                 <ul>
                     <li><a href="/logout.php">Выйти</a></li>
-<?php if ($_SESSION['role'] == 'admin') {
+<?php if ($this->role == 'admin') {
     echo '<li><a href="/admin7">Экспорт отчетов</a></li>';
 } ?>
                     

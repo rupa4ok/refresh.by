@@ -11,12 +11,11 @@
         <div class="row">
             <?php
             
-            $id = $_SESSION['id'];
+            $id = $_SESSION['user']['id'];
             $table = 'object';
-            $role = $_SESSION['role'];
-            $result = $this->admin->GetTableById($table, $id, $role);
+            $result = $this->admin->GetTableById($table, $id, $this->role);
             
-            if ($_SESSION['role'] == 'admin') {
+            if ($this->role == 'admin') {
                 $uri = 'admin5';
                 include_once ROOT . '/views/left-menu.php';
                 $class = 'people-status-editable';
@@ -55,7 +54,7 @@
                         '<th>Название объекта</th>' .
                         '<th>Месяц</th>' .
                         '<th>Год</th>';
-                    if ($_SESSION['role'] == 'admin') {
+                    if ($this->role == 'admin') {
                         echo '<th>Прораб</th>';
                     }
                     echo '<th>Статус</th>' .
@@ -76,7 +75,7 @@
                                 '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
                                 '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
                                 '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>';
-                            if ($_SESSION['role'] == 'admin') {
+                            if ($this->role == 'admin') {
                                 echo '<td>' . $real . '</td>';
                             }
                             echo '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
@@ -88,7 +87,7 @@
  <input type="text" value="' . $row['id'] . '" name="id" hidden>
 <input type="text" name="copy" value="copy" hidden>
 <button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
-                                '<td><a href="/' . $_SESSION['role'] . '5/?month=' . $row['mounth'] . '&year=' . $row['year'] . '&idx=' . $row['id'] . '"><button><i class="fas fa-long-arrow-alt-right"></i></button></a></td>' .
+                                '<td><a href="/' . $this->role . '5/?month=' . $row['mounth'] . '&year=' . $row['year'] . '&idx=' . $row['id'] . '"><button><i class="fas fa-long-arrow-alt-right"></i></button></a></td>' .
                                 '</tr>';
                         } else {
                             echo '<tr>' .

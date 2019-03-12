@@ -11,7 +11,7 @@ class UserController {
     
     public function __construct()
     {
-        if ($_SESSION['role'] !== 'user') {
+        if ($_SESSION['role'] !== 'UserInfo') {
             header('Location:/',true, 301); //редирект на главную если не залогинен
         }
         $this->admin = new Admin();

@@ -33,7 +33,7 @@
                 if ($result) {
                     foreach ($result as $res) {
                         echo '<h1>' . $res->name . '</h1>';
-                        if ($res->status == 'Сдан' and $_SESSION['role'] == 'user') {
+                        if ($res->status == 'Сдан' and $_SESSION['role'] == 'UserInfo') {
                             $objectStatus = 'class="inline-input"';
                             $objectTrigger = 'true';
                         } else {
@@ -125,7 +125,7 @@ if ($nextPage - $month < 2) {
                     
                     if (isset($people->fio)) {
                         if ($status !== 'Сдан') {
-                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="' . $number . '" data-type="text" data-pk="' . $people['id'] . '" data-url="http://tabel.refresh.by/components/ajax3.php" >' . str_replace('.', ',', $ktu) . '</a>';
+                            echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span><a href="#" class="people-editable inputType" data-name="' . $number . '" data-type="text" data-pk="' . $people['id'] . '" data-url="http://refreshk.pro/components/ajax3.php" >' . str_replace('.', ',', $ktu) . '</a>';
                         } else {
                             echo '<div class="fio">' . $people->fio . '<span style="margin-left: 10px;">КТУ: </span>' . str_replace('.', ',', $ktu);
                         }
@@ -212,12 +212,12 @@ if ($nextPage - $month < 2) {
                         $timedata = $this->admin->getWorkId($options);
                         $dayWeek = $this->admin->helpers->dayColor('vyhodnye', $day);
                         
-                        if ($_SESSION['role'] == 'user' and ($objectTrigger) == 'true') {
+                        if ($_SESSION['role'] == 'UserInfo' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
                 ' . str_replace('.', ',', $this->admin->getData($timedata)) . '</td>';
                         } else {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
-                <a style="width: 50%" href="http://tabel.refresh.by/admin5/#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="http://tabel.refresh.by/components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $this->admin->getData($timedata)) . '</a></td>
+                <a style="width: 50%" href="http://refreshk.pro/admin5/#" ' . $objectStatus . ' id="name" data-type="text" data-pk="' . $timedata . '" data-url="http://refreshk.pro/components/ajax2.php" data-name="timework" data-original-title="Введите количество часов" >' . str_replace('.', ',', $this->admin->getData($timedata)) . '</a></td>
                 
                 ';
                         }

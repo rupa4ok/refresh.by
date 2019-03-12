@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once('/home/refresh/tabel.refresh.by/libs/rb.php');
+require_once(ROOT.'/libs/rb.php');
 
 //Подключение к бд
-R::setup('mysql:host=localhost;dbname=refresh_tabel', 'refresh_tabel', 'tabeltabeltabel');
+R::setup('mysql:host=localhost;dbname=refreshk_tabel', 'refreshk_tabel', 'tabeltabeltabel');

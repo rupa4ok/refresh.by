@@ -1,9 +1,9 @@
 <?php
 $link = mysqli_connect(
     'localhost',  /* Хост, к которому мы подключаемся */
-    'refresh_tabel',       /* Имя пользователя */
+    'refreshk_tabel',       /* Имя пользователя */
     'tabeltabeltabel',   /* Используемый пароль */
-    'refresh_tabel');     /* База данных для запросов по умолчанию */
+    'refreshk_tabel');     /* База данных для запросов по умолчанию */
     mysqli_set_charset($link, "utf8");
 
 if (!$link) {

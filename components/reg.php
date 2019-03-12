@@ -35,7 +35,7 @@ require_once"../config/config.php";
             $user = R::dispense('users');
             $user->name = $data['login'];
             $user->email = $data['email'];
-            $user->role = 'user';
+            $user->role = 'UserInfo';
             $user->password = password_hash($data['password'],PASSWORD_DEFAULT);
             R::store($user);
             $success = $data['login'];

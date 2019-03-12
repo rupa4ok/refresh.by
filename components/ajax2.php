@@ -1,9 +1,9 @@
 <?php
 $link = mysqli_connect(
     'localhost',  /* Хост, к которому мы подключаемся */
-    'refresh_tabel',       /* Имя пользователя */
+    'refreshk_tabel',       /* Имя пользователя */
     'tabeltabeltabel',   /* Используемый пароль */
-    'refresh_tabel');     /* База данных для запросов по умолчанию */
+    'refreshk_tabel');     /* База данных для запросов по умолчанию */
 
 if (!$link) {
     printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());

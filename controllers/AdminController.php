@@ -8,14 +8,16 @@ class AdminController
 {
     public $admin;
     public $csv;
+    private $role;
     
     public function __construct()
     {
-        if ($_SESSION['role'] !== 'admin') {
-            header('Location: /', true, 301); //редирект на главную если не залогинен
-        }
+//        if ($_SESSION['user']['role'] !== 'admin') {
+//            header('Location: /', true, 301); //редирект на главную если не залогинен
+//        }
         $this->admin = new Admin();
         $this->csv = new Csv();
+        $this->role = $_SESSION['user']['role'];
     }
     
     public function actionPanel()

@@ -30,7 +30,7 @@
                 <?php
                 
                 $table = 'users';
-                $role = 'user';
+                $role = 'UserInfo';
                 if ( $result = $this->admin->getProrab($table, $role)) {
                     
                     echo '

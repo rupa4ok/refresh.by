@@ -3,9 +3,9 @@
 namespace RedBeanPHP {
 
 /**
- * RedBean Logging interface.
+ * RedBean Logging interfaces.
  * Provides a uniform and convenient logging
- * interface throughout RedBeanPHP.
+ * interfaces throughout RedBeanPHP.
  *
  * @file    RedBean/Logging.php
  * @author  Gabor de Mooij and the RedBeanPHP Community
@@ -769,7 +769,7 @@ class RPDO implements Driver
 			$this->dsn = $this->getDatabaseType();
 		} else {
 			$this->dsn = $dsn;
-			$this->connectInfo = array( 'pass' => $pass, 'user' => $user );
+			$this->connectInfo = array( 'pass' => $pass, 'UserInfo' => $user );
 		}
 
 		//PHP 5.3 PDO SQLite has a bug with large numbers:
@@ -839,7 +839,7 @@ class RPDO implements Driver
 	{
 		if ( $this->isConnected ) return;
 		try {
-			$user = $this->connectInfo['user'];
+			$user = $this->connectInfo['UserInfo'];
 			$pass = $this->connectInfo['pass'];
 			$this->pdo = new \PDO(
 				$this->dsn,
@@ -1174,7 +1174,7 @@ use RedBeanPHP\RedException as RedException;
 /* PHP 5.3 compatibility */
 if (interface_exists('\JsonSerializable')) {
 		/* We extend JsonSerializable to avoid namespace conflicts,
-		can't define interface with special namespace in PHP */
+		can't define interfaces with special namespace in PHP */
 		interface Jsonable extends \JsonSerializable {};
 } else {
 	interface Jsonable {};
@@ -1602,7 +1602,7 @@ class OODBBean implements\IteratorAggregate,\ArrayAccess,\Countable,Jsonable
 	 *
 	 * $bean[$key] = $value;
 	 *
-	 * Note that not all PHP functions work with the array interface.
+	 * Note that not all PHP functions work with the array interfaces.
 	 *
 	 * @return ArrayIterator
 	 */
@@ -2648,7 +2648,7 @@ class OODBBean implements\IteratorAggregate,\ArrayAccess,\Countable,Jsonable
 	}
 
 	/**
-	 * Implementation of Countable interface. Makes it possible to use
+	 * Implementation of Countable interfaces. Makes it possible to use
 	 * count() function on a bean.
 	 *
 	 * @return integer
@@ -3058,7 +3058,7 @@ class OODBBean implements\IteratorAggregate,\ArrayAccess,\Countable,Jsonable
 	}
 
 	/**
-	 * Magic method jsonSerialize, implementation for the \JsonSerializable interface,
+	 * Magic method jsonSerialize, implementation for the \JsonSerializable interfaces,
 	 * this method gets called by json_encode and facilitates a better JSON representation
 	 * of the bean. Exports the bean on JSON serialization, for the JSON fans.
 	 *
@@ -3188,7 +3188,7 @@ namespace RedBeanPHP {
 /**
  * Adapter Interface.
  * Describes the API for a RedBeanPHP Database Adapter.
- * This interface defines the API contract for
+ * This interfaces defines the API contract for
  * a RedBeanPHP Database Adapter.
  *
  * @file    RedBeanPHP/Adapter.php
@@ -3414,7 +3414,7 @@ class DBAdapter extends Observable implements Adapter
 	 * Constructor.
 	 *
 	 * Creates an instance of the RedBean Adapter Class.
-	 * This class provides an interface for RedBean to work
+	 * This class provides an interfaces for RedBean to work
 	 * with ADO compatible DB instances.
 	 *
 	 * @param Driver $database ADO Compatible DB Instance
@@ -3427,7 +3427,7 @@ class DBAdapter extends Observable implements Adapter
 	/**
 	 * Returns a string containing the most recent SQL query
 	 * processed by the database adapter, thus conforming to the
-	 * interface:
+	 * interfaces:
 	 *
 	 * @see Adapter::getSQL
 	 *
@@ -3619,7 +3619,7 @@ namespace RedBeanPHP {
  * Database Cursor Interface.
  * A cursor is used by Query Writers to fetch Query Result rows
  * one row at a time. This is useful if you expect the result set to
- * be quite large. This interface dscribes the API of a database
+ * be quite large. This interfaces dscribes the API of a database
  * cursor. There can be multiple implementations of the Cursor,
  * by default RedBeanPHP offers the PDOCursor for drivers shipping
  * with RedBeanPHP and the NULLCursor.
@@ -3727,7 +3727,7 @@ use RedBeanPHP\Cursor as Cursor;
  * NULL Database Cursor
  * Implementation of the NULL Cursor.
  * Used for an empty BeanCollection. This Cursor
- * can be used for instance if a query fails but the interface
+ * can be used for instance if a query fails but the interfaces
  * demands a cursor to be returned.
  *
  * @file    RedBeanPHP/Cursor/NULLCursor.php
@@ -3771,7 +3771,7 @@ use RedBeanPHP\Repository as Repository;
  * makes it possible to use database cursors. The BeanCollection
  * has a method next() to obtain the first, next and last bean
  * in the collection. The BeanCollection does not implement the array
- * interface nor does it try to act like an array because it cannot go
+ * interfaces nor does it try to act like an array because it cannot go
  * backward or rewind itself.
  *
  * Use the BeanCollection for large datasets where skip/limit is not an
@@ -5006,7 +5006,7 @@ abstract class AQueryWriter
 
 	/**
 	 * Checks whether the specified type (i.e. table) already exists in the database.
-	 * Not part of the Object Database interface!
+	 * Not part of the Object Database interfaces!
 	 *
 	 * @param string $table table name
 	 *
@@ -7393,7 +7393,7 @@ abstract class Repository
 
 	/**
 	 * Checks whether the specified table already exists in the database.
-	 * Not part of the Object Database interface!
+	 * Not part of the Object Database interfaces!
 	 *
 	 * @deprecated Use AQueryWriter::typeExists() instead.
 	 *
@@ -8271,7 +8271,7 @@ class OODB extends Observable
 
 	/**
 	 * Checks whether the specified table already exists in the database.
-	 * Not part of the Object Database interface!
+	 * Not part of the Object Database interfaces!
 	 *
 	 * @deprecated Use AQueryWriter::typeExists() instead.
 	 *
@@ -12945,10 +12945,10 @@ namespace RedBeanPHP {
 
 /**
  * RedBean Plugin.
- * Marker interface for plugins.
- * Use this interface when defining new plugins, it's an
+ * Marker interfaces for plugins.
+ * Use this interfaces when defining new plugins, it's an
  * easy way for the rest of the application to recognize your
- * plugin. This plugin interface does not require you to
+ * plugin. This plugin interfaces does not require you to
  * implement a specific API.
  *
  * @file    RedBean/Plugin.php

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: rupack
+ * UserInfo: rupack
  * Date: 8.2.19
  * Time: 17.43
  */
@@ -12,6 +12,11 @@ use R;
 
 class Helpers
 {
+    public function redirect($uri, $response)
+    {
+        header("Location: $uri", true, 301);
+    }
+    
     
     public function dayCheck($table, $day)
     {
