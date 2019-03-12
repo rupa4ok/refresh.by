@@ -1,84 +1,119 @@
+<?php include "header.php"; ?>
 
-    <body>
-
-<header>
-    <img src="/template/img/logo.png" />
+<header><img src="/template/img/logo.png"/>
 </header>
 
-<section class="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <ul>
-                    <li><a href="/logout.php">Выйти</a></li>
-                    <li><a href="/view/personal.php">Личный кабинет</a></li>
-                    <li><a href="">Информация о пользователе</a></li>
-                    <li><a href="">Экспорт отчета</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</section>
+<?php include_once ROOT . '/views/top-menu.php'; ?>
 
 <section>
     <div class="container">
         <div class="row">
-            <h1>Сотрудники</h1>
+            <h1>Объекты</h1>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <h3>Меню</h3>
-                <ul>
-                    <li><a href="/admin1.php">Объекты</a></li>
-                    <li><a href="/admin6.php">Табель</a></li>
-                    <li><a href="/admin5.php">Прорабы</a></li>
-                    <li><a href="/admin4.php">Работники</a></li>
-                </ul>
-            </div>
+            <?php
+            
+            $id = $this->user->getId();
+            $table = 'object';
+            $result = $this->admin->GetTableById($table, $id, $this->role);
+            
+            if ($this->role == 'admin') {
+                $uri = 'admin5';
+                include_once ROOT . '/views/left-menu.php';
+                $class = 'people-status-editable';
+            } else {
+                $uri = 'user5';
+                include_once ROOT . '/views/left-menu1.php';
+                $class = '';
+            }
+            
+            ?>
             <div class="col-md-9 content-block">
                 
                 <?php
-                    $link = mysqli_connect(
-                        'localhost',
-                        'refresh',
-                        'refreshrefresh',
-                        'refresh');
-                    
-                    if (!$link) {
-                        printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-                        exit;
+                
+                if (isset($error_obj)) {
+                    echo $error_obj;
+                }
+                
+                echo '<div class="addObject" style="width: 50%">
+                        <form method="post">
+  <div class="form-group">
+    <input style="width: 70%" type="text" class="col-md-8 form-control" name="name"
+     aria-describedby="emailHelp" placeholder="Название объекта">
+  </div>
+  <button type="submit" class="btn btn-primary" name="addobject" value="addobject">Сохранить</button>
+</form>
+                        <div>
+                        </div>
+                    </div>';
+                
+                if ($result) {
+                    echo '
+                    <table class="table results1" style="margin-top: 30px;">' .
+                        '<thead>' .
+                        '<tr>' .
+                        '<th>Название объекта</th>' .
+                        '<th>Месяц</th>' .
+                        '<th>Год</th>';
+                    if ($this->role == 'admin') {
+                        echo '<th>Прораб</th>';
                     }
+                    echo '<th>Статус</th>' .
+                        '</tr>' .
+                        '</thead>';
                     
-                    if ($result = mysqli_query($link, 'SELECT * FROM people ORDER BY id')) {
+                    foreach ($result as $row) {
+                        $realId = $row['users_id'];
+                        $table = 'users';
+                        $realName = $this->admin->getProrabName($table, $realId);
                         
-                        echo '
-
-                    <table class="table" style="margin-top: 30px;">' .
-                            '<thead>' .
-                            '<tr>' .
-                            '<th>Имя сотрудника</th>' .
-                            '<th>Коэфиициент сложности</th>' .
-                            '<th>Номер работника</th>' .
-                            '<th>Выполняемые работы</th>' .
-                            '</tr>' .
-                            '</thead>';
+                        foreach ($realName as $value) {
+                            $real = $value['name'];
+                        }
                         
-                        while( $row = mysqli_fetch_assoc($result) ){
+                        if ($row['status'] !== 'Сдан') {
                             echo '<tr>' .
-                                '<td><a href="#" class="people-editable" data-name="fio" data-type="text" data-title="Имя" data-pk="' . $row['fio'] . '" data-url="ajax1.php" >' . $row['fio'] . '</a></td>' .
-                                '<td><a href="#" class="people-year-editable" data-name="koef" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['koef'] . '</a></td>' .
-                                '<td><a href="#" class="people-editable" data-name="nrabotnik" data-type="text" data-pk="' . $row['id'] . '" data-url="ajax1.php" >' . $row['nrabotnik'] . '</a></td>' .
+                                '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
+                                '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
+                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>';
+                            if ($this->role == 'admin') {
+                                echo '<td>' . $real . '</td>';
+                            }
+                            echo '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                                '<td><form method="post" >
+ <input type="text" value="' . $row['id'] . '" name="id" hidden>
+<input type="text" name="delete" value="delete" hidden>
+<button type="submit" onclick="return proverka();"><i class="fas fa-trash-alt"></i></button></form> </td>' .
+                                '<td><form method="post" >
+ <input type="text" value="' . $row['id'] . '" name="id" hidden>
+<input type="text" name="copy" value="copy" hidden>
+<button type="submit" onclick="return proverka1();"> <i class="fas fa-copy"></i></button></form></td>' .
+                                '<td><a href="/' . $this->role . '5/?month=' . $row['mounth'] . '&year=' . $row['year'] . '&idx=' . $row['id'] . '"><button><i class="fas fa-long-arrow-alt-right"></i></button></a></td>' .
+                                '</tr>';
+                        } else {
+                            echo '<tr>' .
+                                '<td><a href="#" class="people-editable" data-name="name" data-type="text" data-title="Имя" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['name'] . '</a></td>' .
+                                '<td><a href="#" class="people-mounth-editable" data-name="mounth" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['mounth'] . '</a></td>' .
+                                '<td><a href="#" class="people-year-editable" data-name="year" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['year'] . '</a></td>';
+                            if ($_SESSION['role'] == 'admin') {
+                                echo '<td>' . $real . '</td>';
+                            }
+                            echo '<td><a href="#" class="' . $class . '" data-name="status" data-type="select" data-pk="' . $row['id'] . '" data-url="components/ajax1.php" >' . $row['status'] . '</a></td>' .
+                                '<td></td>' .
+                                '<td></td>' .
+                                '<td><form action="' . $uri . '" method="POST"><input type="text" name="id" value="' . $row['id'] . '" hidden> <button><i class="fas fa-long-arrow-alt-right"></i></button></form></td>' .
                                 '</tr>';
                         }
-                        echo '</table>';
-                        mysqli_free_result($result);
                     }
-                    mysqli_close($link);
+                    echo '</table>';
+                }
+                
                 ?>
             </div>
         </div>
     </div>
     </div>
 </section>
+
+<?php include "footer.php" ?>

@@ -1,12 +1,11 @@
 {
     "autoload": {
         "psr-4": {
-            "Models\\": "models/",
-            "Libs\\": "libs/",
-            "Components\\": "components/",
-            "Interfaces\\": "interfaces/",
+            "App\\": "app/",
             "Tests\\": "tests/",
-            "Storage\\": "storage/"
+            "App\\Storage\\": "app/storage",
+            "App\\Models\\": "app/models",
+            "App\\Interfaces\\": "app/interfaces"
         }
     },
     "require-dev": {

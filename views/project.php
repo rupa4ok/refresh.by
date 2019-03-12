@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <?php
-            if ($_SESSION['role'] == 'admin') {
+            if ($this->role == 'admin') {
                 include_once ROOT . '/views/left-menu.php';
                 $class = 'people-status-editable';
             } else {
@@ -57,7 +57,7 @@
                         $table = 'users';
                         $realName = $this->admin->getProrabName($table, $realId);
                         
-                        if ($_SESSION['role'] == 'admin') {
+                        if ($this->role == 'admin') {
                             echo '<tr>' .
                                 '<td><a href="#" data-name="name" data-type="text" data-title="Имя" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->name . '</a></td>' .
                                 '<td><a href="#" data-name="mounth" data-type="select" data-pk="' . $res->id . '" data-url="ajax1.php" >' . $res->mounth . '</a></td>' .
@@ -102,12 +102,12 @@
                 
                 echo '<div class="paginator">';
 if ($prevPage - $month > -2) {
-    echo '<div><a href="/' . $_SESSION['role'] . '5?month='.$prevPage.'&year='.$prevYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
+    echo '<div><a href="/' . $this->role . '5?month='.$prevPage.'&year='.$prevYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-left"></i></a></div>';
 }
                 echo '<div class="curent">Месяц: ' . $month . '</div>';
 
 if ($nextPage - $month < 2) {
-    echo '<div><a href="/' . $_SESSION['role'] . '5?month='.$nextPage.'&year='.$nextYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
+    echo '<div><a href="/' . $this->role . '5?month='.$nextPage.'&year='.$nextYear.'&idx=' . $id . '"><i class="fas fa-arrow-circle-right"></i></a></div>';
     
 }
                 echo '</div>';
@@ -146,7 +146,7 @@ if ($nextPage - $month < 2) {
         </form>';
                     }
                     
-                    if ($_SESSION['role'] == 'admin') {
+                    if ($this->role == 'admin') {
                         echo ' Номер работы: ' . $number;
                     }
                     
@@ -205,14 +205,14 @@ if ($nextPage - $month < 2) {
                             'year' => $year,
                             'nraboti' => $number,
                             'nrabotnik' => $peopleId,
-                            'nprorab' => $_SESSION['id']
+                            'nprorab' => $this->user->getId()
                         );
     
                         $this->admin->createWork($options);
                         $timedata = $this->admin->getWorkId($options);
                         $dayWeek = $this->admin->helpers->dayColor('vyhodnye', $day);
                         
-                        if ($_SESSION['role'] == 'UserInfo' and ($objectTrigger) == 'true') {
+                        if ($this->role == 'user' and ($objectTrigger) == 'true') {
                             echo '<td class = "' . $dayWeek . '"><p>' . $day . '</p>
                 ' . str_replace('.', ',', $this->admin->getData($timedata)) . '</td>';
                         } else {
