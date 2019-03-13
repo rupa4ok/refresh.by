@@ -21,7 +21,7 @@ class AdminController
     public $csv;
     private $role;
     private $helpers;
-    private $sessionStorage;
+    private $session;
     private $user;
     private $view;
     
@@ -30,8 +30,8 @@ class AdminController
         $this->view = $view;
         $this->admin = new Admin();
         $this->csv = new Csv();
-        $this->sessionStorage = new SessionStorage('user');
-        $this->user = new UserRole($this->sessionStorage);
+        $this->session = new SessionStorage('user');
+        $this->user = new UserRole($this->session);
         $this->role = $this->user->getRole();
         $this->helpers = new Helpers();
     }

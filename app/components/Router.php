@@ -42,21 +42,16 @@ class Router
                 $segments2 = explode('/', $path);
                 
                 $view = array_shift($segments2);
-
-                print_r($segments);
-                
                 $controllerName = array_shift($segments).'Controller';
-                $controllerName = ucfirst($controllerName);
                 
+                $controllerName = ucfirst($controllerName);
                 $actionName = 'action'.ucfirst((array_shift($segments)));
                 
                 $controllerFile = ROOT . '/app/controllers/' .$controllerName. '.php';
                 if (file_exists($controllerFile)) {
                     include_once($controllerFile);
                 }
-                
-                
-                
+
                 $objectName = trim("App\Controllers" . "\ ") . $controllerName;
                 
                 $controllerObject = new $objectName($view);

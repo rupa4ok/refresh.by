@@ -8,6 +8,7 @@
 
 namespace App\Models;
 
+use App\Interfaces\StorageInterface;
 use App\Interfaces\UserInfo;
 use App\Storage\SessionStorage;
 
@@ -22,7 +23,7 @@ class UserRole implements UserInfo
      */
     private $session;
     
-    public function __construct(SessionStorage $sessionStorage)
+    public function __construct(StorageInterface $sessionStorage)
     {
         $this->session = $sessionStorage;
     }
