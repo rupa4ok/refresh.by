@@ -2,6 +2,8 @@
 
 namespace App\Components;
 
+use App\Controllers\IndexController;
+
 /**
  * Class Router
  * @package App\components\Router
@@ -34,15 +36,14 @@ class Router
         $uri = $this->getURI();
         
         foreach ($this->routes as $uriPattern => $path) {
-    
-            echo $path;
             
             if(preg_match("~$uriPattern~", $uri)) {
                 $segments = explode('/', $path);
                 $segments2 = explode('/', $path);
-    
+                
                 $view = array_shift($segments2);
-                echo $view;
+
+                print_r($segments);
                 
                 $controllerName = array_shift($segments).'Controller';
                 $controllerName = ucfirst($controllerName);
@@ -54,10 +55,14 @@ class Router
                     include_once($controllerFile);
                 }
                 
+                
+                
                 $objectName = trim("App\Controllers" . "\ ") . $controllerName;
                 
                 $controllerObject = new $objectName($view);
                 $result = $controllerObject->$actionName();
+                
+                return $view;
                 if ($result != null) {
                     break;
                 }

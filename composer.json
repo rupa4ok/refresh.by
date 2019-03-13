@@ -5,7 +5,8 @@
             "Tests\\": "tests/",
             "App\\Storage\\": "app/storage",
             "App\\Models\\": "app/models",
-            "App\\Interfaces\\": "app/interfaces"
+            "App\\Interfaces\\": "app/interfaces",
+            "App\\Controllers\\": "app/controllers"
         }
     },
     "require-dev": {

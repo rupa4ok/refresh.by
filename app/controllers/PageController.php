@@ -10,12 +10,14 @@ use App\Models\UserRole;
 use App\Storage\SessionStorage;
 use R;
 
-/**
- * Class AdminController
- * @version 1.0.0
- */
+
 //@TODO подключить контейнер внедрения зависимостей + шаблонизатор
-class AdminController
+
+/**
+ * Class PageController
+ * @package App\Controllers
+ */
+class PageController
 {
     public $admin;
     public $csv;
@@ -36,7 +38,7 @@ class AdminController
         $this->helpers = new Helpers();
     }
     
-    public function actionPanel()
+    public function actionObject()
     {
         $uri = $_SERVER['REQUEST_URI'];
     

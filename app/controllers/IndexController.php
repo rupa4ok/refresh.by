@@ -44,6 +44,7 @@ class IndexController
      */
     public function actionMain()
     {
+        echo 'test';
         require_once(ROOT . "/views/index.php");
         return;
     }

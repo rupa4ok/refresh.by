@@ -1,8 +1,10 @@
 <?php
 
-use Models\Admin;
-use Models\Csv;
-use Models\Pagination;
+namespace App\Controllers;
+
+use App\Models\Admin;
+use App\Models\Csv;
+use App\Models\Pagination;
 
 class UserController {
     
@@ -11,16 +13,12 @@ class UserController {
     
     public function __construct()
     {
-        if ($_SESSION['role'] !== 'UserInfo') {
-            header('Location:/',true, 301); //редирект на главную если не залогинен
-        }
         $this->admin = new Admin();
         $this->csv = new Csv();
     }
     
     public function actionPage()
     {
-        require_once(ROOT . '/config/config.php');
         require_once(ROOT . '/views/header.php');
     
         $uri = $_SERVER['REQUEST_URI'];
